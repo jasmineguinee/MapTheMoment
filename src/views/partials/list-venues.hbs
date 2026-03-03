@@ -1,0 +1,24 @@
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Venue</th>
+      <th>Venue Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each area.venues}}
+      <tr>
+        <td>
+          {{title}}
+        </td>
+        <td>
+          {{venuetype}}
+        </td>
+          <td>
+          {{description}}
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>
