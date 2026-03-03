@@ -15,4 +15,7 @@ export const webRoutes = [
   { method: "POST", path: "/dashboard/addarea", config: dashboardController.addArea },
   { method: "GET", path: "/area/{id}", config: areaController.index },
   { method: "POST", path: "/area/{id}/addvenue", config: areaController.addVenue },
+  { method: "GET", path: "/dashboard/deletearea/{id}", config: dashboardController.deleteArea },
+  { method: "GET", path: "/area/{id}/deletevenue/{venueid}", config: areaController.deleteVenue },
+
 ];

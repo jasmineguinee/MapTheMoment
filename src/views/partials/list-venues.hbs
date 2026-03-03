@@ -4,6 +4,7 @@
       <th>Venue</th>
       <th>Venue Type</th>
       <th>Description</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -17,6 +18,11 @@
         </td>
           <td>
           {{description}}
+        </td>
+         <td>
+          <a href="/area/{{../area._id}}/deletevenue/{{_id}}" class="ui icon button">
+            <i class="fas fa-trash"></i>
+          </a>
         </td>
       </tr>
     {{/each}}

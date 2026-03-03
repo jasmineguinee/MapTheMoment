@@ -1,4 +1,5 @@
 import { db } from "../models/db.js";
+import { VenueSpec } from "../models/joi-schemas.js";
 
 export const areaController = {
   index: {
@@ -13,6 +14,13 @@ export const areaController = {
   },
 
   addVenue: {
+    validate: {
+      payload: VenueSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("area-view", { title: "Add venue error", errors: error.details }).takeover().code(400);
+      },
+    },
     handler: async function (request, h) {
       const area = await db.areaStore.getAreaById(request.params.id);
       const newVenue = {
@@ -24,4 +32,13 @@ export const areaController = {
       return h.redirect(`/area/${area._id}`);
     },
   },
+
+    deleteVenue: {
+    handler: async function(request, h) {
+      const area = await db.areaStore.getAreaById(request.params.id);
+      await db.venueStore.deleteVenue(request.params.venueid);
+      return h.redirect(`/area/${area._id}`);
+    },
+  },
+
 };
