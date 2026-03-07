@@ -4,11 +4,13 @@
       <th>Venue</th>
       <th>Venue Type</th>
       <th>Description</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
       <th></th>
     </tr>
   </thead>
   <tbody>
-    {{#each area.venues}}
+    {{#each occasion.venues}}
       <tr>
         <td>
           {{title}}
@@ -16,11 +18,17 @@
         <td>
           {{venuetype}}
         </td>
-          <td>
+        <td>
           {{description}}
         </td>
          <td>
-          <a href="/area/{{../area._id}}/deletevenue/{{_id}}" class="ui icon button">
+          {{latitude}}
+        </td>
+         <td>
+          {{longitude}}
+        </td>
+         <td>
+          <a href="/occasion/{{../occasion._id}}/deletevenue/{{_id}}" class="ui icon button">
             <i class="fas fa-trash"></i>
           </a>
         </td>

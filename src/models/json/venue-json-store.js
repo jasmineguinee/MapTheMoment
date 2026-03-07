@@ -7,29 +7,46 @@ export const venueJsonStore = {
     return db.data.venues;
   },
 
-  async addVenue(areaId, venue) {
+  async addVenue(occasionId, venue) {
     await db.read();
     venue._id = v4();
-    venue.areaid = areaId;
+    venue.occasionid = occasionId;
     db.data.venues.push(venue);
     await db.write();
     return venue;
   },
 
-  async getVenuesByAreaId(id) {
+  async getVenuesByOccasionId(id) {
     await db.read();
-    return db.data.venues.filter((venue) => venue.areaid === id);
+    let foundVenues = db.data.venues.filter((venue) => venue.occasionid === id);
+    if (!foundVenues) {
+      foundVenues = null;
+    }
+    return foundVenues;
   },
 
   async getVenueById(id) {
     await db.read();
-    return db.data.venues.find((venue) => venue._id === id);
+    let foundVenue = db.data.venues.find((venue) => venue._id === id);
+    if (!foundVenue) {
+      foundVenue = null;
+    }
+    return foundVenue;
+  },
+
+  async getOccasionVenues(occasionId) {
+    await db.read();
+    let foundVenues = venues.filter((venue) => venue.occasionid === occasionId);
+    if (!foundVenues) {
+      foundVenues = null;
+    }
+    return foundVenues;
   },
 
   async deleteVenue(id) {
     await db.read();
     const index = db.data.venues.findIndex((venue) => venue._id === id);
-    db.data.venues.splice(index, 1);
+    if (index !== -1) db.data.venues.splice(index, 1);
     await db.write();
   },
 
@@ -40,8 +57,10 @@ export const venueJsonStore = {
 
   async updateVenue(venue, updatedVenue) {
     venue.title = updatedVenue.title;
-    venue.artist = updatedVenue.artist;
-    venue.duration = updatedVenue.duration;
+    venue.venuetype = updatedVenue.venuetype;
+    venue.description = updatedVenue.description;
+    venue.latitude = updatedVenue.latitude;
+    venue.longitude = updatedVenue.longitude;
     await db.write();
   },
 };

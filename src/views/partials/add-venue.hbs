@@ -1,4 +1,4 @@
-<form class="box" action="/area/{{area._id}}/addvenue" method="POST">
+<form class="box" action="/occasion/{{occasion._id}}/addvenue" method="POST">
   <label>Enter Venue Details:</label>
   <div class="field is-horizontal">
     <div class="field-body">
@@ -8,10 +8,16 @@
       <div class="field">
         <input class="input" type="text" placeholder="Enter Venue Type" name="venuetype">
       </div>
-        <div class="field">
+      <div class="field">
         <input class="input" type="text" placeholder="Enter description" name="description">
+      </div>
+      <div class="field">
+        <input class="input" type="text" placeholder="Enter latitude" name="latitude">
+      </div>
+      <div class="field">
+        <input class="input" type="text" placeholder="Enter longitude" name="longitude">
       </div>
     </div>
   </div>
-  <button class="button is-primary">Add Venue</button>
+  <button class="button is-info">Add Venue</button>
 </form>

@@ -9,9 +9,13 @@
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint . --ext .js",
-    "test": "mocha --ui tdd test/**.js -exit"
+    "test": "mocha --ui tdd test/**/*.js -exit",
+    "dev": "./node_modules/.bin/nodemon src/server.js --ignore 'src/models/json/*.json'",
+    "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js",
+    "testapi": "./node_modules/mocha/bin/mocha --ui tdd test/api/**/*.js"
   },
   "dependencies": {
+    "@hapi/boom": "^10.0.1",
     "@hapi/cookie": "^12.0.1",
     "@hapi/hapi": "^21.4.6",
     "@hapi/vision": "^7.0.3",
@@ -19,16 +23,19 @@
     "handlebars": "^4.7.8",
     "joi": "^18.0.2",
     "lowdb": "^7.0.1",
+    "mongoose": "^9.2.4",
     "uuid": "^13.0.0",
     "uuidv4": "^6.2.13"
   },
   "devDependencies": {
+    "axios": "^1.13.6",
     "chai": "^6.2.2",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "mocha": "^11.7.5",
+    "mocha": "^11.3.0",
+    "nodemon": "^3.1.14",
     "prettier": "^3.8.1"
   }
 }

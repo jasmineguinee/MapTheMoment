@@ -1,0 +1,16 @@
+{{#each occasions}}
+  <div class="box box-link-hover-shadow">
+    <h2 class="title">
+      {{title}}
+    </h2>
+     <a href="/occasion/{{_id}}" class="button">
+      <span class="icon is-small">
+        <i class="fas fa-folder-open"></i>
+      </span>
+    </a>
+    </a>
+    <a href="/dashboard/deleteoccasion/{{_id}}" class="button">
+      <i class="fas fa-trash"></i>
+    </a>
+  </div>
+{{/each}}

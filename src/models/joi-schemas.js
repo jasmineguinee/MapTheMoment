@@ -16,8 +16,10 @@ export const VenueSpec = {
   title: Joi.string().required(),
   venuetype: Joi.string().required(),
   description: Joi.string().required(),
+  latitude: Joi.number().allow("").optional(),
+  longitude: Joi.number().allow("").optional(),
 };
 
-export const AreaSpec = {
+export const OccasionSpec = {
   title: Joi.string().required(),
 };
