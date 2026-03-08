@@ -1,21 +1,55 @@
+    <div class="box box-link-hover-shadow">
+   <script>
+    const map = L.map("map").setView([53.33306, -6.24889], 13); // [lat, lng], zoom
+     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+     }).addTo(map);
+    
+    let marker; 
+    //https://leafletjs.com/reference.html#event-objects event object click
+    map.on('click', function(ev) {
+    const latitude = ev.latlng.lat; 
+    const longitude = ev.latlng.lng;
+
+
+     //setting the value of the id elements I will be needing on html side
+     document.getElementById("latitude").value = latitude.toFixed(6);
+     document.getElementById("longitude").value = latitude.toFixed(6);
+    
+    //making popup bring up lat and long and a small message
+    L.popup()
+    .setLatLng(ev.latlng)
+    .setContent('This is a venue <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
+    .openOn(map);
+    
+    marker = L.marker(ev.latlng, {color: 'red'} ).addTo(map);
+
+    });
+   
+   </script>
+  </div>
 <form class="box" action="/occasion/{{occasion._id}}/addvenue" method="POST">
-  <label>Enter Venue Details:</label>
+  <label>Enter Venue Details. Click on the map to add a location for your venue</label>
   <div class="field is-horizontal">
     <div class="field-body">
       <div class="field">
         <input class="input" type="text" placeholder="Enter Title" name="title">
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter Venue Type" name="venuetype">
+        <select class="input" type="text" placeholder="Enter Venue Type" name="venuetype">
+          <option value="proposal">proposal</option>
+          <option value="wedding">wedding</option>
+        </select>
       </div>
+      
       <div class="field">
         <input class="input" type="text" placeholder="Enter description" name="description">
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter latitude" name="latitude">
+        <input class="input" id="latitude" type="text" placeholder="Enter latitude" name="latitude">
       </div>
       <div class="field">
-        <input class="input" type="text" placeholder="Enter longitude" name="longitude">
+        <input class="input" id="longitude" type="text" placeholder="Enter longitude" name="longitude">
       </div>
     </div>
   </div>

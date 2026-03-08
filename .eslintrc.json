@@ -26,8 +26,6 @@
     "no-undef": "off",
     "func-names": "off",
     "no-console": "off",
-    "import/no-extraneous-dependencies": "off",
-    "no-console": "off"
-
+    "import/no-extraneous-dependencies": "off"
   }
 }

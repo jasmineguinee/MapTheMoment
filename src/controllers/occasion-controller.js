@@ -1,5 +1,7 @@
+
 import { db } from "../models/db.js";
 import { VenueSpec } from "../models/joi-schemas.js";
+
 
 export const occasionController = {
   index: {
@@ -12,7 +14,7 @@ export const occasionController = {
       return h.view("occasion-view", viewData);
     },
   },
-
+  
   addVenue: {
     validate: {
       payload: VenueSpec,
@@ -42,5 +44,9 @@ export const occasionController = {
       return h.redirect(`/occasion/${occasion._id}`);
     },
   },
+
+  addMap: {
+
+  }
 
 };

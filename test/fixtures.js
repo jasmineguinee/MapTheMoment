@@ -34,7 +34,7 @@ export const octoberwedding = {
 /// example of venue
 export const boathousevenue = {
   "title": "Sheen Falls Lodge",
-  "venuetype": "wedding venue",
+  "venuetype": "wedding",
   "description": ""
 };
 /// playlist
@@ -57,17 +57,17 @@ export const testOccasions = [
 export const testVenues = [
   {
     "title": "Fota Island Resort",
-    "venuetype": "wedding venue",
+    "venuetype": "wedding",
     "description": "This is a luxury Irish wedding venue can cater to very large wedddings"
   },
   {
     "title": "Inish Beg Estate",
-    "venuetype": "wedding venue",
+    "venuetype": "wedding",
     "description": "Outdoor ceremonies on Inish Beg can take place by a pond in the woodland, in a walled garden or at the water's edge"
   },
   {
     "title": "Garnish Island",
-    "venuetype": "Proposal hotspot",
+    "venuetype": "proposal",
     "description": "This is a hidden-gem proposal spot, featuring Italianate gardens, exotic plants, and breathtaking sea views. Top locations here include the iconic Grecian Temple overlooking Bantry Bay, the romantic clock tower, the intimate walled garden, and the scenic ferry ride passing the local seal colony"
   }
 ];
