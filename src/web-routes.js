@@ -17,5 +17,6 @@ export const webRoutes = [
   { method: "POST", path: "/occasion/{id}/addvenue", config: occasionController.addVenue },
   { method: "GET", path: "/dashboard/deleteoccasion/{id}", config: dashboardController.deleteOccasion },
   { method: "GET", path: "/occasion/{id}/deletevenue/{venueid}", config: occasionController.deleteVenue },
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
 
 ];
