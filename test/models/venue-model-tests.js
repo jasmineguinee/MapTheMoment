@@ -1,32 +1,32 @@
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
-import { testOccasions, testVenues, corkoccasion, octoberwedding, boathousevenue, testUsers } from "../fixtures.js";
+import { testAreas, testVenues, corkarea, kerry, boathousevenue, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
 
 suite("Venue Model tests", () => {
-  let corkoccasionList = null;
+  let corkareaList = null;
 
   setup(async () => {
     db.init("json");
-    await db.occasionStore.deleteAllOccasions();
+    await db.areaStore.deleteAllAreas();
     await db.venueStore.deleteAllVenues();
-    corkoccasionList = await db.occasionStore.addOccasion(corkoccasion);
+    corkareaList = await db.areaStore.addArea(corkarea);
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      testVenues[i] = await db.venueStore.addVenue(corkoccasionList._id, testVenues[i]);
+      testVenues[i] = await db.venueStore.addVenue(corkareaList._id, testVenues[i]);
     }
   });
 
   test("create single venue", async () => {
-    const octoberweddingList = await db.occasionStore.addOccasion(octoberwedding);
-    const venue = await db.venueStore.addVenue(octoberweddingList._id, boathousevenue);
+    const kerryList = await db.areaStore.addArea(kerry);
+    const venue = await db.venueStore.addVenue(kerryList._id, boathousevenue);
     assert.isNotNull(venue._id);
     assertSubset(boathousevenue, venue);
   });
 
   test("create multiple venueApi", async () => {
-    const occasion = await db.occasionStore.getOccasionById(corkoccasionList._id);
-    const venues = await db.venueStore.getVenuesByOccasionId(occasion._id);
+    const area = await db.areaStore.getAreaById(corkareaList._id);
+    const venues = await db.venueStore.getVenuesByAreaId(area._id);
     assert.equal(testVenues.length, venues.length);
   });
 
@@ -39,8 +39,8 @@ suite("Venue Model tests", () => {
   });
 
   test("get a venue - success", async () => {
-    const octoberweddingList = await db.occasionStore.addOccasion(octoberwedding);
-    const venue = await db.venueStore.addVenue(octoberweddingList._id, boathousevenue);
+    const kerryList = await db.areaStore.addArea(kerry);
+    const venue = await db.venueStore.addVenue(kerryList._id, boathousevenue);
     const newVenue = await db.venueStore.getVenueById(venue._id);
     assertSubset(boathousevenue, newVenue);
   });
@@ -61,6 +61,6 @@ suite("Venue Model tests", () => {
   test("delete one venue - fail", async () => {
     await db.venueStore.deleteVenue("bad-id");
     const venues = await db.venueStore.getAllVenues();
-    assert.equal(venues.length, testOccasions.length);
+    assert.equal(venues.length, testAreas.length);
   });
 });

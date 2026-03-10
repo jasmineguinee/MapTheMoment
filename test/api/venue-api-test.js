@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { mapthemomentService } from "./mapthemoment-service.js";
-import { maggie, octoberwedding, testOccasions, testVenues, boathousevenue } from "../fixtures.js";
+import { maggie, kerry, testAreas, testVenues, boathousevenue } from "../fixtures.js";
 
 suite("Venue API tests", () => {
   let user = null;
@@ -11,13 +11,13 @@ suite("Venue API tests", () => {
     mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);
     await mapthemomentService.authenticate(maggie);
-    await mapthemomentService.deleteAllOccasions();
+    await mapthemomentService.deleteAllAreas();
     await mapthemomentService.deleteAllVenues();
     await mapthemomentService.deleteAllUsers();
     user = await mapthemomentService.createUser(maggie);
     await mapthemomentService.authenticate(maggie);
-    octoberwedding.userid = user._id;
-    bestweddingspots = await mapthemomentService.createOccasion(octoberwedding);
+    kerry.userid = user._id;
+    bestweddingspots = await mapthemomentService.createArea(kerry);
   });
 
   teardown(async () => {});
@@ -56,15 +56,15 @@ suite("Venue API tests", () => {
     assert.equal(returnedVenues.length, 0);
   });
 
-  test("denormalised occasion", async () => {
+  test("denormalised area", async () => {
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       await mapthemomentService.createVenue(bestweddingspots._id, testVenues[i]);
     }
-    const returnedOccasion = await mapthemomentService.getOccasion(bestweddingspots._id);
-    assert.equal(returnedOccasion.venues.length, testVenues.length);
+    const returnedArea = await mapthemomentService.getArea(bestweddingspots._id);
+    assert.equal(returnedArea.venues.length, testVenues.length);
     for (let i = 0; i < testVenues.length; i += 1) {
-      assertSubset(testVenues[i], returnedOccasion.venues[i]);
+      assertSubset(testVenues[i], returnedArea.venues[i]);
     }
   });
 });

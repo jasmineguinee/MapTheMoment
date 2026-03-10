@@ -28,7 +28,7 @@ export const VenueSpec = Joi.object()
   description: Joi.string().required().example("This is a luxury Irish wedding venue that can cater to very large weddings"),
   latitude: Joi.number().allow("").required().example(5),
   longitude: Joi.number().allow("").required().example(6),
-  occasionid: IdSpec,
+  areaid: IdSpec,
   })
   .label("Venue");
 
@@ -40,17 +40,17 @@ export const VenueSpecPlus = VenueSpec.keys({
 export const VenueArraySpec = Joi.array().items(VenueSpecPlus).label("VenueArray");
 
 
-export const OccasionSpec = Joi.object()
+export const AreaSpec = Joi.object()
   .keys({
     title: Joi.string().required().example("Beethoven Sonatas"),
     userid: IdSpec,
     venues: VenueArraySpec,
   })
-  .label("Occasion");
+  .label("Area");
 
-export const OccasionSpecPlus = OccasionSpec.keys({
+export const AreaSpecPlus = AreaSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
-}).label("OccasionPlus");
+}).label("AreaPlus");
 
-export const OccasionArraySpec = Joi.array().items(OccasionSpecPlus).label("OccasionArray");
+export const AreaArraySpec = Joi.array().items(AreaSpecPlus).label("AreaArray");

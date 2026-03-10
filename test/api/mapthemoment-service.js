@@ -25,28 +25,28 @@ export const mapthemomentService = {
     return res.data;
   },
 
-   async createOccasion(occasion) {
-    const res = await axios.post(`${this.mapthemomentUrl}/api/occasions`, occasion);
+   async createArea(area) {
+    const res = await axios.post(`${this.mapthemomentUrl}/api/areas`, area);
     return res.data;
   },
 
-  async deleteAllOccasions() {
-    const response = await axios.delete(`${this.mapthemomentUrl}/api/occasions`);
+  async deleteAllAreas() {
+    const response = await axios.delete(`${this.mapthemomentUrl}/api/areas`);
     return response.data;
   },
 
-  async deleteOccasion(id) {
-    const response = await axios.delete(`${this.mapthemomentUrl}/api/occasions/${id}`);
+  async deleteArea(id) {
+    const response = await axios.delete(`${this.mapthemomentUrl}/api/areas/${id}`);
     return response;
   },
 
-    async getAllOccasions() {
-    const res = await axios.get(`${this.mapthemomentUrl}/api/occasions`);
+    async getAllAreas() {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/areas`);
     return res.data;
   },
 
-  async getOccasion(id) {
-    const res = await axios.get(`${this.mapthemomentUrl}/api/occasions/${id}`);
+  async getArea(id) {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/areas/${id}`);
     return res.data;
   },
 
@@ -57,7 +57,7 @@ export const mapthemomentService = {
   },
 
   async createVenue(id, venue) {
-    const res = await axios.post(`${this.mapthemomentUrl}/api/occasions/${id}/venues`, venue);
+    const res = await axios.post(`${this.mapthemomentUrl}/api/areas/${id}/venues`, venue);
     return res.data;
   },
 

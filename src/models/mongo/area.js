@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 const { Schema } = Mongoose;
 
-const occasionSchema = new Schema({
+const areaSchema = new Schema({
   title: String,
   userid: {
     type: Schema.Types.ObjectId,
@@ -10,4 +10,4 @@ const occasionSchema = new Schema({
   },
 });
 
-export const Occasion = Mongoose.model("Occasion", occasionSchema);
+export const Area = Mongoose.model("Area", areaSchema);

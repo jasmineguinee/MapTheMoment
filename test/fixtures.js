@@ -27,9 +27,9 @@ export const testUsers = [
     password: "secret"
   }
 ];
-/// playlist
-export const octoberwedding = {
-  title: "wedding ideas for october"
+/// area
+export const kerry = {
+  title: "kerry"
 };
 /// example of venue
 export const boathousevenue = {
@@ -39,20 +39,20 @@ export const boathousevenue = {
   "latitude": 5,
   "longitude": 6
 };
-/// playlist
-export const corkoccasion = {
+/// area
+export const corkarea = {
   title: "Springfort hall"
 };
 
-export const testOccasions = [
+export const testAreas = [
   {
-    title: "Jim and Joans wedding day"
+    title: "cork"
   },
   {
-    title: "mountain top proposal"
+    title: "kerry"
   },
   {
-    title: "leap year proposal"
+    title: "galway"
   }
 ];
 

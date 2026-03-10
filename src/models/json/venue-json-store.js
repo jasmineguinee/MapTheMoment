@@ -7,18 +7,18 @@ export const venueJsonStore = {
     return db.data.venues;
   },
 
-  async addVenue(occasionId, venue) {
+  async addVenue(areaId, venue) {
     await db.read();
     venue._id = v4();
-    venue.occasionid = occasionId;
+    venue.areaid = areaId;
     db.data.venues.push(venue);
     await db.write();
     return venue;
   },
 
-  async getVenuesByOccasionId(id) {
+  async getVenuesByAreaId(id) {
     await db.read();
-    let foundVenues = db.data.venues.filter((venue) => venue.occasionid === id);
+    let foundVenues = db.data.venues.filter((venue) => venue.areaid === id);
     if (!foundVenues) {
       foundVenues = null;
     }
@@ -34,9 +34,9 @@ export const venueJsonStore = {
     return foundVenue;
   },
 
-  async getOccasionVenues(occasionId) {
+  async getAreaVenues(areaId) {
     await db.read();
-    let foundVenues = venues.filter((venue) => venue.occasionid === occasionId);
+    let foundVenues = venues.filter((venue) => venue.areaid === areaId);
     if (!foundVenues) {
       foundVenues = null;
     }

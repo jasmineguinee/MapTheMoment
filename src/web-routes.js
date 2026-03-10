@@ -1,7 +1,7 @@
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
-import { occasionController } from "./controllers/occasion-controller.js";
+import { areaController } from "./controllers/area-controller.js";
 import { venueController } from "./controllers/venue-controller.js";
 
 export const webRoutes = [
@@ -13,11 +13,11 @@ export const webRoutes = [
   { method: "POST", path: "/authenticate", config: accountsController.login },
   { method: "GET", path: "/about", config: aboutController.index },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
-  { method: "POST", path: "/dashboard/addoccasion", config: dashboardController.addOccasion },
-  { method: "GET", path: "/occasion/{id}", config: occasionController.index },
-  { method: "POST", path: "/occasion/{id}/addvenue", config: occasionController.addVenue },
-  { method: "GET", path: "/dashboard/deleteoccasion/{id}", config: dashboardController.deleteOccasion },
-  { method: "GET", path: "/occasion/{id}/deletevenue/{venueid}", config: occasionController.deleteVenue },
+  { method: "POST", path: "/dashboard/addarea", config: dashboardController.addArea },
+  { method: "GET", path: "/area/{id}", config: areaController.index },
+  { method: "POST", path: "/area/{id}/addvenue", config: areaController.addVenue },
+  { method: "GET", path: "/dashboard/deletearea/{id}", config: dashboardController.deleteArea },
+  { method: "GET", path: "/area/{id}/deletevenue/{venueid}", config: areaController.deleteVenue },
 
  { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
   { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },

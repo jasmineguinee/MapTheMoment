@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    {{#each occasion.venues}}
+    {{#each area.venues}}
       <tr>
         <td>
           {{title}}
@@ -28,12 +28,12 @@
           {{longitude}}
         </td>
          <td>
-          <a href="/venue/{{../occasion._id}}/editvenue/{{_id}}" class="ui icon button">
+          <a href="/venue/{{../area._id}}/editvenue/{{_id}}" class="ui icon button">
             <i class="fas fa-edit"></i>
           </a>
         </td>
          <td>
-          <a href="/occasion/{{../occasion._id}}/deletevenue/{{_id}}" class="ui icon button">
+          <a href="/area/{{../area._id}}/deletevenue/{{_id}}" class="ui icon button">
             <i class="fas fa-trash"></i>
           </a>
         </td>

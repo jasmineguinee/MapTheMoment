@@ -4,11 +4,11 @@ import { db } from "../models/db.js";
 export const venueController = {
   index: {
     handler: async function (request, h) {
-      const occasion = await db.occasionStore.getOccasionById(request.params.id);
+      const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const viewData = {
         title: "Add the title",
-        occasion: occasion,
+        area: area,
         venue: venue
       };
       return h.view("venue-view", viewData);
@@ -33,7 +33,7 @@ export const venueController = {
         longitude: Number(request.payload.longitude),
       };
       await db.venueStore.updateVenue(venue, newVenue);
-      return h.redirect(`/occasion/${request.params.id}`);
+      return h.redirect(`/area/${request.params.id}`);
     },
   },
 };

@@ -41,7 +41,7 @@ suite("User API tests", () => {
     const returnedUser = await mapthemomentService.getUser(users[0]._id);
     assert.deepEqual(users[0], returnedUser);
   });
-// this one is failing
+
   test("get a user - bad id", async () => {
     try {
       const returnedUser = await mapthemomentService.getUser("1234");

@@ -7,15 +7,15 @@ export const venueMemStore = {
     return venues;
   },
 
-  async addVenue(occasionId, venue) {
+  async addVenue(areaId, venue) {
     venue._id = v4();
-    venue.occasionid = occasionId;
+    venue.areaid = areaId;
     venues.push(venue);
     return venue;
   },
 
-  async getVenuesByOccasionId(id) {
-    return venues.filter((venue) => venue.occasionid === id);
+  async getVenuesByAreaId(id) {
+    return venues.filter((venue) => venue.areaid === id);
   },
 
   async getVenueById(id) {
@@ -26,8 +26,8 @@ export const venueMemStore = {
     return foundVenue;
   },
 
-  async getOccasionVenues(occasionId) {
-    let foundVenues = venues.filter((venue) => venue.occasionid === occasionId);
+  async getAreaVenues(areaId) {
+    let foundVenues = venues.filter((venue) => venue.areaid === areaId);
     if (!foundVenues) {
       foundVenues = null;
     }

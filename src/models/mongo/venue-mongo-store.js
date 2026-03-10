@@ -7,15 +7,15 @@ export const venueMongoStore = {
     return venues;
   },
 
-  async addVenue(occasionId, venue) {
-    venue.occasionid = occasionId;
+  async addVenue(areaId, venue) {
+    venue.areaid = areaId;
     const newVenue = new Venue(venue);
     const venueObj = await newVenue.save();
     return this.getVenueById(venueObj._id);
   },
 
-  async getVenuesByOccasionId(id) {
-    const venues = await Venue.find({ occasionid: id }).lean();
+  async getVenuesByAreaId(id) {
+    const venues = await Venue.find({ areaid: id }).lean();
     return venues;
   },
 
