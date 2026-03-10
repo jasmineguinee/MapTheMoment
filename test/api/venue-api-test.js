@@ -5,28 +5,32 @@ import { maggie, octoberwedding, testOccasions, testVenues, boathousevenue } fro
 
 suite("Venue API tests", () => {
   let user = null;
-  let beethovenSonatas = null;
+  let bestweddingspots = null;
 
   setup(async () => {
-    await mapthemomentService.deleteAllOccasions();
-    await mapthemomentService.deleteAllUsers();
-    await mapthemomentService.deleteAllVenues();
+    mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);
+    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.deleteAllOccasions();
+    await mapthemomentService.deleteAllVenues();
+    await mapthemomentService.deleteAllUsers();
+    user = await mapthemomentService.createUser(maggie);
+    await mapthemomentService.authenticate(maggie);
     octoberwedding.userid = user._id;
-    beethovenSonatas = await mapthemomentService.createOccasion(octoberwedding);
+    bestweddingspots = await mapthemomentService.createOccasion(octoberwedding);
   });
 
   teardown(async () => {});
 
   test("create venue", async () => {
-    const returnedVenue = await mapthemomentService.createVenue(beethovenSonatas._id, boathousevenue);
+    const returnedVenue = await mapthemomentService.createVenue(bestweddingspots._id, boathousevenue);
     assertSubset(boathousevenue, returnedVenue);
   });
 
   test("create Multiple venues", async () => {
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createVenue(beethovenSonatas._id, testVenues[i]);
+      await mapthemomentService.createVenue(bestweddingspots._id, testVenues[i]);
     }
     const returnedVenues = await mapthemomentService.getAllVenues();
     assert.equal(returnedVenues.length, testVenues.length);
@@ -40,7 +44,7 @@ suite("Venue API tests", () => {
   test("Delete VenueApi", async () => {
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createVenue(beethovenSonatas._id, testVenues[i]);
+      await mapthemomentService.createVenue(bestweddingspots._id, testVenues[i]);
     }
     let returnedVenues = await mapthemomentService.getAllVenues();
     assert.equal(returnedVenues.length, testVenues.length);
@@ -55,9 +59,9 @@ suite("Venue API tests", () => {
   test("denormalised occasion", async () => {
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createVenue(beethovenSonatas._id, testVenues[i]);
+      await mapthemomentService.createVenue(bestweddingspots._id, testVenues[i]);
     }
-    const returnedOccasion = await mapthemomentService.getOccasion(beethovenSonatas._id);
+    const returnedOccasion = await mapthemomentService.getOccasion(bestweddingspots._id);
     assert.equal(returnedOccasion.venues.length, testVenues.length);
     for (let i = 0; i < testVenues.length; i += 1) {
       assertSubset(testVenues[i], returnedOccasion.venues[i]);

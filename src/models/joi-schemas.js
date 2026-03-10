@@ -1,33 +1,56 @@
-import Joi from "joi";   
+import Joi from "joi";
 
 export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).description("a valid ID");
-export const UserSpec = Joi.object()
+
+export const UserCredentialsSpec = Joi.object()
   .keys({
-    firstName: Joi.string().example("Homer").required(),
-    lastName: Joi.string().example("Simpson").required(),
     email: Joi.string().email().example("homer@simpson.com").required(),
     password: Joi.string().example("secret").required(),
-    _id: IdSpec,
-    __v: Joi.number(),
   })
-  .label("UserDetails");
+  .label("UserCredentials");
+
+export const UserSpec = UserCredentialsSpec.keys({
+  firstName: Joi.string().example("Homer").required(),
+  lastName: Joi.string().example("Simpson").required(),
+}).label("UserDetails");
+
+export const UserSpecPlus = UserSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("UserDetailsPlus");
+
+export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
+
+export const VenueSpec = Joi.object()
+  .keys({
+  title: Joi.string().required().example("Fota Island Resort"),
+  venuetype: Joi.string().required().example("wedding"),
+  description: Joi.string().required().example("This is a luxury Irish wedding venue that can cater to very large weddings"),
+  latitude: Joi.number().allow("").required().example(5),
+  longitude: Joi.number().allow("").required().example(6),
+  occasionid: IdSpec,
+  })
+  .label("Venue");
+
+export const VenueSpecPlus = VenueSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("VenuePlus");
+
+export const VenueArraySpec = Joi.array().items(VenueSpecPlus).label("VenueArray");
 
 
-export const UserArray = Joi.array().items(UserSpec).label("UserArray");
+export const OccasionSpec = Joi.object()
+  .keys({
+    title: Joi.string().required().example("Beethoven Sonatas"),
+    userid: IdSpec,
+    venues: VenueArraySpec,
+  })
+  .label("Occasion");
 
-export const UserCredentialsSpec = {
-  email: Joi.string().email().required(),
-  password: Joi.string().required(),
-};
+export const OccasionSpecPlus = OccasionSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("OccasionPlus");
 
-export const VenueSpec = {
-  title: Joi.string().required(),
-  venuetype: Joi.string().required(),
-  description: Joi.string().required(),
-  latitude: Joi.number().allow("").optional(),
-  longitude: Joi.number().allow("").optional(),
-};
-
-export const OccasionSpec = {
-  title: Joi.string().required(),
-};
+export const OccasionArraySpec = Joi.array().items(OccasionSpecPlus).label("OccasionArray");

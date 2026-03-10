@@ -2,6 +2,7 @@ import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
 import { occasionController } from "./controllers/occasion-controller.js";
+import { venueController } from "./controllers/venue-controller.js";
 
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
@@ -17,6 +18,12 @@ export const webRoutes = [
   { method: "POST", path: "/occasion/{id}/addvenue", config: occasionController.addVenue },
   { method: "GET", path: "/dashboard/deleteoccasion/{id}", config: dashboardController.deleteOccasion },
   { method: "GET", path: "/occasion/{id}/deletevenue/{venueid}", config: occasionController.deleteVenue },
-  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } }
+
+ { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
+  { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },
+
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+
+
 
 ];

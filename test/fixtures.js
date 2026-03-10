@@ -33,9 +33,11 @@ export const octoberwedding = {
 };
 /// example of venue
 export const boathousevenue = {
-  "title": "Sheen Falls Lodge",
+  "title": "boathouse Lodge",
   "venuetype": "wedding",
-  "description": ""
+  "description": "romantic wedding location",
+  "latitude": 5,
+  "longitude": 6
 };
 /// playlist
 export const corkoccasion = {
@@ -44,13 +46,13 @@ export const corkoccasion = {
 
 export const testOccasions = [
   {
-    title: "Kerry"
+    title: "Jim and Joans wedding day"
   },
   {
-    title: "Cork"
+    title: "mountain top proposal"
   },
   {
-    title: "Wicklow"
+    title: "leap year proposal"
   }
 ];
 
@@ -58,17 +60,23 @@ export const testVenues = [
   {
     "title": "Fota Island Resort",
     "venuetype": "wedding",
-    "description": "This is a luxury Irish wedding venue can cater to very large wedddings"
+    "description": "This is a luxury Irish wedding venue that can cater to very large weddings",
+    "latitude": 5,
+    "longitude": 6
   },
   {
     "title": "Inish Beg Estate",
     "venuetype": "wedding",
-    "description": "Outdoor ceremonies on Inish Beg can take place by a pond in the woodland, in a walled garden or at the water's edge"
+    "description": "Outdoor ceremonies on Inish Beg can take place by a pond in the woodland, in a walled garden or at the water's edge",
+    "latitude": 5,
+    "longitude": 6
   },
   {
     "title": "Garnish Island",
     "venuetype": "proposal",
-    "description": "This is a hidden-gem proposal spot, featuring Italianate gardens, exotic plants, and breathtaking sea views. Top locations here include the iconic Grecian Temple overlooking Bantry Bay, the romantic clock tower, the intimate walled garden, and the scenic ferry ride passing the local seal colony"
+    "description": "This is a hidden-gem proposal spot, featuring Italianate gardens, exotic plants, and breathtaking sea views. Top locations here include the iconic Grecian Temple overlooking Bantry Bay, the romantic clock tower, the intimate walled garden, and the scenic ferry ride passing the local seal colony",
+    "latitude": 5,
+    "longitude": 6
   }
 ];
 

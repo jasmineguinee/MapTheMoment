@@ -1,9 +1,13 @@
 import Boom from "@hapi/boom";
+import { IdSpec, OccasionArraySpec, OccasionSpec, OccasionSpecPlus } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { validationError } from "./logger.js";
 
 export const occasionApi = {
     find: {
-    auth: false,
+    auth: {
+      strategy: "jwt"
+    },
     handler: async function (request, h) {
       try {
         const occasions = await db.occasionStore.getAllOccasions();
@@ -12,6 +16,10 @@ export const occasionApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+     tags: ["api"],
+    response: { schema: OccasionArraySpec, failAction: validationError },
+    description: "Get all occasions",
+    notes: "Returns all occasions",
   },
 
 
@@ -28,6 +36,11 @@ export const occasionApi = {
         return Boom.serverUnavailable("No Occasion with this id");
       }
     },
+    tags: ["api"],
+    description: "Find a Occasion",
+    notes: "Returns a occasion",
+    validate: { params: { id: IdSpec }, failAction: validationError },
+    response: { schema: OccasionSpecPlus, failAction: validationError },
   },
 
 
@@ -45,6 +58,11 @@ export const occasionApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Create an Occasion",
+    notes: "Returns the newly created occasion",
+    validate: { payload: OccasionSpec, failAction: validationError },
+    response: { schema: OccasionSpecPlus, failAction: validationError },
   },
 
     deleteOne: {
@@ -61,6 +79,9 @@ export const occasionApi = {
         return Boom.serverUnavailable("No Occasion with this id");
       }
     },
+     tags: ["api"],
+    description: "Delete an occasion",
+    validate: { params: { id: IdSpec }, failAction: validationError },
   },
 
 
@@ -74,6 +95,8 @@ export const occasionApi = {
         return Boom.serverUnavailable("Database Error");
       }
     },
+    tags: ["api"],
+    description: "Delete all OccasionApi",
   },
 
 

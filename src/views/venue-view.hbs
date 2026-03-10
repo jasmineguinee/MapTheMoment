@@ -1,0 +1,63 @@
+{{> menu}}
+<link rel="stylesheet"href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<div id='map' style="height: 400px;"></div>
+ <script>
+    const map = L.map("map").setView([53.33306, -6.24889], 13); // [lat, lng], zoom
+     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+     }).addTo(map);
+    
+    let marker; 
+    //https://leafletjs.com/reference.html#event-objects event object click
+    map.on('click', function(ev) {
+    const latitude = ev.latlng.lat; 
+    const longitude = ev.latlng.lng;
+
+
+     //setting the value of the id elements I will be needing on html side
+     document.getElementById("latitude").value = latitude.toFixed(6);
+     document.getElementById("longitude").value = latitude.toFixed(6);
+    
+    //making popup bring up lat and long and a small message
+    L.popup()
+    .setLatLng(ev.latlng)
+    .setContent('This is a venue <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
+    .openOn(map);
+    
+    marker = L.marker(ev.latlng, {color: 'red'} ).addTo(map);
+
+    });
+   
+   </script>
+<section class="section">
+
+<form class="box"  action="/venue/{{occasion._id}}/updatevenue/{{venue._id}}" method="POST">
+    <div class="box box-link-hover-shadow">
+  
+  </div>
+  <label>Update Venue Details:</label>
+  <div class="field is-horizontal">
+    <div class="field-body">
+      <div class="field">
+        <input class="input" type="text" name="title", value="{{venue.title}}">
+      </div>
+      <div class="field">
+        <select class="input" type="text" name="venuetype" value="{{venue.venuetype}}">
+          <option value="proposal">proposal</option>
+          <option value="wedding">wedding</option>
+        </select>
+      <div class="field">
+        <input class="input" type="text"  name="description" value="{{venue.description}}">
+      </div>
+      <div class="field">
+        <input class="input"  id="latitude" type="text"  name="latitude" value="{{venue.latitude}}">
+      </div>
+      <div class="field">
+        <input class="input" id="longitude" type="text"  name="longitude" value="{{venue.longitude}}">
+      </div>
+
+    </div>
+  </div>
+  <button class="button is-primary">Update Venue</button>
+</form>

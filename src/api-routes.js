@@ -7,14 +7,20 @@ export const apiRoutes = [
   { method: "GET", path: "/api/users", config: userApi.find },
   { method: "DELETE", path: "/api/users", config: userApi.deleteAll },
   { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
-    { method: "POST", path: "/api/occasions", config: occasionApi.create },
+
+  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
+
+  { method: "POST", path: "/api/occasions", config: occasionApi.create },
   { method: "DELETE", path: "/api/occasions", config: occasionApi.deleteAll },
   { method: "GET", path: "/api/occasions", config: occasionApi.find },
   { method: "GET", path: "/api/occasions/{id}", config: occasionApi.findOne },
   { method: "DELETE", path: "/api/occasions/{id}", config: occasionApi.deleteOne },
-   { method: "GET", path: "/api/venues", config: venueApi.find },
+
+  { method: "GET", path: "/api/venues", config: venueApi.find },
   { method: "GET", path: "/api/venues/{id}", config: venueApi.findOne },
   { method: "POST", path: "/api/occasions/{id}/venues", config: venueApi.create },
   { method: "DELETE", path: "/api/venues", config: venueApi.deleteAll },
   { method: "DELETE", path: "/api/venues/{id}", config: venueApi.deleteOne },
+ 
+
 ];

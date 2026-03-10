@@ -25,30 +25,36 @@
   "occasions": [
     {
       "title": "Springfort hall",
-      "_id": "d4d02578-2ff0-4de0-abde-51050f8e7c08"
+      "_id": "dbed405e-2b03-4f40-a51b-d036523b9820"
     }
   ],
   "venues": [
     {
       "title": "Fota Island Resort",
       "venuetype": "wedding",
-      "description": "This is a luxury Irish wedding venue can cater to very large wedddings",
-      "_id": "f8522f70-9cdd-40bf-9064-52e1c9c7e33f",
-      "occasionid": "d4d02578-2ff0-4de0-abde-51050f8e7c08"
+      "description": "This is a luxury Irish wedding venue that can cater to very large weddings",
+      "latitude": 5,
+      "longitude": 6,
+      "_id": "fadc53f8-e0de-4337-a701-ad8b3b575c9b",
+      "occasionid": "dbed405e-2b03-4f40-a51b-d036523b9820"
     },
     {
       "title": "Inish Beg Estate",
       "venuetype": "wedding",
       "description": "Outdoor ceremonies on Inish Beg can take place by a pond in the woodland, in a walled garden or at the water's edge",
-      "_id": "340cab24-581d-4ee9-b790-318939e81dee",
-      "occasionid": "d4d02578-2ff0-4de0-abde-51050f8e7c08"
+      "latitude": 5,
+      "longitude": 6,
+      "_id": "a69a1de6-6c87-4ea4-8b38-0fe91f6490e7",
+      "occasionid": "dbed405e-2b03-4f40-a51b-d036523b9820"
     },
     {
       "title": "Garnish Island",
       "venuetype": "proposal",
       "description": "This is a hidden-gem proposal spot, featuring Italianate gardens, exotic plants, and breathtaking sea views. Top locations here include the iconic Grecian Temple overlooking Bantry Bay, the romantic clock tower, the intimate walled garden, and the scenic ferry ride passing the local seal colony",
-      "_id": "fbdbeb43-3998-4ab1-83b1-7deb2924a1d8",
-      "occasionid": "d4d02578-2ff0-4de0-abde-51050f8e7c08"
+      "latitude": 5,
+      "longitude": 6,
+      "_id": "ddce96c7-9fe1-493b-8bd7-93520728e6e9",
+      "occasionid": "dbed405e-2b03-4f40-a51b-d036523b9820"
     }
   ]
 }

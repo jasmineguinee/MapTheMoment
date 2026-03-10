@@ -11,9 +11,13 @@ suite("Occasion API tests", () => {
  let user = null;
 
   setup(async () => {
+    mapthemomentService.clearAuth();
+    user = await mapthemomentService.createUser(maggie);
+    await mapthemomentService.authenticate(maggie);
     await mapthemomentService.deleteAllOccasions();
     await mapthemomentService.deleteAllUsers();
     user = await mapthemomentService.createUser(maggie);
+    await mapthemomentService.authenticate(maggie);
     octoberwedding.userid = user._id;
   });
 
