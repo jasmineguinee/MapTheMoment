@@ -1,18 +1,23 @@
-
 import { db } from "../models/db.js";
 import { AreaSpec } from "../models/joi-schemas.js";
+
 
 export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const areas = await db.areaStore.getUserAreas(loggedInUser._id);
+      const area = await db.areaStore.getUserAreas(loggedInUser._id);
+      const publicVenues = await db.venueStore.getPublicVenues();
+      const publicVenueStrings = JSON.stringify(publicVenues);
       const viewData = {
         title: "MapTheMoment Dashboard",
         user: loggedInUser,
-        areas: areas,
+        areas: area,
+        publicVenueStrings: publicVenueStrings
+        
       };
       return h.view("dashboard-view", viewData);
+      
     },
   },
 

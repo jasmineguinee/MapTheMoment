@@ -7,9 +7,11 @@ export const areaController = {
   index: {
     handler: async function (request, h) {
       const area = await db.areaStore.getAreaById(request.params.id);
+      const venue = await db.venueStore.getVenueById(request.params.venueid);
       const viewData = {
         title: "Area",
         area: area,
+        venue: venue
       };
       return h.view("area-view", viewData);
     },
@@ -31,6 +33,7 @@ export const areaController = {
         description: request.payload.description,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
+        visability: request.payload.visability,
       };
       await db.venueStore.addVenue(area._id, newVenue);
       return h.redirect(`/area/${area._id}`);
@@ -44,9 +47,5 @@ export const areaController = {
       return h.redirect(`/area/${area._id}`);
     },
   },
-
-  addMap: {
-
-  }
 
 };

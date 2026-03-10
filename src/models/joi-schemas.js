@@ -28,6 +28,7 @@ export const VenueSpec = Joi.object()
   description: Joi.string().required().example("This is a luxury Irish wedding venue that can cater to very large weddings"),
   latitude: Joi.number().allow("").required().example(5),
   longitude: Joi.number().allow("").required().example(6),
+  visability: Joi.string().required().example("private"),
   areaid: IdSpec,
   })
   .label("Venue");

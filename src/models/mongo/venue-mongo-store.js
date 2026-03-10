@@ -7,6 +7,11 @@ export const venueMongoStore = {
     return venues;
   },
 
+    async getPublicVenues(id) {
+    const publicVenues = await Venue.find({ visability: "public" }).lean();
+    return publicVenues;
+  },
+
   async addVenue(areaId, venue) {
     venue.areaid = areaId;
     const newVenue = new Venue(venue);
@@ -46,6 +51,7 @@ export const venueMongoStore = {
     venueDoc.description = updatedVenue.description;
     venueDoc.latitude = updatedVenue.latitude;
     venueDoc.longitude = updatedVenue.longitude;
+    venueDoc.visability = updatedVenue.visability;
     await venueDoc.save();
   },
 };

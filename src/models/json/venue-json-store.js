@@ -6,6 +6,17 @@ export const venueJsonStore = {
     await db.read();
     return db.data.venues;
   },
+  // using this to get all the public venues on the homepage
+
+  async getPublicVenues(){
+    await db.read();
+
+    let publicVenues = db.data.venues.filter((venue) => venue.visability === "public");
+    if (!publicVenues) {
+      publicVenues = null;
+    }
+    return publicVenues;
+  },
 
   async addVenue(areaId, venue) {
     await db.read();
@@ -61,6 +72,7 @@ export const venueJsonStore = {
     venue.description = updatedVenue.description;
     venue.latitude = updatedVenue.latitude;
     venue.longitude = updatedVenue.longitude;
+    venue.visability = updatedVenue.visability;
     await db.write();
   },
 };

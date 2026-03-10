@@ -7,6 +7,19 @@ export const venueMemStore = {
     return venues;
   },
 
+  // function to get public venues only
+
+ async getPublicVenues(){
+    await db.read();
+
+    let publicVenues = db.data.venues.filter((venue) => venue.visability === "public");
+    if (!publicVenues) {
+      publicVenues = null;
+    }
+    return publicVenues;
+  },
+
+
   async addVenue(areaId, venue) {
     venue._id = v4();
     venue.areaid = areaId;
@@ -50,5 +63,6 @@ export const venueMemStore = {
     venue.description = updatedVenue.venuedescription;
     venue.latitude = updatedVenue.latitude;
     venue.longitude = updatedVenue.longitude;
+    venue.visability = updatedVenue.visability;
   },
 };

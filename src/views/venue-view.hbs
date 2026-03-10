@@ -17,7 +17,7 @@
 
      //setting the value of the id elements I will be needing on html side
      document.getElementById("latitude").value = latitude.toFixed(6);
-     document.getElementById("longitude").value = latitude.toFixed(6);
+     document.getElementById("longitude").value = longitude.toFixed(6);
     
     //making popup bring up lat and long and a small message
     L.popup()
@@ -56,7 +56,12 @@
       <div class="field">
         <input class="input" id="longitude" type="text"  name="longitude" value="{{venue.longitude}}">
       </div>
-
+      <div class="field">
+        <select class="input" type="text" placeholder="make this public?" name="visability">
+          <option value="public">public</option>
+          <option value="private">private</option>
+        </select>
+      </div>
     </div>
   </div>
   <button class="button is-primary">Update Venue</button>

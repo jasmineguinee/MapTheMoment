@@ -14,15 +14,15 @@
 
      //setting the value of the id elements I will be needing on html side
      document.getElementById("latitude").value = latitude.toFixed(6);
-     document.getElementById("longitude").value = latitude.toFixed(6);
+     document.getElementById("longitude").value = longitude.toFixed(6);
     
     //making popup bring up lat and long and a small message
     L.popup()
-    .setLatLng(ev.latlng)
+    .setLatLng([latitude, longitude])
     .setContent('This is a venue <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
     .openOn(map);
     
-    marker = L.marker(ev.latlng, {color: 'red'} ).addTo(map);
+    marker = L.marker([latitude, longitude], {color: 'red'} ).addTo(map);
 
     });
    
@@ -50,6 +50,12 @@
       </div>
       <div class="field">
         <input class="input" id="longitude" type="text" placeholder="Enter longitude" name="longitude">
+      </div>
+      <div class="field">
+        <select class="input" type="text" placeholder="make this public?" name="visability">
+          <option value="public">public</option>
+          <option value="private">private</option>
+        </select>
       </div>
     </div>
   </div>

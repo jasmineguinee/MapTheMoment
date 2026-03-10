@@ -27,7 +27,6 @@ export const areaJsonStore = {
     return list;
   },
 
-
   async getUserAreas(userid) {
     await db.read();
     return db.data.areas.filter((area) => area.userid === userid);
