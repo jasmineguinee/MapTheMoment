@@ -6,11 +6,35 @@ export const venueMongoStore = {
     const venues = await Venue.find().lean();
     return venues;
   },
-
+  // public venues
     async getPublicVenues(id) {
     const publicVenues = await Venue.find({ visability: "public" }).lean();
     return publicVenues;
   },
+  // public wedding venues
+  async getPublicWeddingVenues(){
+       const pubWeddingVenues = await Venue.find({ visability: "public", venuetype: "wedding" }).lean();
+    return pubWeddingVenues;
+  },
+  // public proposal venues
+    async getPublicProposalSpots(){
+       const pubProposalSpots = await Venue.find({ visability: "public", venuetype: "proposal" }).lean();
+    return pubProposalSpots;
+  },
+   // USER AREA VENUES BY TYPE - wedding
+   
+  async getAreaWeddingVenues(id) {
+    const venues = await Venue.find({ areaid: id, venuetype: "wedding" }).lean();
+    return venues;
+  },
+
+   // USER AREA VENUES BY TYPE - proposal
+   
+   async getAreaProposalVenues(id) {
+    const venues = await Venue.find({ areaid: id, venuetype: "proposal" }).lean();
+    return venues;
+  },
+
 
   async addVenue(areaId, venue) {
     venue.areaid = areaId;

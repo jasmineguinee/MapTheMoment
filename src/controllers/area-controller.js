@@ -8,10 +8,16 @@ export const areaController = {
     handler: async function (request, h) {
       const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
+      const weddingVenues = await db.venueStore.getAreaWeddingVenues(request.params.id);
+      const proposalVenues = await db.venueStore.getAreaProposalVenues(request.params.id);
+      const weddingVenuesStrings = JSON.stringify(weddingVenues);
+      const proposalVenueStrings = JSON.stringify(proposalVenues);
       const viewData = {
         title: "Area",
         area: area,
-        venue: venue
+        venue: venue,
+        weddingVenuesStrings: weddingVenuesStrings,
+        proposalVenueStrings: proposalVenueStrings
       };
       return h.view("area-view", viewData);
     },

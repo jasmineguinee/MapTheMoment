@@ -1,34 +1,80 @@
-    <div class="box box-link-hover-shadow">
-   <script>
-    const map = L.map("map").setView([53.33306, -6.24889], 13); // [lat, lng], zoom
+    
+    
+  <div class="box box-link-hover-shadow">
+  <div hidden="hidden" id="weddingVenuesStrings">{{{weddingVenuesStrings}}}</div>
+  <div hidden="hidden" id="proposalVenueStrings">{{{proposalVenueStrings}}}</div>
+
+  <script>
+    const map = L.map("map").setView([51.8985, -8.84756], 7); // [lat, lng], zoom
      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors"
      }).addTo(map);
+
+    map.dragging.enable();
     
-    let marker; 
+
+    const rawWeddingVenues = document.getElementById("weddingVenuesStrings").textContent;
+    const weddingVenues = JSON.parse(rawWeddingVenues);
+    const rawProposalVenues = document.getElementById("proposalVenueStrings").textContent;
+    const proposalVenues = JSON.parse(rawProposalVenues);
+
+    
+    const weddingicon = L.icon({
+    iconUrl: "/images/dome.png",
+    iconSize: [48, 48],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    });
+
+    const proposalicon = L.icon({
+    iconUrl: "/images/mappin.png",
+    iconSize: [48, 48],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    });
+    
+    const markers = [];
+    
+    weddingVenues.forEach(venue => {
+    L.popup()
+    .setLatLng([venue.latitude, venue.longitude])
+     marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     markers.push(marker)
+     });
+
+    proposalVenues.forEach(venue => {
+    L.popup()
+    .setLatLng([venue.latitude, venue.longitude])
+     marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
+     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     markers.push(marker)
+     });
+
+
+    
+
     //https://leafletjs.com/reference.html#event-objects event object click
     map.on('click', function(ev) {
     const latitude = ev.latlng.lat; 
     const longitude = ev.latlng.lng;
 
-
-     //setting the value of the id elements I will be needing on html side
+  //setting the value of the id elements I will be needing on html side - brings it back to html
      document.getElementById("latitude").value = latitude.toFixed(6);
      document.getElementById("longitude").value = longitude.toFixed(6);
     
-    //making popup bring up lat and long and a small message
     L.popup()
     .setLatLng([latitude, longitude])
-    .setContent('This is a venue <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
+    .setContent('Choose this location! <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
     .openOn(map);
-    
-    marker = L.marker([latitude, longitude], {color: 'red'} ).addTo(map);
+
 
     });
-   
-   </script>
+    
+  </script>
+
   </div>
-<form class="box" action="/area/{{area._id}}/addvenue" method="POST">
+  <form class="box" action="/area/{{area._id}}/addvenue" method="POST">
   <label>Enter Venue Details. Click on the map to add a location for your venue</label>
   <div class="field is-horizontal">
     <div class="field-body">

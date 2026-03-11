@@ -7,14 +7,17 @@ export const dashboardController = {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getUserAreas(loggedInUser._id);
-      const publicVenues = await db.venueStore.getPublicVenues();
-      const publicVenueStrings = JSON.stringify(publicVenues);
+      const pubWeddingVenues = await db.venueStore.getPublicWeddingVenues();
+      const pubProposalSpots = await db.venueStore. getPublicProposalSpots();
+      const pubWeddingVenueStrings = JSON.stringify(pubWeddingVenues);
+      const pubProposalSpotsStrings = JSON.stringify(pubProposalSpots);
+      
       const viewData = {
         title: "MapTheMoment Dashboard",
         user: loggedInUser,
         areas: area,
-        publicVenueStrings: publicVenueStrings
-        
+        pubWeddingVenueStrings: pubWeddingVenueStrings,
+        pubProposalSpotsStrings: pubProposalSpotsStrings
       };
       return h.view("dashboard-view", viewData);
       

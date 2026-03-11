@@ -1,0 +1,57 @@
+ 
+  <div class="box box-link-hover-shadow">
+   <label class="label">Wedding venues and proposal hotspots - shared by our community members</label>
+   <div hidden="hidden" id="pubweddingvenues">{{{pubWeddingVenueStrings}}}</div>
+    <div hidden="hidden" id="pubproposalvenues">{{{pubProposalSpotsStrings}}}</div>
+   
+   <script>  
+    const rawpubweddings = document.getElementById("pubweddingvenues").textContent;
+    const rawpubproposals = document.getElementById("pubproposalvenues").textContent;
+    const pubweddings = JSON.parse(rawpubweddings);
+    const pubproposals = JSON.parse(rawpubproposals);
+    
+     const map = L.map("map").setView([51.8985, -8.84756], 7);
+     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+     }).addTo(map);
+
+     map.dragging.enable();
+    
+    const weddingicon = L.icon({
+    iconUrl: "/images/dome.png",
+    iconSize: [48, 48],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    });
+
+    const proposalicon = L.icon({
+    iconUrl: "/images/mappin.png",
+    iconSize: [48, 48],
+    iconAnchor: [16, 32],
+    popupAnchor: [0, -32],
+    });
+   // make array for all the venue markers
+   const markers = [];
+
+   // make a marker for each type of venue
+   pubweddings.forEach(venue => {
+    L.popup()
+    .setLatLng([venue.latitude, venue.longitude])
+     marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     markers.push(marker)
+
+     });
+
+    pubproposals.forEach(venue => {
+    L.popup()
+    .setLatLng([venue.latitude, venue.longitude])
+     marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
+     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     markers.push(marker)
+     });
+   
+
+   </script>
+
+</div>

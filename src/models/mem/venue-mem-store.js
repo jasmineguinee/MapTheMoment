@@ -18,8 +18,47 @@ export const venueMemStore = {
     }
     return publicVenues;
   },
+   // get all the public wedding venues
+    async getPublicWeddingVenues(){
+      await db.read();
+  
+      let pubWeddingVenues = db.data.venues.filter((venue) => venue.visability === "public", venue.venuetype === "wedding" );
+      if (!publicVenues) {
+        pubWeddingVenues = null;
+      }
+      return pubWeddingVenues;
+    },
+     // get all the public proposal venues
+      async getPublicProposalSpots(){
+      await db.read();
+  
+      let pubProposalSpots= db.data.venues.filter((venue) => venue.visability === "public", venue.venuetype === "proposal" );
+      if (!pubProposalSpots) {
+        pubProposalSpots = null;
+      }
+      return pubProposalSpots;
+    },
 
+   /// USERS AREA VENUES BY TYPE - wedding
+      async getAreaWeddingVenues(areaId) {
+      await db.read();
+      let foundVenues = venues.filter((venue) => venue.areaid === areaId, venue.venuetype === "wedding");
+      if (!foundVenues) {
+        foundVenues = null;
+      }
+      return foundVenues;
+    },
 
+     /// USERS AREA VENUES BY TYPE - proposal
+       async getAreaProposalVenues(areaId) {
+        await db.read();
+        let foundVenues = venues.filter((venue) => venue.areaid === areaId, venue.venuetype === "proposal");
+        if (!foundVenues) {
+          foundVenues = null;
+        }
+        return foundVenues;
+      },
+      
   async addVenue(areaId, venue) {
     venue._id = v4();
     venue.areaid = areaId;

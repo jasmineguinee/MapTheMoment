@@ -17,6 +17,47 @@ export const venueJsonStore = {
     }
     return publicVenues;
   },
+// getting any public wedding venues (public posts by anyone on the website )
+  async getPublicWeddingVenues(){
+    await db.read();
+
+    let pubWeddingVenues = db.data.venues.filter((venue) => venue.visability === "public", venue.venuetype === "wedding" );
+    if (!publicVenues) {
+      pubWeddingVenues = null;
+    }
+    return pubWeddingVenues;
+  },
+  
+ // get all the public proposal venues
+      async getPublicProposalSpots(){
+      await db.read();
+  
+      let pubProposalSpots= db.data.venues.filter((venue) => venue.visability === "public", venue.venuetype === "proposal" );
+      if (!pubProposalSpots) {
+        pubProposalSpots = null;
+      }
+      return pubProposalSpots;
+    },
+
+    /// USERS AREA VENUES BY TYPE - wedding
+    async getAreaWeddingVenues(areaId) {
+    await db.read();
+    let foundVenues = venues.filter((venue) => venue.areaid === areaId, venue.venuetype === "wedding");
+    if (!foundVenues) {
+      foundVenues = null;
+    }
+    return foundVenues;
+  },
+  /// USERS AREA VENUES BY TYPE - proposal
+   async getAreaProposalVenues(areaId) {
+    await db.read();
+    let foundVenues = venues.filter((venue) => venue.areaid === areaId, venue.venuetype === "proposal");
+    if (!foundVenues) {
+      foundVenues = null;
+    }
+    return foundVenues;
+  },
+
 
   async addVenue(areaId, venue) {
     await db.read();
