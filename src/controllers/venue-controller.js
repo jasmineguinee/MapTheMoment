@@ -33,11 +33,11 @@ export const venueController = {
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const newVenue = {
         title: request.payload.title,
-        venuetype: request.payload.artist,
+        venuetype: request.payload.venuetype,
         description:request.payload.description,
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
-        visability: request.payload.visability
+        visability: request.payload.visability,
       };
       await db.venueStore.updateVenue(venue, newVenue);
       return h.redirect(`/area/${request.params.id}`);

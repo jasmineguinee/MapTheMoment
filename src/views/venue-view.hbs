@@ -89,6 +89,7 @@
           <option value="proposal">proposal</option>
           <option value="wedding">wedding</option>
         </select>
+      </div>
       <div class="field">
         <input class="input" type="text"  name="description" value="{{venue.description}}">
       </div>
@@ -99,7 +100,7 @@
         <input class="input" id="longitude" type="text"  name="longitude" value="{{venue.longitude}}">
       </div>
       <div class="field">
-        <select class="input" type="text" placeholder="make this public?" name="visability" value="{{venue.visability}}" >
+        <select class="input" id="visability" type="text" placeholder="make this public?" name="visability" value="{{venue.visability}}">
           <option value="public">public</option>
           <option value="private">private</option>
         </select>

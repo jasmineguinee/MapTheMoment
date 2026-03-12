@@ -22,7 +22,7 @@ const result = dotenv.config();
 
 const swaggerOptions = {
   info: {
-    title: "MapTheMoment",
+    title: "mapthemoment",
     version: "0.1",
   },
 };
