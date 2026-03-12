@@ -1,9 +1,11 @@
  
   <div class="box box-link-hover-shadow">
    <label class="label">Wedding venues and proposal hotspots - shared by our community members</label>
+   <button id="pubproposals"type="button">View proposal venues</button>
+   <button id="pubweddings"type="button">View wedding venues</button>
+   <button id="clearvenues"type="button">Clear venues</button>
    <div hidden="hidden" id="pubweddingvenues">{{{pubWeddingVenueStrings}}}</div>
     <div hidden="hidden" id="pubproposalvenues">{{{pubProposalSpotsStrings}}}</div>
-   
    <script>  
     const rawpubweddings = document.getElementById("pubweddingvenues").textContent;
     const rawpubproposals = document.getElementById("pubproposalvenues").textContent;
@@ -32,17 +34,24 @@
     });
    // make array for all the venue markers
    const markers = [];
+  
+  document.getElementById("pubproposals").onclick = function() {getPubProposalVenues()};
+  document.getElementById("pubweddings").onclick = function() {getPubWeddingVenues()};
+  document.getElementById("clearvenues").onclick = function() {clearvenues()};
+  
 
    // make a marker for each type of venue
+  function getPubWeddingVenues(){
    pubweddings.forEach(venue => {
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
      marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
      markers.push(marker)
-
      });
+  }
 
+  function getPubProposalVenues(){
     pubproposals.forEach(venue => {
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
@@ -50,7 +59,14 @@
      marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
      markers.push(marker)
      });
-   
+  }
+
+   function clearvenues(){
+    markers.forEach(marker =>{
+     map.removeLayer(marker);
+    })
+   }
+  
 
    </script>
 

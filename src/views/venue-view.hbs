@@ -2,6 +2,9 @@
 <link rel="stylesheet"href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <div id='map' style="height: 400px;"></div>
+ <button id="userproposals"type="button">View your proposal venues on the map</button>
+   <button id="userweddings"type="button">View your wedding venues on the map</button>
+   <button id="clearvenues"type="button">Clear venues</button>
   <div hidden="hidden" id="weddingVenuesStrings">{{{weddingVenuesStrings}}}</div>
   <div hidden="hidden" id="proposalVenueStrings">{{{proposalVenueStrings}}}</div>
    <script>
@@ -12,12 +15,12 @@
 
     map.dragging.enable();
     
-
     const rawWeddingVenues = document.getElementById("weddingVenuesStrings").textContent;
     const weddingVenues = JSON.parse(rawWeddingVenues);
     const rawProposalVenues = document.getElementById("proposalVenueStrings").textContent;
     const proposalVenues = JSON.parse(rawProposalVenues);
 
+    userproposals
     
     const weddingicon = L.icon({
     iconUrl: "/images/dome.png",
@@ -32,9 +35,14 @@
     iconAnchor: [16, 32],
     popupAnchor: [0, -32],
     });
-    
+
+    document.getElementById("userproposals").onclick = function() {getUserProposalVenues()};
+    document.getElementById("userweddings").onclick = function() {getUserWeddingVenues()};
+    document.getElementById("clearvenues").onclick = function() {clearvenues()};
+
     const markers = [];
-    
+
+  function getUserWeddingVenues(){
     weddingVenues.forEach(venue => {
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
@@ -42,7 +50,10 @@
      marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
      markers.push(marker)
      });
+   }
 
+
+  function getUserProposalVenues(){
     proposalVenues.forEach(venue => {
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
@@ -50,9 +61,13 @@
      marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
      markers.push(marker)
      });
-
-
+  }
     
+  function clearvenues(){
+    markers.forEach(marker =>{
+     map.removeLayer(marker);
+    })
+   }
 
     //https://leafletjs.com/reference.html#event-objects event object click
     map.on('click', function(ev) {
