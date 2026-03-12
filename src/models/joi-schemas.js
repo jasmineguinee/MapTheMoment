@@ -55,3 +55,12 @@ export const AreaSpecPlus = AreaSpec.keys({
 }).label("AreaPlus");
 
 export const AreaArraySpec = Joi.array().items(AreaSpecPlus).label("AreaArray");
+
+export const JwtAuth = Joi.object()
+  .keys({
+    success: Joi.boolean().example("true").required(),
+    token: Joi.string().example("eyJhbGciOiJND.g5YmJisIjoiaGYwNTNjAOhE.gCWGmY5-YigQw0DCBo").required(),
+  })
+  .label("JwtAuth");
+
+  

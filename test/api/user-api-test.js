@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { mapthemomentService } from "./mapthemoment-service.js";
-import { maggie, testUsers } from "../fixtures.js";
+import { maggieCredentials, maggie, testUsers } from "../fixtures.js";
 import { db } from "../../src/models/db.js";
 
 const users = new Array(testUsers.length);
@@ -10,14 +10,14 @@ suite("User API tests", () => {
   setup(async () => {
     mapthemomentService.clearAuth();
     await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     await mapthemomentService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
       users[0] = await mapthemomentService.createUser(testUsers[i]);
     }
     await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
   });
   teardown(async () => {});
 
@@ -32,7 +32,7 @@ suite("User API tests", () => {
     assert.equal(returnedUsers.length, 4);
     await mapthemomentService.deleteAllUsers();
     await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     returnedUsers = await mapthemomentService.getAllUsers();
     assert.equal(returnedUsers.length, 1);
   });
@@ -55,7 +55,7 @@ suite("User API tests", () => {
   test("get a user - deleted user", async () => {
     await mapthemomentService.deleteAllUsers();
     await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     try {
       const returnedUser = await mapthemomentService.getUser(users[0]._id);
       assert.fail("Should not return a response");

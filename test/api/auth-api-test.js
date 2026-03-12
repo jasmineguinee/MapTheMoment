@@ -1,26 +1,26 @@
 import { assert } from "chai";
 import { mapthemomentService } from "./mapthemoment-service.js";
 import { decodeToken } from "../../src/api/jwt-utils.js";
-import { maggie } from "../fixtures.js";
+import { maggie, maggieCredentials } from "../fixtures.js";
 
 suite("Authentication API tests", async () => {
   setup(async () => {
     mapthemomentService.clearAuth();
     await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     await mapthemomentService.deleteAllUsers();
   });
 
   test("authenticate", async () => {
     const returnedUser = await mapthemomentService.createUser(maggie);
-    const response = await mapthemomentService.authenticate(maggie);
+    const response = await mapthemomentService.authenticate(maggieCredentials);
     assert(response.success);
     assert.isDefined(response.token);
   });
 
   test("verify Token", async () => {
     const returnedUser = await mapthemomentService.createUser(maggie);
-    const response = await mapthemomentService.authenticate(maggie);
+    const response = await mapthemomentService.authenticate(maggieCredentials);
 
     const userInfo = decodeToken(response.token);
     assert.equal(userInfo.email, returnedUser.email);

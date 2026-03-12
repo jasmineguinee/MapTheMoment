@@ -25,6 +25,14 @@ const swaggerOptions = {
     title: "mapthemoment",
     version: "0.1",
   },
+  securityDefinitions: {
+    jwt: {
+      type: "apiKey",
+      name: "Authorization",
+      in: "header"
+    }
+  },
+  security: [{ jwt: [] }]
 };
 
 if (result.error) {
