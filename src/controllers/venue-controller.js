@@ -38,9 +38,14 @@ export const venueController = {
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
         visability: request.payload.visability,
+    
       };
       await db.venueStore.updateVenue(venue, newVenue);
       return h.redirect(`/area/${request.params.id}`);
     },
   },
+
+
+
+
 };

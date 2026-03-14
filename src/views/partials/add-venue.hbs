@@ -1,17 +1,20 @@
-    
-    
+
   <div class="box box-link-hover-shadow">
   <div hidden="hidden" id="weddingVenuesStrings">{{{weddingVenuesStrings}}}</div>
   <div hidden="hidden" id="proposalVenueStrings">{{{proposalVenueStrings}}}</div>
-
-  <script>
+ <script>
     const map = L.map("map").setView([51.8985, -8.84756], 7); // [lat, lng], zoom
      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors"
      }).addTo(map);
 
     map.dragging.enable();
-    
+
+   // add search to the map (to make getting venues easier)
+    L.Control.geocoder({
+       defaultMarkGeocode: true 
+       }).addTo(map);
+
     const rawWeddingVenues = document.getElementById("weddingVenuesStrings").textContent;
     const weddingVenues = JSON.parse(rawWeddingVenues);
     const rawProposalVenues = document.getElementById("proposalVenueStrings").textContent;
@@ -44,7 +47,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
    }
@@ -55,7 +58,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type:' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
   }
@@ -71,7 +74,7 @@
     const latitude = ev.latlng.lat; 
     const longitude = ev.latlng.lng;
 
-  //setting the value of the id elements I will be needing on html side - brings it back to html
+     //setting the value of the id elements I will be needing on html side - brings it back to html
      document.getElementById("latitude").value = latitude.toFixed(6);
      document.getElementById("longitude").value = longitude.toFixed(6);
     
@@ -79,11 +82,10 @@
     .setLatLng([latitude, longitude])
     .setContent('Choose this location! <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
     .openOn(map);
-
-
     });
     
   </script>
+
 
   </div>
   <form class="box" action="/area/{{area._id}}/addvenue" method="POST">

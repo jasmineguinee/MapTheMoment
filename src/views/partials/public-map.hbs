@@ -1,6 +1,6 @@
  
   <div class="box box-link-hover-shadow">
-   <label class="label">Wedding venues and proposal hotspots - shared by our community members</label>
+   <h3 class="title">Wedding venues and proposal hotspots - shared by our community members</h3>
    <button id="pubproposals"type="button">View proposal venues</button>
    <button id="pubweddings"type="button">View wedding venues</button>
    <button id="clearvenues"type="button">Clear venues</button>
@@ -18,7 +18,15 @@
      }).addTo(map);
 
      map.dragging.enable();
-    
+      
+   // the following is for searching places to make adding and viewing venues easier
+   // putting the mark geocode as true as I want it to zoom in and mark where user has searched
+   // useful github resource for this was found here: https://github.com/perliedman/leaflet-control-geocoder?tab=readme-ov-file
+
+      L.Control.geocoder({
+       defaultMarkGeocode: true
+       }).addTo(map);
+
     const weddingicon = L.icon({
     iconUrl: "/images/dome.png",
     iconSize: [48, 48],
@@ -46,7 +54,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
   }
@@ -56,7 +64,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
   }

@@ -1,6 +1,8 @@
 {{> menu}}
 <link rel="stylesheet"href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet"href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
 <div id='map' style="height: 400px;"></div>
  <button id="userproposals"type="button">View your proposal venues on the map</button>
    <button id="userweddings"type="button">View your wedding venues on the map</button>
@@ -14,13 +16,15 @@
      }).addTo(map);
 
     map.dragging.enable();
-    
+
+      L.Control.geocoder({
+       defaultMarkGeocode: true 
+       }).addTo(map);
+
     const rawWeddingVenues = document.getElementById("weddingVenuesStrings").textContent;
     const weddingVenues = JSON.parse(rawWeddingVenues);
     const rawProposalVenues = document.getElementById("proposalVenueStrings").textContent;
     const proposalVenues = JSON.parse(rawProposalVenues);
-
-    userproposals
     
     const weddingicon = L.icon({
     iconUrl: "/images/dome.png",
@@ -47,7 +51,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
    }
@@ -58,7 +62,7 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br Venue Type: >' + venue.venuetype + '<br> Description: ' + venue.description + '<br> + Latitude: ' + venue.latitude.toFixed(6) + '<br> Longitude: ' + venue.longitude.toFixed(6) + '<br> visability: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
      markers.push(marker)
      });
   }
@@ -82,8 +86,6 @@
     .setLatLng([latitude, longitude])
     .setContent('Choose this location! <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
     .openOn(map);
-
-
     });
     
   </script>
