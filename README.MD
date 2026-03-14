@@ -12,7 +12,7 @@ On the main dashboard when the user logs in, they can view all public postings f
 ## Use cases for application
 This app could be used for businesses to display information about and promote their venues. Users can also post venues and proposal hotspots they have found and give their experience in the description. This could also be helpful for users who are seeking to plan events and wish to access to all information in one spot. 
 
-## Packages required
+## Packages required  
 Hapi is required for this project. Please install hapi, hapi vision for template rendering, hapi cookie to enable user sessions and hapi boom for http friendly errors with the commands below:  
 npm install @hapi/hapi  
 npm install @hapi/vision  
@@ -64,12 +64,13 @@ For JWT security for API tests, complete the following command:
 npm install hapi-auth-jwt2 jsonwebtoken  
 
 
-## Installation innstructions
-To install and start the installation use the following commands  
-npm install
-npm run start
+## Installation instructions
+To install and start the project use the following commands:  
 
-References:  
+npm install  
+npm run start  
+
+## References:   
 [Eslint](https://eslint.org/)  
 [Prettier](https://prettier.io/)  
 [Hapi](https://hapi.dev/module/?sort=name)  
