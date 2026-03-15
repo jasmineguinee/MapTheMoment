@@ -41,8 +41,14 @@
             <i class="fas fa-trash"></i>
           </a>
         </td>
+        {{#if img}}
+        <td>
+          <figure class="image is-64x64">
+           <img src="{{img}}">
+          </figure>
+        </td>
+        {{/if}}
       </tr>
     {{/each}}
   </tbody>
 </table>
-

@@ -49,9 +49,15 @@
   function getUserWeddingVenues(){
     weddingVenues.forEach(venue => {
     L.popup()
-    .setLatLng([venue.latitude, venue.longitude])
+     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     const imgstr = venue.img;
+    if (imgstr){
+      const url = "<img src="+ imgstr + " style = 'width:200px;'>"
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }else{
      marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }
      markers.push(marker)
      });
    }
@@ -62,7 +68,13 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
+     const imgstr = venue.img;
+    if (imgstr){
+      const url = "<img src="+ imgstr + " style = 'width:200px;'>"
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }else{
      marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }
      markers.push(marker)
      });
   }
@@ -90,10 +102,8 @@
     
   </script>
 <section class="section">
-
 <form class="box"  action="/venue/{{area._id}}/updatevenue/{{venue._id}}" method="POST">
     <div class="box box-link-hover-shadow">
- 
   </div>
   <label>Update Venue Details:</label>
   <div class="field is-horizontal">
@@ -121,8 +131,14 @@
           <option value="public">public</option>
           <option value="private">private</option>
         </select>
-      </div>
-    </div>
   </div>
   <button class="button is-info">Update Venue</button>
 </form>
+</section>
+<section>
+   <div>
+        <div class="image">
+             {{> venue-image }}
+         </div>
+    </div>
+</section>

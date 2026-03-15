@@ -1,5 +1,6 @@
 import { VenueSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
+import { imageStore } from "../models/image-store.js";
 
 export const venueController = {
   index: {
@@ -30,6 +31,7 @@ export const venueController = {
       },
     },
     handler: async function (request, h) {
+
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const newVenue = {
         title: request.payload.title,
@@ -38,6 +40,7 @@ export const venueController = {
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
         visability: request.payload.visability,
+        img:venue.img,
     
       };
       await db.venueStore.updateVenue(venue, newVenue);
@@ -45,6 +48,44 @@ export const venueController = {
     },
   },
 
+uploadImage: {
+    handler: async function (request, h) {
+    try {
+
+        const venue = await db.venueStore.getVenueById(request.params.venueid);
+        
+        const file = request.payload.imagefile;
+        if (Object.keys(file).length > 0) {
+          const url =  await imageStore.uploadImage(request.payload.imagefile);
+         
+        const updatedVenue = {
+          title: venue.title,
+          venuetype: venue.venuetype,
+          description: venue.description,
+          latitude: venue.latitude,
+          longitude: venue.longitude,
+          visability: venue.visability,
+          img: url,
+        };
+
+        await db.venueStore.updateVenue(venue, updatedVenue);
+      }
+      // using the route for the edit venue option to return to page with venues
+      return h.redirect(`/venue/${request.params.id}/editvenue/${request.params.venueid}`);
+  
+    } catch (err) {
+      console.log(err);
+
+      return h.redirect("/");
+    }
+    },
+    payload: {
+      multipart: true,
+      output: "data",
+      maxBytes: 209715200,
+      parse: true,
+    },
+  },
 
 
 

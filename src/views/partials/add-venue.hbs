@@ -47,7 +47,13 @@
     L.popup()
     .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     const imgstr = venue.img;
+    if (imgstr){
+      const url = "<img src="+ imgstr + " style = 'width:200px;'>"
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }else{
      marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }
      markers.push(marker)
      });
    }
@@ -56,9 +62,15 @@
   function getUserProposalVenues(){
     proposalVenues.forEach(venue => {
     L.popup()
-    .setLatLng([venue.latitude, venue.longitude])
+       .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
-     marker.bindPopup(venue.title + '<br> Venue Type:' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+     const imgstr = venue.img;
+    if (imgstr){
+      const url = "<img src="+ imgstr + " style = 'width:200px;'>"
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }else{
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+    }
      markers.push(marker)
      });
   }

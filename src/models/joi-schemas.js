@@ -30,6 +30,8 @@ export const VenueSpec = Joi.object()
   longitude: Joi.number().allow("").required().example(6),
   visability: Joi.string().required().example("private"),
   areaid: IdSpec,
+  img: Joi.any().optional(),
+  imagefile: Joi.any().optional(),
   })
   .label("Venue");
 

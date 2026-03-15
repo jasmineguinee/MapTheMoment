@@ -6,8 +6,8 @@ export const venueJsonStore = {
     await db.read();
     return db.data.venues;
   },
-  // using this to get all the public venues on the homepage
 
+  // using this to get all the public venues on the homepage
   async getPublicVenues(){
     await db.read();
 

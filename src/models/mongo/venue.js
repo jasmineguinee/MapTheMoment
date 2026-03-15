@@ -9,6 +9,7 @@ const venueSchema = new Schema({
   latitude: Number,
   longitude: Number,
   visability: String,
+  img: String,
   areaid: {
     type: Schema.Types.ObjectId,
     ref: "Area",

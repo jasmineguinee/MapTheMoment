@@ -23,7 +23,7 @@ export const webRoutes = [
   { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-
+  { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
 
 
 ];
