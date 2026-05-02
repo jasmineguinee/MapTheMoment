@@ -1,3 +1,4 @@
+import os from "os";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
@@ -24,6 +25,16 @@ export const webRoutes = [
 
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
   { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
+
+{
+  method: "GET",
+  path: "/testlb",
+  handler: function (request, h) {
+     return("Server: " + os.hostname());
+  },
+  config: {auth: false}
+},
+
 
 
 ];

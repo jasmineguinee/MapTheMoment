@@ -2,7 +2,7 @@ import { EventEmitter } from "events";
 import { assert } from "chai";
 import { mapthemomentService } from "./mapthemoment-service.js";
 import { assertSubset } from "../test-utils.js";
-import { maggie, kerry, testAreas } from "../fixtures.js";
+import { maggie, kerry, testAreas, maggieCredentials } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
 
@@ -13,11 +13,11 @@ suite("Area API tests", () => {
   setup(async () => {
     mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     await mapthemomentService.deleteAllAreas();
     await mapthemomentService.deleteAllUsers();
     user = await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     kerry.userid = user._id;
   });
 

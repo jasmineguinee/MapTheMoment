@@ -1,26 +1,28 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { mapthemomentService } from "./mapthemoment-service.js";
-import { maggie, kerry, testAreas, testVenues, boathousevenue } from "../fixtures.js";
+import { maggie, kerry, testAreas, testVenues, boathousevenue, maggieCredentials } from "../fixtures.js";
 
 suite("Venue API tests", () => {
   let user = null;
   let limerick = null;
 
+
   setup(async () => {
     mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     await mapthemomentService.deleteAllAreas();
     await mapthemomentService.deleteAllVenues();
     await mapthemomentService.deleteAllUsers();
     user = await mapthemomentService.createUser(maggie);
-    await mapthemomentService.authenticate(maggie);
+    await mapthemomentService.authenticate(maggieCredentials);
     kerry.userid = user._id;
     limerick = await mapthemomentService.createArea(kerry);
   });
 
   teardown(async () => {});
+
 
   test("create venue", async () => {
     const returnedVenue = await mapthemomentService.createVenue(limerick._id, boathousevenue);
