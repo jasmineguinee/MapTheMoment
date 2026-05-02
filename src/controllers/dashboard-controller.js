@@ -6,18 +6,22 @@ export const dashboardController = {
   index: {
     handler: async function (request, h) {
       const loggedInUser = request.auth.credentials;
-      const area = await db.areaStore.getAreaById(request.params.id);
       const areas = await db.areaStore.getUserAreas(loggedInUser._id);
       const pubWeddingVenues = await db.venueStore.getPublicWeddingVenues();
-      const pubProposalSpots = await db.venueStore. getPublicProposalSpots();
+      const pubProposalSpots = await db.venueStore.getPublicProposalSpots();
       const pubWeddingVenueStrings = JSON.stringify(pubWeddingVenues);
       const pubProposalSpotsStrings = JSON.stringify(pubProposalSpots);
+  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all#:~:text=The%20Promise.,array%20of%20the%20fulfillment%20values.
+      await Promise.all(
+        areas.map(async (area) => {
+          area.venues = await db.venueStore.getVenuesByAreaId(area._id);
+        })
+        );
 
-    
       const viewData = {
+        areas:areas,
         title: "MapTheMoment Dashboard",
         user: loggedInUser,
-        areas: areas,
         pubWeddingVenueStrings: pubWeddingVenueStrings,
         pubProposalSpotsStrings: pubProposalSpotsStrings,
       };

@@ -1,16 +1,29 @@
 {{#each areas}}
-  <div class="box box-link-hover-shadow">
+<div class="box box-link-hover-shadow">
+   <div>
     <h2 class="title">
       {{title}}
     </h2>
+     <p>Number of venues: {{venues.length}}</p>
      <a href="/area/{{_id}}" class="button">
       <span class="icon is-small">
         <i class="fas fa-folder-open"></i>
       </span>
     </a>
-    </a>
     <a href="/dashboard/deletearea/{{_id}}" class="button">
       <i class="fas fa-trash"></i>
     </a>
-  </div>
+   
+   <div class = "flex-container">
+   {{#each venues}}
+    <div>
+     <figure>
+       <img class="image is-128x128" src="{{img}}">
+     </figure>
+    </div>
+   {{/each}}
+   </div>
+   
+ </div>
 {{/each}}
+

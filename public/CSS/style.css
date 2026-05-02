@@ -1,0 +1,15 @@
+.flex-container {
+ display: flex;
+ flex-direction: row;
+ flex-wrap: nowrap;  
+ overflow-x: auto; 
+}
+
+.flex-container div {
+    padding:10px;
+}
+
+.dash-img {
+    height: auto;
+    width: auto;
+}
