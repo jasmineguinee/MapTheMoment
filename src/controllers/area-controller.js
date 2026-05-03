@@ -5,6 +5,7 @@ import { VenueSpec } from "../models/joi-schemas.js";
 export const areaController = {
   index: {
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const weddingVenues = await db.venueStore.getAreaWeddingVenues(request.params.id);
@@ -31,7 +32,11 @@ export const areaController = {
       },
     },
     handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getAreaById(request.params.id);
+      const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
+      
+      console.log(poster)
       const newVenue = {
         title: request.payload.title,
         venuetype: request.payload.venuetype,
@@ -39,6 +44,8 @@ export const areaController = {
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
         visability: request.payload.visability,
+        poster: poster,
+       
       };
       await db.venueStore.addVenue(area._id, newVenue);
       return h.redirect(`/area/${area._id}`);

@@ -114,6 +114,7 @@ export const venueJsonStore = {
     venue.latitude = updatedVenue.latitude;
     venue.longitude = updatedVenue.longitude;
     venue.visability = updatedVenue.visability;
+    venue.poster = updatedVenue.poster;
     await db.write();
   },
 };

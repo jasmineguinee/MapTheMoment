@@ -57,9 +57,9 @@
      const imgstr = venue.img;
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type:' + venue.visability + '<br> Posted By: ' + venue.poster);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }
      markers.push(marker)
      });
@@ -73,9 +73,9 @@
      const imgstr = venue.img;
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }
      markers.push(marker)
      });

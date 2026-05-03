@@ -54,9 +54,9 @@
      const imgstr = venue.img;
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }
      markers.push(marker)
      });
@@ -71,9 +71,9 @@
      const imgstr = venue.img;
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
     }
      markers.push(marker)
      });
@@ -99,46 +99,12 @@
     .setContent('Choose this location! <br>'+'Latitude: ' + latitude.toFixed(6) + '<br>Longitude: ' + longitude.toFixed(6))
     .openOn(map);
     });
-    
   </script>
-<section class="section">
-<form class="box"  action="/venue/{{area._id}}/updatevenue/{{venue._id}}" method="POST">
-    <div class="box box-link-hover-shadow">
-  </div>
-  <label>Update Venue Details:</label>
-  <div class="field is-horizontal">
-    <div class="field-body">
-      <div class="field">
-        <input class="input" type="text" name="title", value="{{venue.title}}">
-      </div>
-      <div class="field">
-        <select class="input" type="text" name="venuetype" value="{{venue.venuetype}}">
-          <option value="proposal">proposal</option>
-          <option value="wedding">wedding</option>
-        </select>
-      </div>
-      <div class="field">
-        <input class="input" type="text"  name="description" value="{{venue.description}}">
-      </div>
-      <div class="field">
-        <input class="input"  id="latitude" type="text"  name="latitude" value="{{venue.latitude}}">
-      </div>
-      <div class="field">
-        <input class="input" id="longitude" type="text"  name="longitude" value="{{venue.longitude}}">
-      </div>
-      <div class="field">
-        <select class="input" id="visability" type="text" placeholder="make this public?" name="visability" value="{{venue.visability}}">
-          <option value="public">public</option>
-          <option value="private">private</option>
-        </select>
-  </div>
-  <button class="button is-info">Update Venue</button>
-</form>
-</section>
+
+ {{> edit-venue }}
+ {{> add-venue-image }}
+
 <section>
-   <div>
-        <div class="image">
-             {{> venue-image }}
-         </div>
-    </div>
+  {{> comment-thread}}
+  {{> add-comment }}
 </section>

@@ -1,6 +1,6 @@
 {{#each areas}}
 <div class="box box-link-hover-shadow">
-   <div>
+   
     <h2 class="title">
       {{title}}
     </h2>
@@ -14,16 +14,19 @@
       <i class="fas fa-trash"></i>
     </a>
    
+   
    <div class = "flex-container">
    {{#each venues}}
+    {{#if img}}
     <div>
      <figure>
        <img class="image is-128x128" src="{{img}}">
      </figure>
     </div>
+    {{/if}}
    {{/each}}
    </div>
-   
+
  </div>
 {{/each}}
 

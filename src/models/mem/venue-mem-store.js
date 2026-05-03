@@ -103,5 +103,6 @@ export const venueMemStore = {
     venue.latitude = updatedVenue.latitude;
     venue.longitude = updatedVenue.longitude;
     venue.visability = updatedVenue.visability;
+    venue.poster = updatedVenue.poster;
   },
 };

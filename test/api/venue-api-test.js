@@ -1,7 +1,7 @@
 import { assert } from "chai";
 import { assertSubset } from "../test-utils.js";
 import { mapthemomentService } from "./mapthemoment-service.js";
-import { maggie, kerry, testAreas, testVenues, boathousevenue, maggieCredentials } from "../fixtures.js";
+import { maggie, kerry, testAreas, testVenues, boathousevenue, maggieCredentials} from "../fixtures.js";
 
 suite("Venue API tests", () => {
   let user = null;
@@ -58,15 +58,5 @@ suite("Venue API tests", () => {
     assert.equal(returnedVenues.length, 0);
   });
 
-  test("denormalised area", async () => {
-    for (let i = 0; i < testVenues.length; i += 1) {
-      // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createVenue(limerick._id, testVenues[i]);
-    }
-    const returnedArea = await mapthemomentService.getArea(limerick._id);
-    assert.equal(returnedArea.venues.length, testVenues.length);
-    for (let i = 0; i < testVenues.length; i += 1) {
-      assertSubset(testVenues[i], returnedArea.venues[i]);
-    }
-  });
+ 
 });

@@ -77,6 +77,7 @@ export const venueMongoStore = {
     venueDoc.longitude = updatedVenue.longitude;
     venueDoc.visability = updatedVenue.visability;
     venueDoc.img = updatedVenue.img;
+    venueDoc.poster = updatedVenue.poster;
     await venueDoc.save();
   },
 };

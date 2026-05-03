@@ -84,6 +84,28 @@ export const mapthemomentService = {
 
   async clearAuth() {
     axios.defaults.headers.common["Authorization"] = "";
-  }
+  },
+
+
+
+    async createComment(id, comment) {
+    const res = await axios.post(`${this.mapthemomentUrl}/api/venues/${id}/comments`, comment);
+    return res.data;
+  },
+
+    async getAllComments() {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/comments`);
+    return res.data;
+  },
+
+    async getComment(id) {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/comments/${id}`);
+    return res.data;
+  },
+
+   async deleteComment(id) {
+    const res = await axios.delete(`${this.mapthemomentUrl}/api/comments/${id}`);
+    return res.data;
+  },
 
 };

@@ -1,27 +1,34 @@
-import { VenueSpec } from "../models/joi-schemas.js";
+import { VenueSpec, CommentSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
 export const venueController = {
   index: {
     handler: async function (request, h) {
+
       const area = await db.areaStore.getAreaById(request.params.id);
+      const venues = await db.venueStore.getVenuesByAreaId(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const weddingVenues = await db.venueStore.getAreaWeddingVenues(request.params.id);
       const proposalVenues = await db.venueStore.getAreaProposalVenues(request.params.id);
       const weddingVenuesStrings = JSON.stringify(weddingVenues);
       const proposalVenueStrings = JSON.stringify(proposalVenues);
+      const comments = await db.commentStore.getCommentsByVenueId(request.params.venueid);
+
       const viewData = {
         title: "Add the title",
+        comments: comments,
         area: area,
         venue: venue,
         weddingVenuesStrings: weddingVenuesStrings,
-        proposalVenueStrings: proposalVenueStrings
+        proposalVenueStrings: proposalVenueStrings,
       };
       return h.view("venue-view", viewData);
-    },
   },
+  
+},
 
+ 
   update: {
     validate: {
       payload: VenueSpec,
@@ -31,8 +38,9 @@ export const venueController = {
       },
     },
     handler: async function (request, h) {
-
+      const loggedInUser = request.auth.credentials;
       const venue = await db.venueStore.getVenueById(request.params.venueid);
+      const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
       const newVenue = {
         title: request.payload.title,
         venuetype: request.payload.venuetype,
@@ -41,6 +49,7 @@ export const venueController = {
         longitude: Number(request.payload.longitude),
         visability: request.payload.visability,
         img:venue.img,
+        poster: poster,
     
       };
       await db.venueStore.updateVenue(venue, newVenue);
@@ -53,8 +62,10 @@ uploadImage: {
     try {
 
         const venue = await db.venueStore.getVenueById(request.params.venueid);
-        
+        const loggedInUser = request.auth.credentials;
+        const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
         const file = request.payload.imagefile;
+
         if (Object.keys(file).length > 0) {
           const url =  await imageStore.uploadImage(request.payload.imagefile);
          
@@ -65,6 +76,7 @@ uploadImage: {
           latitude: venue.latitude,
           longitude: venue.longitude,
           visability: venue.visability,
+          poster: poster,
           img: url,
         };
 
@@ -89,4 +101,29 @@ uploadImage: {
 
 
 
+
+   addComment: {
+    validate: {
+      payload: CommentSpec,
+      options: { abortEarly: false },
+      failAction: function (request, h, error) {
+        return h.view("venue-view", { title: "Add comment error", errors: error.details }).takeover().code(400);
+      },
+    },
+    handler: async function (request, h) {
+      
+      const venue = await db.venueStore.getVenueById(request.params.venueid);
+      const newComment = {
+        content: request.payload.content,
+     
+      };
+      await db.commentStore.addComment(venue._id, newComment);
+  
+      return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
+  
+    },
+  },
+
+
 };
+

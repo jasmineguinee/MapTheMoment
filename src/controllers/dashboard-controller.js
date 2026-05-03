@@ -11,7 +11,7 @@ export const dashboardController = {
       const pubProposalSpots = await db.venueStore.getPublicProposalSpots();
       const pubWeddingVenueStrings = JSON.stringify(pubWeddingVenues);
       const pubProposalSpotsStrings = JSON.stringify(pubProposalSpots);
-  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all#:~:text=The%20Promise.,array%20of%20the%20fulfillment%20values.
+
       await Promise.all(
         areas.map(async (area) => {
           area.venues = await db.venueStore.getVenuesByAreaId(area._id);

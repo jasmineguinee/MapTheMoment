@@ -29,19 +29,32 @@ export const VenueSpec = Joi.object()
   latitude: Joi.number().allow("").required().example(5),
   longitude: Joi.number().allow("").required().example(6),
   visability: Joi.string().required().example("private"),
+  poster: Joi.string().optional().example("David Barry"),
   areaid: IdSpec,
   img: Joi.any().optional(),
   imagefile: Joi.any().optional(),
   })
   .label("Venue");
 
+  export const CommentSpec = Joi.object()
+  .keys({
+  content: Joi.string().required().example("I do not like this venue"),
+  })
+  .label("Comment");
+
 export const VenueSpecPlus = VenueSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
 }).label("VenuePlus");
 
+export const CommentSpecPlus = CommentSpec.keys({
+  _id: IdSpec,
+  __v:Joi.number(),
+}).label("CommentPlus")
+
 export const VenueArraySpec = Joi.array().items(VenueSpecPlus).label("VenueArray");
 
+export const CommentArraySpec = Joi.array().items(CommentSpecPlus).label("CommentArray");
 
 export const AreaSpec = Joi.object()
   .keys({

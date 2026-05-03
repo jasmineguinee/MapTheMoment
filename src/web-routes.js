@@ -5,6 +5,7 @@ import { aboutController } from "./controllers/about-controller.js";
 import { areaController } from "./controllers/area-controller.js";
 import { venueController } from "./controllers/venue-controller.js";
 
+
 export const webRoutes = [
   { method: "GET", path: "/", config: accountsController.index },
   { method: "GET", path: "/signup", config: accountsController.showSignup },
@@ -15,17 +16,29 @@ export const webRoutes = [
   { method: "GET", path: "/about", config: aboutController.index },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addarea", config: dashboardController.addArea },
+
   { method: "GET", path: "/area/{id}", config: areaController.index },
+
   { method: "POST", path: "/area/{id}/addvenue", config: areaController.addVenue },
+
   { method: "GET", path: "/dashboard/deletearea/{id}", config: dashboardController.deleteArea },
   { method: "GET", path: "/area/{id}/deletevenue/{venueid}", config: areaController.deleteVenue },
 
+
+
+
  { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
+ { method: "GET", path: "/venue/{id}/addimage/{venueid}", config: venueController.index },
   { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },
-
+   { method: "POST", path: "/venue/{id}/addcomment/{venueid}", config: venueController.addComment },
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-  { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
 
+
+  { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
+ 
+
+
+  // path for load balancer testing
 {
   method: "GET",
   path: "/testlb",
