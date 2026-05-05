@@ -88,24 +88,31 @@ export const mapthemomentService = {
 
 
 
-    async createComment(id, comment) {
-    const res = await axios.post(`${this.mapthemomentUrl}/api/venues/${id}/comments`, comment);
+
+    async createReview(id, review) {
+    const res = await axios.post(`${this.mapthemomentUrl}/api/venues/${id}/reviews`, review);
     return res.data;
   },
 
-    async getAllComments() {
-    const res = await axios.get(`${this.mapthemomentUrl}/api/comments`);
+    async getAllReviews() {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/reviews`);
     return res.data;
   },
 
-    async getComment(id) {
-    const res = await axios.get(`${this.mapthemomentUrl}/api/comments/${id}`);
+    async getReview(id) {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/reviews/${id}`);
     return res.data;
   },
 
-   async deleteComment(id) {
-    const res = await axios.delete(`${this.mapthemomentUrl}/api/comments/${id}`);
+   async deleteReview(id) {
+    const res = await axios.delete(`${this.mapthemomentUrl}/api/reviews/${id}`);
     return res.data;
   },
+
+    async deleteAllReviews() {
+    const res = await axios.delete(`${this.mapthemomentUrl}/api/reviews`);
+    return res.data;
+  },
+
 
 };

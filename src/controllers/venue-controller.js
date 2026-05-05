@@ -1,4 +1,4 @@
-import { VenueSpec, CommentSpec } from "../models/joi-schemas.js";
+import { VenueSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
 
@@ -13,11 +13,11 @@ export const venueController = {
       const proposalVenues = await db.venueStore.getAreaProposalVenues(request.params.id);
       const weddingVenuesStrings = JSON.stringify(weddingVenues);
       const proposalVenueStrings = JSON.stringify(proposalVenues);
-      const comments = await db.commentStore.getCommentsByVenueId(request.params.venueid);
+      const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
 
       const viewData = {
         title: "Add the title",
-        comments: comments,
+        reviews: reviews,
         area: area,
         venue: venue,
         weddingVenuesStrings: weddingVenuesStrings,
@@ -102,22 +102,22 @@ uploadImage: {
 
 
 
-   addComment: {
+   addReview: {
     validate: {
-      payload: CommentSpec,
+      payload: ReviewSpec,
       options: { abortEarly: false },
       failAction: function (request, h, error) {
-        return h.view("venue-view", { title: "Add comment error", errors: error.details }).takeover().code(400);
+        return h.view("venue-view", { title: "Add review error", errors: error.details }).takeover().code(400);
       },
     },
     handler: async function (request, h) {
       
       const venue = await db.venueStore.getVenueById(request.params.venueid);
-      const newComment = {
+      const newReview = {
         content: request.payload.content,
      
       };
-      await db.commentStore.addComment(venue._id, newComment);
+      await db.reviewStore.addReview(venue._id, newReview);
   
       return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
   

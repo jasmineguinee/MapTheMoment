@@ -43,6 +43,7 @@ export const venueMongoStore = {
     return this.getVenueById(venueObj._id);
   },
 
+
   async getVenuesByAreaId(id) {
     const venues = await Venue.find({ areaid: id }).lean();
     return venues;

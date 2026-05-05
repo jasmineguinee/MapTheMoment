@@ -39,19 +39,19 @@ export const kerry = {
 };
 
 export const opinion = {
-   "content": "this was a nice venue"
+   content: "this was a nice venue"
 };
   
 
 /// example of venue
 export const boathousevenue = {
-  "title": "boathouse Lodge",
-  "venuetype": "wedding",
-  "description": "romantic wedding location",
-  "latitude": 5,
-  "longitude": 6,
-  "visability": "private",
-   "poster": "Mary Duane"
+  title: "boathouse Lodge",
+  venuetype: "wedding",
+  description: "romantic wedding location",
+  latitude: 5,
+  longitude: 6,
+  visability: "private",
+   poster: "Mary Duane"
 };
 /// area
 export const corkarea = {
@@ -100,7 +100,7 @@ export const testVenues = [
   }
 ];
 
-export const testComments = [
+export const testReviews = [
   {
     "content": "I think its too busy for a proposal venue",
   },

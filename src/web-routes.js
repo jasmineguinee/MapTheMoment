@@ -30,7 +30,7 @@ export const webRoutes = [
  { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
  { method: "GET", path: "/venue/{id}/addimage/{venueid}", config: venueController.index },
   { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },
-   { method: "POST", path: "/venue/{id}/addcomment/{venueid}", config: venueController.addComment },
+   { method: "POST", path: "/venue/{id}/addreview/{venueid}", config: venueController.addReview },
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
 

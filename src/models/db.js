@@ -1,24 +1,24 @@
 import { userMemStore } from "./mem/user-mem-store.js";
 import { areaMemStore } from "./mem/area-mem-store.js";
 import { venueMemStore } from "./mem/venue-mem-store.js";
-import { commentMemStore } from "./mem/comment-mem-store.js";
+import { reviewMemStore } from "./mem/review-mem-store.js";
 
 import { userJsonStore } from "./json/user-json-store.js";
 import { areaJsonStore } from "./json/area-json-store.js";
 import { venueJsonStore } from "./json/venue-json-store.js";
-import { commentJsonStore } from "./json/comment-json-store.js";
+import { reviewJsonStore } from "./json/review-json-store.js";
 
 import { connectMongo } from "./mongo/connect.js";
 import { userMongoStore } from "./mongo/user-mongo-store.js";
 import { areaMongoStore } from "./mongo/area-mongo-store.js";
 import { venueMongoStore } from "./mongo/venue-mongo-store.js";
-import { commentMongoStore } from "./mongo/comment-mongo-store.js";
+import { reviewMongoStore } from "./mongo/review-mongo-store.js";
 
 export const db = {
   userStore: null,
   areaStore: null,
   venueStore: null,
-  commentStore: null,
+  reviewStore: null,
 
  init(storeType) {
     switch (storeType) {
@@ -26,20 +26,20 @@ export const db = {
         this.userStore = userJsonStore;
         this.areaStore = areaJsonStore;
         this.venueStore = venueJsonStore;
-        this.commentStore = commentJsonStore;
+        this.reviewStore = reviewJsonStore;
         break;
       case "mongo":
         this.userStore = userMongoStore;
         this.areaStore = areaMongoStore;
         this.venueStore = venueMongoStore;
-        this.commentStore = commentMongoStore;
+        this.reviewStore = reviewMongoStore;
         connectMongo();
         break;
       default:
         this.userStore = userMemStore;
         this.areaStore = areaMemStore;
         this.venueStore = venueMemStore;
-        this.commentStore = commentMemStore;
+        this.reviewStore = reviewMemStore;
     }
   },
 };

@@ -2,7 +2,7 @@ import Mongoose from "mongoose";
 
 const { Schema } = Mongoose;
 
-const commentSchema = new Schema({
+const reviewSchema = new Schema({
   content: String,
 
   venueid: {
@@ -11,4 +11,6 @@ const commentSchema = new Schema({
   },
 });
 
-export const Comment = Mongoose.model("Comment", commentSchema);
+
+
+export const Review = Mongoose.model("Review", reviewSchema);

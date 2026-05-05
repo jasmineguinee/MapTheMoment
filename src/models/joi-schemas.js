@@ -19,7 +19,21 @@ export const UserSpecPlus = UserSpec.keys({
   __v: Joi.number(),
 }).label("UserDetailsPlus");
 
+export const ReviewSpec = Joi.object()
+  .keys({
+  content: Joi.string().required().example("I do not like this venue"),
+  venueid: IdSpec,
+  })
+  .label("Review");
+
 export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
+export const ReviewSpecPlus = ReviewSpec.keys({
+  _id: IdSpec,
+  __v:Joi.number(),
+}).label("ReviewPlus")
+
+
+export const ReviewArraySpec = Joi.array().items(ReviewSpecPlus).label("ReviewArray");
 
 export const VenueSpec = Joi.object()
   .keys({
@@ -33,28 +47,18 @@ export const VenueSpec = Joi.object()
   areaid: IdSpec,
   img: Joi.any().optional(),
   imagefile: Joi.any().optional(),
+  reviews: ReviewArraySpec,
   })
   .label("Venue");
 
-  export const CommentSpec = Joi.object()
-  .keys({
-  content: Joi.string().required().example("I do not like this venue"),
-  })
-  .label("Comment");
 
 export const VenueSpecPlus = VenueSpec.keys({
   _id: IdSpec,
   __v: Joi.number(),
 }).label("VenuePlus");
 
-export const CommentSpecPlus = CommentSpec.keys({
-  _id: IdSpec,
-  __v:Joi.number(),
-}).label("CommentPlus")
 
 export const VenueArraySpec = Joi.array().items(VenueSpecPlus).label("VenueArray");
-
-export const CommentArraySpec = Joi.array().items(CommentSpecPlus).label("CommentArray");
 
 export const AreaSpec = Joi.object()
   .keys({
@@ -78,4 +82,4 @@ export const JwtAuth = Joi.object()
   })
   .label("JwtAuth");
 
-  
+

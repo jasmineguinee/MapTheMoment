@@ -29,6 +29,7 @@ suite("Venue API tests", () => {
     assertSubset(boathousevenue, returnedVenue);
   });
 
+
   test("create Multiple venues", async () => {
     for (let i = 0; i < testVenues.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
