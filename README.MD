@@ -81,3 +81,4 @@ npm run start
 [robomongo](https://robomongo.org)  
 [Plugin for geocoding in the map search](https://github.com/perliedman/leaflet-control-geocoder)  
 [Leaflet documentation](https://leafletjs.com/reference.html#event-objects)  
+[c8 for coverage reports](https://github.com/bcoe/c8)
