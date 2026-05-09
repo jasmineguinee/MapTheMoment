@@ -33,11 +33,13 @@ export const webRoutes = [
    { method: "POST", path: "/venue/{id}/addreview/{venueid}", config: venueController.addReview },
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
 
-
   { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
  
+ { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
 
 
+
+    { method: "POST", path: "/dashboard/{id}/addpublicreview/{venueid}", config: dashboardController.addPubReview},
   // path for load balancer testing
 {
   method: "GET",

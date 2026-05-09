@@ -1,0 +1,43 @@
+
+<table class="table is-fullwidth">
+  <thead>
+    <tr>
+      <th>Venue</th>
+      <th>Venue Type</th>
+      <th>Description</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>visability</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td>
+          {{venue.title}}
+        </td>
+        <td>
+          {{venue.venuetype}}
+        </td>
+        <td>
+          {{venue.description}}
+        </td>
+         <td>
+          {{venue.latitude}}
+        </td>
+         <td>
+          {{venue.longitude}}
+        </td>
+         <td>
+          {{venue.visability}}
+        </td>
+        {{#if venue.img}}
+        <td>
+          <figure class="image is-64x64">
+           <img src="{{img}}">
+          </figure>
+        </td>
+        {{/if}}
+      </tr>
+  </tbody>
+</table>

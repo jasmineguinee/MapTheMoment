@@ -1,0 +1,62 @@
+<link rel="stylesheet"href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet"href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+<div id='map' style="height: 400px;"></div>
+
+  <div hidden="hidden" id="venuestring">{{{venuestring}}}</div>
+   <script>
+    const map = L.map("map").setView([51.8985, -8.84756], 7); // [lat, lng], zoom
+     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors"
+     }).addTo(map);
+
+    map.dragging.enable();
+
+      L.Control.geocoder({
+       defaultMarkGeocode: true 
+       }).addTo(map);
+
+    const rawVenue = document.getElementById("venuestring").textContent;
+    const venue = JSON.parse(rawVenue);
+ 
+   let theicon;
+    if (venue.venuetype === "wedding"){
+       theicon = L.icon({
+       iconUrl: "/images/dome.png",
+       iconSize: [48, 48],
+       iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+       });
+    }else{
+       theicon = L.icon({
+      iconUrl: "/images/mappin.png",
+      iconSize: [48, 48],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -32],
+    });
+    }
+    
+
+  const venuemarker = [];
+
+  function mapthevenue(){
+   
+    L.popup()
+
+     .setLatLng([venue.latitude, venue.longitude])
+     marker = L.marker([venue.latitude, venue.longitude], { icon: theicon }).addTo(map);
+     const imgstr = venue.img;
+
+    if (imgstr){
+      const url = "<img src="+ imgstr + " style = 'width:200px;'>"
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
+    }else{
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster);
+    }
+    venuemarker.push(marker)
+
+   }
+  
+  mapthevenue();
+  </script>

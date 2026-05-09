@@ -82,9 +82,10 @@ uploadImage: {
 
         await db.venueStore.updateVenue(venue, updatedVenue);
       }
-      // using the route for the edit venue option to return to page with venues
-      return h.redirect(`/venue/${request.params.id}/editvenue/${request.params.venueid}`);
   
+      return h.redirect(`/venue/${request.params.id}/editvenue/${request.params.venueid}`);
+     
+    
     } catch (err) {
       console.log(err);
 
@@ -119,8 +120,8 @@ uploadImage: {
       };
       await db.reviewStore.addReview(venue._id, newReview);
   
-      return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
-  
+       return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
+       
     },
   },
 

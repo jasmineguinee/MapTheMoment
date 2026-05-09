@@ -1,0 +1,22 @@
+{{> menu}}
+{{> singleVenuePubMap}}
+
+  <div class = "flex-container">
+    {{#if venue.img}}
+    <div>
+     <figure>
+       <img id = "dash-img" src="{{venue.img}}">
+     </figure>
+    </div>
+    {{/if}}
+   </div>
+
+<section class="hero">
+  <div class="hero-body has-text-centered">
+    <p class="title ">
+      Venue Details</p>
+  </div>
+</section>
+{{> pubVenueDetails}}
+{{> review-thread}}
+ {{> add-review }}

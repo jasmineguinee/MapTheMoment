@@ -9,14 +9,18 @@
     }
   };
 </script>
-       
-<div class="card">
-  <div class="card-image">
-    <figure class="image is-128x128">
-      <img src="{{venue.img}}">
-    </figure>
-  </div>
-  <div class="card-content">
+    
+
+    <div class = "flex-container">
+    {{#if venue.img}}
+    <div>
+     <figure>
+       <img id = "dash-img" src="{{venue.img}}">
+     </figure>
+    </div>
+    {{/if}}
+   </div>
+    <div>
     <form action="/venue/{{area._id}}/uploadimage/{{venue._id}}" method="POST"enctype="multipart/form-data" >
       <div id="file-select" class="file has-name is-fullwidth">
         <label class="file-label"> <input class="file-input" name="imagefile" type="file" accept="image/png, image/jpeg">
@@ -33,7 +37,7 @@
         <button type="submit" class="button is-info">Upload</button>
       </div>
     </form>
-  </div>
-</div>
+    </div>
 
- 
+
+

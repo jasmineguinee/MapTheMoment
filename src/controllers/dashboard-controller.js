@@ -1,5 +1,5 @@
 import { db } from "../models/db.js";
-import { AreaSpec } from "../models/joi-schemas.js";
+import { AreaSpec, ReviewSpec } from "../models/joi-schemas.js";
 
 
 export const dashboardController = {
@@ -11,7 +11,7 @@ export const dashboardController = {
       const pubProposalSpots = await db.venueStore.getPublicProposalSpots();
       const pubWeddingVenueStrings = JSON.stringify(pubWeddingVenues);
       const pubProposalSpotsStrings = JSON.stringify(pubProposalSpots);
-
+      
       await Promise.all(
         areas.map(async (area) => {
           area.venues = await db.venueStore.getVenuesByAreaId(area._id);
@@ -57,4 +57,44 @@ export const dashboardController = {
     },
   },
 
+
+     getVenueDetails: {
+    handler: async function (request, h) {
+      const loggedInUser = request.auth.credentials;
+      const area = await db.areaStore.getAreaById(request.params.id);
+      const venue = await db.venueStore.getVenueById(request.params.venueid);
+      const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
+      const viewData = {
+        title: "Public POI View",
+        area: area,
+        venue:venue,
+        venuestring: JSON.stringify(venue),
+        reviews: reviews
+      };
+      return h.view("dash-poi-view", viewData);
+    },
+  },
+
+   addPubReview: {
+      validate: {
+        payload: ReviewSpec,
+        options: { abortEarly: false },
+        failAction: function (request, h, error) {
+          return h.view("venue-view", { title: "Add review error", errors: error.details }).takeover().code(400);
+        },
+      },
+      handler: async function (request, h) {
+        
+        const venue = await db.venueStore.getVenueById(request.params.venueid);
+        const newReview = {
+          content: request.payload.content,
+       
+        };
+        await db.reviewStore.addReview(venue._id, newReview);
+    
+         return h.view("dash-poi-view");
+         
+      },
+    },
+  
 };
