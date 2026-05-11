@@ -1,6 +1,6 @@
 import { db } from "../models/db.js";
 import { AreaSpec, ReviewSpec } from "../models/joi-schemas.js";
-
+import { cleanHtml } from "../utils/sanitisation.js";
 
 export const dashboardController = {
   index: {
@@ -42,7 +42,7 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const newArea = {
         userid: loggedInUser._id,
-        title: request.payload.title,
+        title: cleanHtml(request.payload.title),
       };
       await db.areaStore.addArea(newArea);
       return h.redirect("/dashboard");
@@ -84,11 +84,12 @@ export const dashboardController = {
         },
       },
       handler: async function (request, h) {
-        
+        const loggedInUser = request.auth.credentials;
         const venue = await db.venueStore.getVenueById(request.params.venueid);
+         const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
         const newReview = {
-          content: request.payload.content,
-       
+          content: cleanHtml(request.payload.content),
+          postedBy: postedBy,
         };
         await db.reviewStore.addReview(venue._id, newReview);
     

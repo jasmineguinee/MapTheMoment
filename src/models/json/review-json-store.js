@@ -58,6 +58,7 @@ export const reviewJsonStore = {
 
   async updateReview(venue, updatedReview) {
     review.content = updatedReview.content;
+    review.postedBy = updatedReview.postedBy;
     await db.write();
   },
 };

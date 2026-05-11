@@ -1,13 +1,14 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 import { db } from "../models/db.js";
+import { cleanHtml } from "../utils/sanitisation.js";
 
 const result = dotenv.config();
 
 export function createToken(user) {
   const payload = {
     id: user._id,
-    email: user.email,
+    email: cleanHtml(user.email),
   };
   const options = {
     algorithm: "HS256",

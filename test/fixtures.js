@@ -103,12 +103,15 @@ export const testVenues = [
 export const testReviews = [
   {
     "content": "I think its too busy for a proposal venue",
+    "postedBy": "Mary Egan",
   },
   {
     "content": "wow, thats a showstopping place!",
+     "postedBy": "John Barry",
 
   },
   {
     "content": "I wasn't happy. Their prices are a bit hefty",
+     "postedBy": "Elise O' Keefe",
   }
 ];

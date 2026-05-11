@@ -1,16 +1,14 @@
-<table class="table is-fullwidth">
-  <thead>
-  <tr>
-    <th>Reviews</th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
+<br>
+  <h2 class="has-text-weight-medium is-size-4">Reviews</h2>
+
   {{#each reviews}}
-  <tr>
-    <td>{{ content }}</td>
-  </tr>
-  {{/each}}
-  </tbody>
-</table>
+ <div class="box box-link-hover-shadow">
+  <p>{{ content }}</p>
+  <p>posted By: {{ postedBy }}</p>   
+ </div>
+   {{/each}}
+
+
  
+
+

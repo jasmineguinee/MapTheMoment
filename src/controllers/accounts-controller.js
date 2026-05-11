@@ -1,5 +1,6 @@
 import { db } from "../models/db.js";
 import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
+import { cleanHtml } from "../utils/sanitisation.js";
 
 export const accountsController = {
   index: {

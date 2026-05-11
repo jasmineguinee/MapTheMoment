@@ -4,7 +4,7 @@ const { Schema } = Mongoose;
 
 const reviewSchema = new Schema({
   content: String,
-
+  postedBy: String,
   venueid: {
     type: Schema.Types.ObjectId,
     ref: "Venue",

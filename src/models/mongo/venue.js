@@ -10,7 +10,7 @@ const venueSchema = new Schema({
   longitude: Number,
   visability: String,
   img: String,
-  poster: String,
+  poster: String, 
   areaid: {
     type: Schema.Types.ObjectId,
     ref: "Area",

@@ -22,6 +22,7 @@ export const UserSpecPlus = UserSpec.keys({
 export const ReviewSpec = Joi.object()
   .keys({
   content: Joi.string().required().example("I do not like this venue"),
+  postedBy: Joi.string().optional().example("Johnny Barry"),
   venueid: IdSpec,
   })
   .label("Review");

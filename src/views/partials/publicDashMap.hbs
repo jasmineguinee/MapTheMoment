@@ -4,14 +4,15 @@
    <button id="pubproposals"type="button">View proposal venues</button>
    <button id="pubweddings"type="button">View wedding venues</button>
    <button id="clearvenues"type="button">Clear venues</button>
-   <div hidden="hidden" id="pubweddingvenues">{{{pubWeddingVenueStrings}}}</div>
-   <div hidden="hidden" id="pubproposalvenues">{{{pubProposalSpotsStrings}}}</div>
+   <div hidden="hidden" id="pubweddingvenues" type="application/json">{{pubWeddingVenueStrings}}</div>
+   <div hidden="hidden" id="pubproposalvenues" type="application/json">{{pubProposalSpotsStrings}}</div>
   
    <script>  
+    
+
   
     const rawpubweddings = document.getElementById("pubweddingvenues").textContent;
     const rawpubproposals = document.getElementById("pubproposalvenues").textContent;
-  
     const pubweddings = JSON.parse(rawpubweddings);
     const pubproposals = JSON.parse(rawpubproposals);
 

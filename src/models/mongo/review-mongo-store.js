@@ -48,6 +48,7 @@ export const reviewMongoStore = {
   async updateReview(review, updatedReview) {
     const reviewDoc = await Review.findOne({ _id: review._id });
     reviewDoc.content = updatedReview.content;
+    reviewDoc.postedBy = updatedReview.postedBy;
     await reviewDoc.save();
   },
 };

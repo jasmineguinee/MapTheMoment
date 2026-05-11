@@ -1,6 +1,7 @@
 import { VenueSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
+import { cleanHtml } from "../utils/sanitisation.js";
 
 export const venueController = {
   index: {
@@ -42,12 +43,12 @@ export const venueController = {
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
       const newVenue = {
-        title: request.payload.title,
-        venuetype: request.payload.venuetype,
-        description:request.payload.description,
+        title: cleanHtml(request.payload.title),
+        venuetype: cleanHtml(request.payload.venuetype),
+        description:cleanHtml(request.payload.description),
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
-        visability: request.payload.visability,
+        visability: cleanHtml(request.payload.visability),
         img:venue.img,
         poster: poster,
     
@@ -112,10 +113,12 @@ uploadImage: {
       },
     },
     handler: async function (request, h) {
-      
+      const loggedInUser = request.auth.credentials;
       const venue = await db.venueStore.getVenueById(request.params.venueid);
+      const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
       const newReview = {
-        content: request.payload.content,
+        content: cleanHtml(request.payload.content),
+        postedBy: postedBy,
      
       };
       await db.reviewStore.addReview(venue._id, newReview);

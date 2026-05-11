@@ -61,6 +61,6 @@ export const reviewMemStore = {
 
   async updateReview(review, updatedReview) {
     review.content = updatedReview.content;
- 
+    review.postedBy = updatedReview.postedBy;
   },
 };

@@ -1,6 +1,6 @@
 import { db } from "../models/db.js";
 import { VenueSpec } from "../models/joi-schemas.js";
-
+import { cleanHtml } from "../utils/sanitisation.js";
 
 export const areaController = {
   index: {
@@ -35,15 +35,14 @@ export const areaController = {
       const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getAreaById(request.params.id);
       const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
-      
-      console.log(poster)
+    
       const newVenue = {
-        title: request.payload.title,
-        venuetype: request.payload.venuetype,
-        description: request.payload.description,
+        title: cleanHtml(request.payload.title),
+        venuetype: cleanHtml(request.payload.venuetype),
+        description: cleanHtml(request.payload.description),
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
-        visability: request.payload.visability,
+        visability: cleanHtml(request.payload.visability),
         poster: poster,
        
       };

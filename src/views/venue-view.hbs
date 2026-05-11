@@ -7,8 +7,8 @@
  <button id="userproposals"type="button">View your proposal venues on the map</button>
    <button id="userweddings"type="button">View your wedding venues on the map</button>
    <button id="clearvenues"type="button">Clear venues</button>
-  <div hidden="hidden" id="weddingVenuesStrings">{{{weddingVenuesStrings}}}</div>
-  <div hidden="hidden" id="proposalVenueStrings">{{{proposalVenueStrings}}}</div>
+  <div hidden="hidden" id="weddingVenuesStrings" type="application/json">{{weddingVenuesStrings}}</div>
+  <div hidden="hidden" id="proposalVenueStrings" type="application/json">{{proposalVenueStrings}}</div>
    <script>
     const map = L.map("map").setView([51.8985, -8.84756], 7); // [lat, lng], zoom
      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
