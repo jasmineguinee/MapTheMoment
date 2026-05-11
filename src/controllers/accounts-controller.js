@@ -1,6 +1,7 @@
+import argon2 from "argon2";
 import { db } from "../models/db.js";
 import { UserSpec, UserCredentialsSpec } from "../models/joi-schemas.js";
-import { cleanHtml } from "../utils/sanitisation.js";
+import { cleanHtml, cleanString } from "../utils/sanitisation.js";
 
 export const accountsController = {
   index: {
@@ -14,6 +15,8 @@ export const accountsController = {
     handler: function (request, h) {
       return h.view("signup-view", { title: "Sign up for mapthemoment" });
     },
+
+
   },
   signup: {
     auth: false,
@@ -26,10 +29,15 @@ export const accountsController = {
     },
     handler: async function (request, h) {
       const user = request.payload;
+      user.firstName = cleanString(user.firstName);
+      user.lastName = cleanString(user.lastName);
+      user.email = cleanString(user.email);
       await db.userStore.addUser(user);
       return h.redirect("/");
     },
   },
+
+
   showLogin: {
     auth: false,
     handler: function (request, h) {
@@ -49,7 +57,11 @@ export const accountsController = {
     handler: async function (request, h) {
       const { email, password } = request.payload;
       const user = await db.userStore.getUserByEmail(email);
-      if (!user || user.password !== password) {
+      if (!user) {
+        return h.redirect("/");
+      }
+      const hashedPass = await argon2.verify(user.password, password);
+      if (!hashedPass) {
         return h.redirect("/");
       }
       request.cookieAuth.set({ id: user._id });

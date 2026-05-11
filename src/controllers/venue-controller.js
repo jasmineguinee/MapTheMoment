@@ -1,7 +1,7 @@
 import { VenueSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
-import { cleanHtml } from "../utils/sanitisation.js";
+import { cleanHtml, cleanString} from "../utils/sanitisation.js";
 
 export const venueController = {
   index: {
@@ -43,12 +43,12 @@ export const venueController = {
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const poster = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
       const newVenue = {
-        title: cleanHtml(request.payload.title),
-        venuetype: cleanHtml(request.payload.venuetype),
+        title: cleanString(request.payload.title),
+        venuetype: cleanString(request.payload.venuetype),
         description:cleanHtml(request.payload.description),
         latitude: Number(request.payload.latitude),
         longitude: Number(request.payload.longitude),
-        visability: cleanHtml(request.payload.visability),
+        visability: cleanString(request.payload.visability),
         img:venue.img,
         poster: poster,
     

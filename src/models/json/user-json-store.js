@@ -1,4 +1,5 @@
 import { v4 } from "uuid";
+import argon2 from "argon2";
 import { db } from "./store-utils.js";
 
 export const userJsonStore = {
@@ -10,6 +11,7 @@ export const userJsonStore = {
   async addUser(user) {
     await db.read();
     user._id = v4();
+    user.password = await argon2.hash(user.password);
     db.data.users.push(user);
     await db.write();
     return user;

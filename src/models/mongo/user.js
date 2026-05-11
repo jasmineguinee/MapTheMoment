@@ -1,3 +1,4 @@
+import argon2 from "argon2";
 import Mongoose from "mongoose";
 
 const { Schema } = Mongoose;

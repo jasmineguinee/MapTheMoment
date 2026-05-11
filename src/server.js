@@ -6,6 +6,7 @@ import dotenv from "dotenv";
 import path from "path";
 import Joi from "joi";
 import jwt from "hapi-auth-jwt2";
+
 import HapiSwagger from "hapi-swagger";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
@@ -14,6 +15,7 @@ import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
 import { validate } from "./api/jwt-utils.js";
 import { apiRoutes } from "./api-routes.js";
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

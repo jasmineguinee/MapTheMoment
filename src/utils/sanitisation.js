@@ -19,3 +19,15 @@ if (typeof input !== "string")
 
 }
 
+
+export function cleanString(input) {
+
+  if(typeof input !== "string")
+    return input;
+
+  return sanitizeHtml(input,{
+    allowedTags: [],
+    allowedAttributes: {},
+  }).trim();
+}
+

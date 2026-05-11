@@ -1,6 +1,6 @@
 import { db } from "../models/db.js";
 import { AreaSpec, ReviewSpec } from "../models/joi-schemas.js";
-import { cleanHtml } from "../utils/sanitisation.js";
+import { cleanHtml, cleanString } from "../utils/sanitisation.js";
 
 export const dashboardController = {
   index: {
@@ -42,7 +42,7 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const newArea = {
         userid: loggedInUser._id,
-        title: cleanHtml(request.payload.title),
+        title: cleanString(request.payload.title),
       };
       await db.areaStore.addArea(newArea);
       return h.redirect("/dashboard");

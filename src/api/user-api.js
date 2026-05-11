@@ -3,6 +3,7 @@ import { db } from "../models/db.js";
 import { UserCredentialsSpec, UserSpec, UserSpecPlus, IdSpec, UserArray, JwtAuth } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
 import { createToken } from "./jwt-utils.js";
+import { cleanHtml } from "../utils/sanitisation.js";
 
 export const userApi = {
   find: {
