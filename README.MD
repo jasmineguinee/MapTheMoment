@@ -82,3 +82,5 @@ npm run start
 [Plugin for geocoding in the map search](https://github.com/perliedman/leaflet-control-geocoder)  
 [Leaflet documentation](https://leafletjs.com/reference.html#event-objects)  
 [c8 for coverage reports](https://github.com/bcoe/c8)
+[Argon2 for hashing and salting passwords](https://www.npmjs.com/package/argon2)
+[sanitise-html package for santising input and output](https://www.npmjs.com/package/sanitize-html)
