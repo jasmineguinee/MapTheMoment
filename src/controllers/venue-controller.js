@@ -21,6 +21,7 @@ export const venueController = {
         reviews: reviews,
         area: area,
         venue: venue,
+        venuestring: JSON.stringify(venue),
         weddingVenuesStrings: weddingVenuesStrings,
         proposalVenueStrings: proposalVenueStrings,
       };

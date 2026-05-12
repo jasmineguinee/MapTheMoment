@@ -1,0 +1,39 @@
+
+<p><button class="button is-info" type= "button" id="copy-link"> share link </button></p>
+
+<script>
+
+   // https://developer.mozilla.org/en-US/docs/Web/API/Navigator/clipboard
+// https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement
+async function copyTheLink() {
+const url = window.location.href;
+
+if (navigator.clipboard && window.isSecureContext) {
+    try {
+    await navigator.clipboard.writeText(url);
+    }catch{
+        console.log("error")
+    }
+}
+
+const element =document.createElement('textarea');
+element.value = url;
+element.setAttribute('readonly', '')
+// make the element available for copying
+document.body.appendChild(element);
+element.select();
+try {
+    // copy whats selected (the content in element)
+    return document.execCommand('copy');
+} finally {
+    // I am removing it now as its no longer needed
+    document.body.removeChild(element);
+}
+}
+
+
+document.getElementById('copy-link').addEventListener('click', async () => {
+    const go = await copyTheLink();
+})
+
+</script>
