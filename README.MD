@@ -33,7 +33,7 @@ npm install -D prettier
 
 npm install dotenv  
 
-<u>We need to install Joi for vaidation:</u>   
+<u>We need to install Joi for validation:</u>   
 
 npm install joi  
 
