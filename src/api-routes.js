@@ -2,14 +2,16 @@ import { userApi } from "./api/user-api.js";
 import { areaApi } from "./api/area-api.js";
 import { venueApi } from "./api/venue-api.js";
 import { reviewApi } from "./api/review-api.js";
+import { ratingApi } from "./api/rating-api.js";
 
 export const apiRoutes = [
   { method: "POST", path: "/api/users", config: userApi.create },
   { method: "GET", path: "/api/users", config: userApi.find },
   { method: "DELETE", path: "/api/users", config: userApi.deleteAll },
+    { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
   { method: "GET", path: "/api/users/{id}", config: userApi.findOne },
 
-  { method: "POST", path: "/api/users/authenticate", config: userApi.authenticate },
+
 
   { method: "POST", path: "/api/areas", config: areaApi.create },
   { method: "DELETE", path: "/api/areas", config: areaApi.deleteAll },
@@ -29,5 +31,10 @@ export const apiRoutes = [
   { method: "DELETE", path: "/api/reviews", config: reviewApi.deleteAll },
   { method: "DELETE", path: "/api/reviews/{id}", config: reviewApi.deleteOne },
 
+  { method: "GET", path: "/api/ratings", config: ratingApi.find },
+  { method: "GET", path: "/api/ratings/{id}", config: ratingApi.findOne },
+  { method: "POST", path: "/api/venues/{id}/ratings", config: ratingApi.create },
+  { method: "DELETE", path: "/api/ratings", config: ratingApi.deleteAll },
+  { method: "DELETE", path: "/api/ratings/{id}", config: ratingApi.deleteOne },
 
 ];

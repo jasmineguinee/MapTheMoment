@@ -6,6 +6,7 @@ export const mapthemomentService = {
   mapthemomentUrl: serviceUrl,
 
   async createUser(user) {
+    this.clearAuth();
     const res = await axios.post(`${this.mapthemomentUrl}/api/users`, user);
     return res.data;
   },
@@ -113,6 +114,34 @@ export const mapthemomentService = {
     const res = await axios.delete(`${this.mapthemomentUrl}/api/reviews`);
     return res.data;
   },
+
+  
+
+    async createRating(id, rating) {
+    const res = await axios.post(`${this.mapthemomentUrl}/api/venues/${id}/ratings`, rating);
+    return res.data;
+  },
+
+    async getAllRatings() {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/ratings`);
+    return res.data;
+  },
+
+    async getRating(id) {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/ratings/${id}`);
+    return res.data;
+  },
+
+   async deleteRating(id) {
+    const res = await axios.delete(`${this.mapthemomentUrl}/api/ratings/${id}`);
+    return res.data;
+  },
+
+    async deleteAllRatings() {
+    const res = await axios.delete(`${this.mapthemomentUrl}/api/ratings`);
+    return res.data;
+  },
+
 
 
 };

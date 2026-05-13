@@ -7,6 +7,7 @@ export const maggie = {
   password: "secret"
 };
 
+
 export const maggieCredentials = {
   email: "maggie@simpson.com",
   password: "secret"
@@ -115,3 +116,22 @@ export const testReviews = [
      "postedBy": "Elise O' Keefe",
   }
 ];
+
+
+export const testRatings = [
+  {
+    "number": 1,
+  },
+  {
+    "number": 4,
+  },
+  {
+    "number": 5,
+  }
+];
+
+
+export const myrating = {
+   number: 5,
+};
+  

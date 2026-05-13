@@ -1,7 +1,9 @@
+import argon2 from "argon2";
 import { assert } from "chai";
 import { db } from "../../src/models/db.js";
 import { maggie, testUsers } from "../fixtures.js";
 import { assertSubset } from "../test-utils.js";
+
 
 suite("User Model tests", () => {
 
@@ -16,7 +18,9 @@ suite("User Model tests", () => {
 
   test("create a user", async () => {
     const newUser = await db.userStore.addUser(maggie);
-    assertSubset(maggie, newUser);
+    assert.isString(newUser.password);
+    assert.isTrue(await argon2.verify(newUser.password, maggie.password))
+    // assertSubset(maggie, newUser);
   });
 
   test("delete all users", async () => {

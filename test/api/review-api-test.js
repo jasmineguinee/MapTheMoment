@@ -6,7 +6,7 @@ import { maggie, kerry, testVenues, testReviews, boathousevenue, maggieCredentia
 suite("review API tests", () => {
   let user = null;
   let limerick = null;
-  let woodlandVenue = null;
+  let woodlandvenue = null;
 
 
   setup(async () => {
@@ -21,15 +21,15 @@ suite("review API tests", () => {
     await mapthemomentService.authenticate(maggieCredentials);
     kerry.userid = user._id;
     limerick = await mapthemomentService.createArea(kerry);
-    woodlandVenue = await mapthemomentService.createVenue(limerick._id, boathousevenue);
+    woodlandvenue = await mapthemomentService.createVenue(limerick._id, boathousevenue);
   });
 
   teardown(async () => {});
 
 
   test("create review", async () => {
-    woodlandVenue = await mapthemomentService.createVenue(limerick._id, boathousevenue);
-    const returnedReview = await mapthemomentService.createReview(woodlandVenue._id, opinion);
+    woodlandvenue = await mapthemomentService.createVenue(limerick._id, boathousevenue);
+    const returnedReview = await mapthemomentService.createReview(woodlandvenue._id, opinion);
     assertSubset(opinion, returnedReview);
   });
 
@@ -37,7 +37,7 @@ suite("review API tests", () => {
   test("create Multiple reviews", async () => {
     for (let i = 0; i < testReviews.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createReview(woodlandVenue._id, testReviews[i]);
+      await mapthemomentService.createReview(woodlandvenue._id, testReviews[i]);
     }
     const returnedReviews = await mapthemomentService.getAllReviews();
     assert.equal(returnedReviews.length, testReviews.length);
@@ -51,7 +51,7 @@ suite("review API tests", () => {
   test("Delete ReviewApi", async () => {
     for (let i = 0; i < testReviews.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      await mapthemomentService.createReview(woodlandVenue._id, testReviews[i]);
+      await mapthemomentService.createReview(woodlandvenue._id, testReviews[i]);
     }
     let returnedReviews = await mapthemomentService.getAllReviews();
     assert.equal(returnedReviews.length, testReviews.length);

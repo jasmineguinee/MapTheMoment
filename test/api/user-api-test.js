@@ -23,8 +23,10 @@ suite("User API tests", () => {
 
   test("create a user", async () => {
     const newUser = await mapthemomentService.createUser(maggie);
-    assertSubset(maggie, newUser);
+    assertSubset({
+      firstName: maggie.firstName, lastName: maggie.lastName, email: maggie.email}, newUser);
     assert.isDefined(newUser._id);
+    assert.match(newUser.password,/^\$argon2(id|i)\$/);
   });
 
   test("delete all user", async () => {

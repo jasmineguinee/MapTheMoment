@@ -1,4 +1,5 @@
 import Boom from "@hapi/boom";
+import argon2 from "argon2";
 import { db } from "../models/db.js";
 import { UserCredentialsSpec, UserSpec, UserSpecPlus, IdSpec, UserArray, JwtAuth } from "../models/joi-schemas.js";
 import { validationError } from "./logger.js";
@@ -91,7 +92,11 @@ export const userApi = {
         if (!user) {
           return Boom.unauthorized("User not found");
         }
-        if (user.password !== request.payload.password) {
+        // https://argon2-cffi.readthedocs.io/en/stable/howto.html
+        // section needs changing because of password hash - in opposed to simply verifying if the users input matches the password
+        // we instead have to verify with argon2 if the stored hash is for the password they inputted at this point
+        const match = await argon2.verify(user.password, request.payload.password);
+        if (!match) {
           return Boom.unauthorized("Invalid password");
         }
         const token = createToken(user);

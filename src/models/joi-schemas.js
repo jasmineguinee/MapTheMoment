@@ -1,14 +1,19 @@
 import Joi from "joi";
-
+import argon2 from "argon2";
 
 export const IdSpec = Joi.alternatives().try(Joi.string(), Joi.object()).description("a valid ID");
 
-export const UserCredentialsSpec = Joi.object()
+  const passwordSpec = Joi.alternatives().try(
+    Joi.string().example("secret").required(),
+    Joi.string().pattern(/^\$argon2(id|i)\$.$/).required(),
+  ).required();
+
+  export const UserCredentialsSpec = Joi.object()
   .keys({
     email: Joi.string().email().example("homer@simpson.com").required(),
-    password: Joi.string().example("secret").required(),
-  })
-  .label("UserCredentials");
+    password: passwordSpec,
+  }).label("UserCredentials");
+
 
 export const UserSpec = UserCredentialsSpec.keys({
   firstName: Joi.string().example("Homer").required(),
@@ -28,14 +33,29 @@ export const ReviewSpec = Joi.object()
   })
   .label("Review");
 
+
+export const RatingSpec = Joi.object()
+  .keys({
+  number: Joi.number().required().example(5),
+  venueid: IdSpec,
+  })
+  .label("Rating");
+
 export const UserArray = Joi.array().items(UserSpecPlus).label("UserArray");
+
 export const ReviewSpecPlus = ReviewSpec.keys({
   _id: IdSpec,
   __v:Joi.number(),
 }).label("ReviewPlus")
 
+export const RatingSpecPlus = RatingSpec.keys({
+  _id: IdSpec,
+  __v:Joi.number(),
+}).label("RatingPlus")
 
 export const ReviewArraySpec = Joi.array().items(ReviewSpecPlus).label("ReviewArray");
+
+export const RatingArraySpec = Joi.array().items(RatingSpecPlus).label("RatingArray");
 
 export const VenueSpec = Joi.object()
   .keys({
@@ -50,6 +70,7 @@ export const VenueSpec = Joi.object()
   img: Joi.any().optional(),
   imagefile: Joi.any().optional(),
   reviews: ReviewArraySpec,
+  ratings: RatingArraySpec,
   })
   .label("Venue");
 
