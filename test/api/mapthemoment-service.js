@@ -144,4 +144,31 @@ export const mapthemomentService = {
 
 
 
+
+  async createPost(post) {
+    const res = await axios.post(`${this.mapthemomentUrl}/api/posts`, post);
+    return res.data;
+  },
+
+  async deleteAllPosts() {
+    const response = await axios.delete(`${this.mapthemomentUrl}/api/posts`);
+    return response.data;
+  },
+
+  async deletePost(id) {
+    const response = await axios.delete(`${this.mapthemomentUrl}/api/posts/${id}`);
+    return response;
+  },
+
+    async getAllPosts() {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/posts`);
+    return res.data;
+  },
+
+  async getPost(id) {
+    const res = await axios.get(`${this.mapthemomentUrl}/api/posts/${id}`);
+    return res.data;
+  },
+
+
 };

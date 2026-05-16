@@ -1,0 +1,16 @@
+<form class="box" action="/noticeboard/publishpost" method="POST">
+   <div id='map' style="height: 400px;"></div>
+   {{> noticeboard-map}}
+  <label>If You want to include a venue in your post, click it on the map!</label>
+  <div class="field is-horizontal">
+    <div class="field-body">  
+   <input hidden="hidden" id="venueid" name="venueid" value="">
+      <div class="field">
+        <input class="input" id="body" type="text" placeholder="Enter post body" name="body">
+      </div>
+       <div class="field" type="text" id="venue-preview" name="venue-preview">
+      </div>
+    </div>
+  </div>
+  <button class="button is-info">Add Post</button>
+  </form>

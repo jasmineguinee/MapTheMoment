@@ -4,6 +4,7 @@ import { dashboardController } from "./controllers/dashboard-controller.js";
 import { aboutController } from "./controllers/about-controller.js";
 import { areaController } from "./controllers/area-controller.js";
 import { venueController } from "./controllers/venue-controller.js";
+import { noticeController } from "./controllers/noticeboard-controller.js";
 
 
 export const webRoutes = [
@@ -36,10 +37,12 @@ export const webRoutes = [
   { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
  
  { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
+  { method: "POST", path: "/dashboard/{id}/addpublicreview/{venueid}", config: dashboardController.addPubReview},
 
 
+    { method: "GET", path: "/noticeboard", config: noticeController.index },
 
-    { method: "POST", path: "/dashboard/{id}/addpublicreview/{venueid}", config: dashboardController.addPubReview},
+    { method: "POST", path: "/noticeboard/publishpost", config: noticeController.publishPost },
   // path for load balancer testing
 {
   method: "GET",

@@ -1,19 +1,18 @@
  
   <div class="box box-link-hover-shadow">
-   <h3 class="title">Wedding venues and proposal hotspots - shared by our community members</h3>
+   <h3 class="title">Add a post! Want to mention a venue? click to use</h3>
    <button id="pubproposals"type="button">View proposal venues</button>
    <button id="pubweddings"type="button">View wedding venues</button>
    <button id="clearvenues"type="button">Clear venues</button>
    <div hidden="hidden" id="pubweddingvenues" type="application/json">{{pubWeddingVenueStrings}}</div>
    <div hidden="hidden" id="pubproposalvenues" type="application/json">{{pubProposalSpotsStrings}}</div>
+   
    <script>  
-  
     const rawpubweddings = document.getElementById("pubweddingvenues").textContent;
     const rawpubproposals = document.getElementById("pubproposalvenues").textContent;
     const pubweddings = JSON.parse(rawpubweddings);
     const pubproposals = JSON.parse(rawpubproposals);
 
-    
      const map = L.map("map").setView([51.8985, -8.84756], 7);
      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution: "© OpenStreetMap contributors"
@@ -54,45 +53,86 @@
   function getPubWeddingVenues(){
    pubweddings.forEach(venue => {
     const pathToDetails = `/dashboard/getvenuedetails/${venue._id}`
+    const selectbutton = '<br><button type="button" class="select-venue-button">Use this for post</button>';
+    const detailslink = `<br><a href="${pathToDetails}">View Full Details</a>`;
+
     L.popup()
       .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     marker.venueData = venue;
      const imgstr = venue.img;
 
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type:' + venue.visability + '<br> Posted By: ' + venue.poster + '<br>' + `<a href="${pathToDetails}">View Full Details</a>`);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type:' + venue.visability + '<br> Posted By: ' + venue.poster + selectbutton + detailslink);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + '<br>' + `<a href="${pathToDetails}">View Full Details</a>`);
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + selectbutton + detailslink);
     }
      markers.push(marker)
      });
   }
 
   function getPubProposalVenues(){
-    pubproposals.forEach(venue => {  
+    pubproposals.forEach(venue => {
     const pathToDetails = `/dashboard/getvenuedetails/${venue._id}`
+    const selectbutton = '<br><button type="button" class="select-venue-button">Use this for post</button>';
+    const detailslink = `<br><a href="${pathToDetails}">View Full Details</a>`;
+
+
     L.popup()
      .setLatLng([venue.latitude, venue.longitude])
      marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
      const imgstr = venue.img;
-
+     marker.venueData = venue;
     if (imgstr){
       const url = "<img src="+ imgstr + " style = 'width:200px;'>"
-      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + '<br>' + `<a href="${pathToDetails}">View Full Details</a>`);
+      marker.bindPopup(url + '<br>' + venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + selectbutton + detailslink);
     }else{
-     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + '<br>' + `<a href="${pathToDetails}">View Full Details</a>` );
+     marker.bindPopup(venue.title + '<br> Venue Type: ' + venue.venuetype + '<br> Description: ' + venue.description + '<br> Post type: ' + venue.visability + '<br> Posted By: ' + venue.poster + selectbutton + detailslink);
     }
+
+
+    marker.on('popupopen', function () {
+       const button = document.querySelector('.select-venue-button');
+       if (button){
+        button.onclick = function () {
+            selectVenueForPost(marker.venueData);
+        };
+    }
+    });
+
      markers.push(marker)
      });
   }
+
+
 
    function clearvenues(){
     markers.forEach(marker =>{
      map.removeLayer(marker);
     })
    }
+
+
+ 
+   function selectVenueForPost(venue){
+  document.getElementById('venueid').value = venue._id;
+
+   const preview =document.getElementById('venue-preview');
+
+   let html = '';
+   if (venue.img){
+    html +='<img src="' + venue.img + '" style="width:200px;"><br>';
+   }
+   html +=
+   '<strong>' + venue.title + '</strong><br>' +   
+   'Description:' +venue.description;
+ 
+   preview.innerHTML = html;
   
+
+   map.closePopup();
+   }
    
    </script>
 

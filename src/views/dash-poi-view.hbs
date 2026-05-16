@@ -1,6 +1,7 @@
 {{> menu}}
 {{> singleVenuePubMap}}
 
+ 
   <div class = "flex-container">
     {{#if venue.img}}
     <div>
@@ -10,7 +11,7 @@
     </div>
     {{/if}}
    </div>
-<h2 class="has-text-weight-medium is-size-4">Venue Details</h2>
+<h2 class="has-text-weight-medium is-size-4">{{venue.title}}</h2>
 {{> share-venue}}
 {{> pubVenueDetails}}
 {{> review-thread}}

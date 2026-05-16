@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { db } from "../models/db.js";
 import { AreaSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { cleanHtml, cleanString } from "../utils/sanitisation.js";
@@ -67,9 +68,9 @@ export const dashboardController = {
       const viewData = {
         title: "Public POI View",
         area: area,
-        venue:venue,
+        venue: venue,
         venuestring: JSON.stringify(venue),
-        reviews: reviews
+        reviews: reviews,
       };
       return h.view("dash-poi-view", viewData);
     },
@@ -87,9 +88,12 @@ export const dashboardController = {
         const loggedInUser = request.auth.credentials;
         const venue = await db.venueStore.getVenueById(request.params.venueid);
          const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
+        const time = dayjs().format("D/M/YY HH:mm");
+        
         const newReview = {
           content: cleanHtml(request.payload.content),
           postedBy: postedBy,
+          time:time,
         };
         await db.reviewStore.addReview(venue._id, newReview);
     

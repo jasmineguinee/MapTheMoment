@@ -1,3 +1,4 @@
+import dayjs from "dayjs";
 import { VenueSpec, ReviewSpec } from "../models/joi-schemas.js";
 import { db } from "../models/db.js";
 import { imageStore } from "../models/image-store.js";
@@ -103,8 +104,6 @@ uploadImage: {
   },
 
 
-
-
    addReview: {
     validate: {
       payload: ReviewSpec,
@@ -117,14 +116,15 @@ uploadImage: {
       const loggedInUser = request.auth.credentials;
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
+      const time = dayjs().format("D/M/YY HH:mm");
       const newReview = {
         content: cleanHtml(request.payload.content),
         postedBy: postedBy,
+        time:time,
      
       };
       await db.reviewStore.addReview(venue._id, newReview);
-  
-       return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
+      return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
        
     },
   },

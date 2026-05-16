@@ -7,21 +7,6 @@ export const reviewMemStore = {
     return reviews;
   },
 
-  // function to get public reviews only
-
- async getPublicReviews(){
-    await db.read();
-
-    let publicReviews = db.data.reviews.filter((review) => review.visability === "public");
-    if (!publicReviews) {
-      publicReviews = null;
-    }
-    return publicReviews;
-  },
-
- 
-
-
   async addReview(venueId, review) {
     review._id = v4();
     review.venueid = venueId;
@@ -62,5 +47,6 @@ export const reviewMemStore = {
   async updateReview(review, updatedReview) {
     review.content = updatedReview.content;
     review.postedBy = updatedReview.postedBy;
+    review.time = updatedReview.time;
   },
 };

@@ -59,6 +59,14 @@ export const corkarea = {
   title: "Springfort hall"
 };
 
+// test post 
+export const mypost = {
+     "body": "I wasn't happy. Their prices are a bit hefty",
+     "poster": "Elise O' Keefe",
+     "time": "time string",
+     "venueid": "5231e197-1589-52be-7bfc-b45618c7c02c",
+}
+
 export const testAreas = [
   {
     title: "cork"
@@ -135,3 +143,24 @@ export const myrating = {
    number: 5,
 };
   
+
+export const testPosts = [
+  {
+     "body": "Here is my wonderful venue. Take a look! We make sure to do the best for our customers",
+     "poster": "Mary O' Keefe",
+     "time": "time string",
+     "venueid": "5231e1234-1545-52be-7bfc-b44518c7c02c",
+  },
+  {
+     "body": "I'm baffled. I took a long time to choose this venue for my wedding but they didn't even cater for special diets, the customer service could do with a bit of work",
+     "poster": "John Brown",
+     "time": "time string",
+     "venueid": "5231123ks-1589-52be-7bfc-b45618c7c02c",
+  },
+  {
+     "body": "Tpday we got engaged here. It was so romantic and I was impressed with his choice of venue",
+     "poster": "Lucy Maloney",
+     "time": "time string",
+     "venueid": "5239876-1589-52be-7bfc-b45618c7c02c",
+  }
+];

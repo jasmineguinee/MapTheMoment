@@ -6,11 +6,7 @@ export const reviewMongoStore = {
     const reviews = await Review.find().lean();
     return reviews;
   },
-  // reviews on public venues
-    async getPublicReviews(id) {
-    const publicReviews = await Review.find({ visability: "public" }).lean();
-    return publicReviews;
-  },
+
  
 
   async addReview(venueId, review) {
@@ -49,6 +45,7 @@ export const reviewMongoStore = {
     const reviewDoc = await Review.findOne({ _id: review._id });
     reviewDoc.content = updatedReview.content;
     reviewDoc.postedBy = updatedReview.postedBy;
+    reviewDoc.time = updatedReview.time;
     await reviewDoc.save();
   },
 };

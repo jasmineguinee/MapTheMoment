@@ -29,6 +29,7 @@ export const ReviewSpec = Joi.object()
   .keys({
   content: Joi.string().required().example("I do not like this venue"),
   postedBy: Joi.string().optional().example("Johnny Barry"),
+  time: Joi.string().optional().example("string of time"),
   venueid: IdSpec,
   })
   .label("Review");
@@ -105,4 +106,19 @@ export const JwtAuth = Joi.object()
   })
   .label("JwtAuth");
 
+export const PostSpec = Joi.object()
+  .keys({
+    body: Joi.string().required().example("I wanted to post about this venue because"),
+    userid: IdSpec,
+    venueid: Joi.string().allow("").optional().example("5231e197-1589-42be-9bfc-b45618c7c02c"),
+    poster: Joi.string().optional().example("David Barry"),
+    time: Joi.string().optional().example("17/5/27 12:00"),
+  })
+  .label("Post");
 
+export const PostSpecPlus = PostSpec.keys({
+  _id: IdSpec,
+  __v: Joi.number(),
+}).label("PostPlus");
+
+export const PostArraySpec = Joi.array().items(PostSpecPlus).label("PostArray");
