@@ -7,20 +7,6 @@ export const ratingMemStore = {
     return ratings;
   },
 
-  // function to get public ratings only
-
- async getPublicRatings(){
-    await db.read();
-
-    let publicRatings = db.data.ratings.filter((rating) => rating.visability === "public");
-    if (!publicRatings) {
-      publicRatings = null;
-    }
-    return publicRatings;
-  },
-
- 
-
 
   async addRating(venueId, rating) {
     rating._id = v4();
@@ -41,13 +27,31 @@ export const ratingMemStore = {
     return foundRating;
   },
 
-  async getVenueRatings(venueId) {
-    let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
-    if (!foundRatings) {
-      foundRatings = null;
-    }
-    return foundRatings;
-  },
+  // async getVenueRatings(venueId) {
+  //   let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+  //   if (!foundRatings) {
+  //     foundRatings = null;
+  //   }
+  //   return foundRatings;
+  // },
+
+   async getVenueRatingAvg(venueId){
+       await db.read();
+      let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+      if (!foundRatings) {
+        foundRatings = null;
+      }
+  
+      const numberOfRatings = foundRatings.length;
+      
+     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+      const totalsum = foundRatings.reduce(
+        (accumulator, rating) => 
+       accumulator + rating.number,
+     0);
+     
+     return totalsum / numberOfRatings;
+    },
 
   async deleteRating(id) {
     const index = ratings.findIndex((rating) => rating._id === id);

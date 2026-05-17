@@ -16,10 +16,14 @@ export const venueController = {
       const weddingVenuesStrings = JSON.stringify(weddingVenues);
       const proposalVenueStrings = JSON.stringify(proposalVenues);
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
+      const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
+
+      
 
       const viewData = {
         title: "Add the title",
         reviews: reviews,
+        ratings:ratings,
         area: area,
         venue: venue,
         venuestring: JSON.stringify(venue),
@@ -104,31 +108,7 @@ uploadImage: {
   },
 
 
-   addReview: {
-    validate: {
-      payload: ReviewSpec,
-      options: { abortEarly: false },
-      failAction: function (request, h, error) {
-        return h.view("venue-view", { title: "Add review error", errors: error.details }).takeover().code(400);
-      },
-    },
-    handler: async function (request, h) {
-      const loggedInUser = request.auth.credentials;
-      const venue = await db.venueStore.getVenueById(request.params.venueid);
-      const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
-      const time = dayjs().format("D/M/YY HH:mm");
-      const newReview = {
-        content: cleanHtml(request.payload.content),
-        postedBy: postedBy,
-        time:time,
-     
-      };
-      await db.reviewStore.addReview(venue._id, newReview);
-      return h.redirect(`/venue/${request.params.venueid}/editvenue/${request.params.venueid}`);
-       
-    },
-  },
-
+  
 
 };
 

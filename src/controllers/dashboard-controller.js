@@ -1,6 +1,6 @@
 import dayjs from "dayjs";
 import { db } from "../models/db.js";
-import { AreaSpec, ReviewSpec } from "../models/joi-schemas.js";
+import { AreaSpec, ReviewSpec, RatingSpec } from "../models/joi-schemas.js";
 import { cleanHtml, cleanString } from "../utils/sanitisation.js";
 
 export const dashboardController = {
@@ -18,6 +18,7 @@ export const dashboardController = {
           area.venues = await db.venueStore.getVenuesByAreaId(area._id);
         })
         );
+
 
       const viewData = {
         areas:areas,
@@ -65,12 +66,14 @@ export const dashboardController = {
       const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
+      const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
       const viewData = {
         title: "Public POI View",
         area: area,
         venue: venue,
         venuestring: JSON.stringify(venue),
         reviews: reviews,
+        ratings: ratings,
       };
       return h.view("dash-poi-view", viewData);
     },
@@ -81,7 +84,7 @@ export const dashboardController = {
         payload: ReviewSpec,
         options: { abortEarly: false },
         failAction: function (request, h, error) {
-          return h.view("venue-view", { title: "Add review error", errors: error.details }).takeover().code(400);
+          return h.view("dash-poi-view", { title: "Add review error", errors: error.details }).takeover().code(400);
         },
       },
       handler: async function (request, h) {
@@ -97,9 +100,31 @@ export const dashboardController = {
         };
         await db.reviewStore.addReview(venue._id, newReview);
     
-         return h.view("dash-poi-view");
+        return h.redirect(`/dashboard/${request.params.venueid}/getvenuedetails/${request.params.venueid}`);
          
       },
     },
-  
+
+    addRating: {
+      validate: {
+        payload: RatingSpec,
+        options: { abortEarly: false },
+        failAction: function (request, h, error) {
+          return h.view("dash-poi-view", { title: "Add review error", errors: error.details }).takeover().code(400);
+        },
+      },
+      handler: async function (request, h) {
+        const loggedInUser = request.auth.credentials;
+        const venue = await db.venueStore.getVenueById(request.params.venueid);
+        const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
+        const newRating = {
+          number: request.payload.number,
+        };
+        await db.ratingStore.addRating(venue._id, newRating);
+    
+         
+           return h.redirect(`/dashboard/${request.params.venueid}/getvenuedetails/${request.params.venueid}`);
+         
+      },
+    },
 };

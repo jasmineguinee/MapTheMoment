@@ -6,12 +6,7 @@ export const ratingMongoStore = {
     const ratings = await Rating.find().lean();
     return ratings;
   },
-  // ratings on public venues
-    async getPublicRatings(id) {
-    const publicRatings = await Rating.find({ visability: "public" }).lean();
-    return publicRatings;
-  },
- 
+
 
   async addRating(venueId, rating) {
     rating.venueid = venueId;
@@ -24,6 +19,16 @@ export const ratingMongoStore = {
     const ratings = await Rating.find({ ratingid: id }).lean();
     return ratings;
   },
+
+
+  //   async getVenueRatings(venueId) {
+  //   let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+  //   if (!foundRatings) {
+  //     foundRatings = null;
+  //   }
+  //   return foundRatings;
+  // },
+
 
   async getRatingById(id) {
     if (Mongoose.isValidObjectId(id)) {

@@ -17,42 +17,41 @@ export const webRoutes = [
   { method: "GET", path: "/about", config: aboutController.index },
   { method: "GET", path: "/dashboard", config: dashboardController.index },
   { method: "POST", path: "/dashboard/addarea", config: dashboardController.addArea },
-
+  
   { method: "GET", path: "/area/{id}", config: areaController.index },
-
+  
   { method: "POST", path: "/area/{id}/addvenue", config: areaController.addVenue },
-
+  
   { method: "GET", path: "/dashboard/deletearea/{id}", config: dashboardController.deleteArea },
   { method: "GET", path: "/area/{id}/deletevenue/{venueid}", config: areaController.deleteVenue },
-
-
-
-
- { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
- { method: "GET", path: "/venue/{id}/addimage/{venueid}", config: venueController.index },
+  
+  
+  
+  
+  { method: "GET", path: "/venue/{id}/editvenue/{venueid}", config: venueController.index },
+  { method: "GET", path: "/venue/{id}/addimage/{venueid}", config: venueController.index },
   { method: "POST", path: "/venue/{id}/updatevenue/{venueid}", config: venueController.update },
-   { method: "POST", path: "/venue/{id}/addreview/{venueid}", config: venueController.addReview },
-  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
-
   { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
- 
- { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
+  { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
+  
+  { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
+  { method: "GET", path: "/dashboard/{id}/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
   { method: "POST", path: "/dashboard/{id}/addpublicreview/{venueid}", config: dashboardController.addPubReview},
-
-
-    { method: "GET", path: "/noticeboard", config: noticeController.index },
-
-    { method: "POST", path: "/noticeboard/publishpost", config: noticeController.publishPost },
+  { method: "POST", path: "/dashboard/{id}/addrating/{venueid}", config: dashboardController.addRating},
+  
+  
+  { method: "GET", path: "/noticeboard", config: noticeController.index },
+  { method: "POST", path: "/noticeboard/publishpost", config: noticeController.publishPost },
   // path for load balancer testing
-{
-  method: "GET",
-  path: "/testlb",
-  handler: function (request, h) {
-     return("Server: " + os.hostname());
+  {
+    method: "GET",
+    path: "/testlb",
+    handler: function (request, h) {
+      return("Server: " + os.hostname());
+    },
+    config: {auth: false}
   },
-  config: {auth: false}
-},
-
-
-
+  
+  
+  
 ];

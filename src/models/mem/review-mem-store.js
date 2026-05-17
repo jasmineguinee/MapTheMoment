@@ -26,13 +26,13 @@ export const reviewMemStore = {
     return foundReview;
   },
 
-  async getVenueReviews(venueId) {
-    let foundReviews = reviews.filter((review) => review.venueid === venueId);
-    if (!foundReviews) {
-      foundReviews = null;
-    }
-    return foundReviews;
-  },
+  // async getVenueReviews(venueId) {
+  //   let foundReviews = reviews.filter((review) => review.venueid === venueId);
+  //   if (!foundReviews) {
+  //     foundReviews = null;
+  //   }
+  //   return foundReviews;
+  // },
 
   async deleteReview(id) {
     const index = reviews.findIndex((review) => review._id === id);

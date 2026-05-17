@@ -1,0 +1,18 @@
+ 
+ 
+ 
+ 
+ <form class="box" action="/dashboard/{{venue._id}}/addrating/{{venue._id}}" method="POST">
+    <div class="card">
+        <h1>Star Rating</h1>
+        <br />
+        <span onclick="getR(1)" class="star">★</span>
+        <span onclick="getR(2)" class="star">★</span>
+        <span onclick="getR(3)" class="star">★</span>
+        <span onclick="getR(4)" class="star">★</span>
+        <span onclick="getR(5)" class="star">★</span>
+         <input hidden="hidden" id="number" name="number" value="">
+        {{!-- <h3 id="number" name="number"></h3> --}}
+    </div>
+      <button class="button is-info">Add Rating</button>
+  </form>

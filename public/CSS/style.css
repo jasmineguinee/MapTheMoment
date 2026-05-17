@@ -14,3 +14,15 @@
     width: auto;
 }
 
+
+
+
+
+.star {
+  font-size: 10vh;
+  cursor: pointer;
+}
+
+.star.active {
+  color: rgb(232, 187, 24);
+}

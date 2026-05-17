@@ -35,14 +35,34 @@ export const ratingJsonStore = {
     return foundRating;
   },
 
-  async getVenueRatings(venueId) {
-    await db.read();
+  // async getVenueRatings(venueId) {
+  //   await db.read();
+  //   let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+  //   if (!foundRatings) {
+  //     foundRatings = null;
+  //   }
+  //   return foundRatings;
+  // },
+
+ 
+  async getVenueRatingAvg(venueId){
+     await db.read();
     let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
     if (!foundRatings) {
       foundRatings = null;
     }
-    return foundRatings;
+
+    const numberOfRatings = foundRatings.length;
+    
+   // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+    const totalsum = foundRatings.reduce(
+      (accumulator, rating) => 
+     accumulator + rating.number,
+   0);
+   
+   return totalsum / numberOfRatings;
   },
+
 
   async deleteRating(id) {
     await db.read();

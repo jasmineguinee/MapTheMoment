@@ -35,14 +35,14 @@ export const reviewJsonStore = {
     return foundReview;
   },
 
-  async getVenueReviews(venueId) {
-    await db.read();
-    let foundReviews = reviews.filter((review) => review.venueid === venueId);
-    if (!foundReviews) {
-      foundReviews = null;
-    }
-    return foundReviews;
-  },
+  // async getVenueReviews(venueId) {
+  //   await db.read();
+  //   let foundReviews = reviews.filter((review) => review.venueid === venueId);
+  //   if (!foundReviews) {
+  //     foundReviews = null;
+  //   }
+  //   return foundReviews;
+  // },
 
   async deleteReview(id) {
     await db.read();

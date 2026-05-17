@@ -15,4 +15,13 @@
 {{> share-venue}}
 {{> pubVenueDetails}}
 {{> review-thread}}
- {{> add-review }}
+ {{> add-pubReview }}
+
+{{#if ratings}}
+  {{#each ratings}}
+ <div class="box box-link-hover-shadow">
+  <p>{{ number }}</p>
+  </div>
+   {{/each}}
+{{/if}}
+ {{> add-star-rating}}

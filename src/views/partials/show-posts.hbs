@@ -1,6 +1,6 @@
    
-   {{#each posts}}
-   <div class="box box-link-hover-shadow">
+{{#each posts}}
+<div class="box box-link-hover-shadow">
     <p>{{time}}</p>
     <br>
      <p>
@@ -8,22 +8,19 @@
     </p>
     <br>
     <p class="has-text-info">Posted by: {{poster}}</p>
- <div class="box box-link-hover-shadow">
-   <div class = "flex-container">
-    {{#if venue}}
-    <div>
-        {{#if venue.img}}
+  {{#if venue}}
+ <div>
+      {{#if venue.img}}
      <figure>
        <img id = "dash-img" src="{{venue.img}}">
      </figure>
-       {{/if}}
-    </div>
-   </div>
+      {{/if}}
    <p>{{venue.title}}</p>
    <p>{{venue.description}}</p>
    <a href="/dashboard/getvenuedetails/{{venueid}}">View More Details here..</a>
-    {{/if}}
  </div>
+  {{/if}}
  </div>
 {{/each}}
+
 
