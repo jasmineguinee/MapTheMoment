@@ -12,7 +12,9 @@
     {{/if}}
    </div>
 <h2 class="has-text-weight-medium is-size-4">{{venue.title}}</h2>
+{{#if ratings}}
 {{> venue-stars}}
+{{/if}}
 {{> share-venue}}
 {{> pubVenueDetails}}
 {{> review-thread}}
