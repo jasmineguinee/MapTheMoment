@@ -1,18 +1,66 @@
  
  
+ <script>
+      let displaystars = 
+    document.getElementsByClassName("displaystar");
+document.addEventListener("DOMContentLoaded", function() {
+   let avg = document.getElementById("avgrating").innerText;
+ let avgRating = parseFloat(avg);
+  showR(avgRating);
+
+});
+
+
+
+ let avg = document.getElementById("avgrating").innerText;
+ let avgRating = parseFloat(avg);
+  showR(avgRating);
+
+
  
+
+
+function showR(avgRating) {
+
+    remove();
+    for (let i = 0; i < avgRating && i < displaystars.length; i++) {
+       if(i < Math.floor(avgRating)){
+        displaystars[i].className = "displaystar active";
+       }
+
+       else if (i === Math.floor(avgRating) && avgRating % 1 !== 0) {
+        displaystars[i].className = "displaystar half";
+       }
+       
+       else {
+        displaystars[i].className = "displaystar";
+       }
+    }
+    
+}
+
+
+function remove() {
+    for (let i = 0; i < displaystars.length; i++){
+      displaystars[i].className = "displaystar"
+    }
+   
+}
+ </script>
+
  
- <form class="box" action="/dashboard/{{venue._id}}/addrating/{{venue._id}}" method="POST">
+
     <div class="card">
         <h1>Star Rating</h1>
         <br />
-        <span onclick="getR(1)" class="star">★</span>
-        <span onclick="getR(2)" class="star">★</span>
-        <span onclick="getR(3)" class="star">★</span>
-        <span onclick="getR(4)" class="star">★</span>
-        <span onclick="getR(5)" class="star">★</span>
-         <input hidden="hidden" id="number" name="number" value="">
-        {{!-- <h3 id="number" name="number"></h3> --}}
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+      
+        <p hidden= "hidden" id="avgrating" name="avgrating">{{ avgrating }}</p>
+        <p id="avgrating" name="avgrating">{{ roundedAvg }}/5</p>
     </div>
-      <button class="button is-info">Add Rating</button>
-  </form>
+  
+  

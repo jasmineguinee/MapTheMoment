@@ -27,14 +27,25 @@ export const ratingMemStore = {
     return foundRating;
   },
 
-  // async getVenueRatings(venueId) {
-  //   let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
-  //   if (!foundRatings) {
-  //     foundRatings = null;
-  //   }
-  //   return foundRatings;
-  // },
+  async getVenueRatings(venueId) {
+    let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+    if (!foundRatings) {
+      foundRatings = null;
+    }
+    return foundRatings;
+  },
 
+
+    async usersRatingForVenue(venueid, userid) {
+      await db.read();
+      let foundRatings = db.data.ratings.filter((rating) => rating.venueid === venueid && rating.userid === userid);
+      if (!foundRatings) {
+        foundRatings = null;
+      }
+      return foundRatings;
+      
+    },
+  
    async getVenueRatingAvg(venueId){
        await db.read();
       let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
@@ -65,6 +76,7 @@ export const ratingMemStore = {
 
   async updateRating(rating, updatedRating) {
     rating.number = updatedRating.number;
+    rating.userid = updatedRating.userid;
    
   },
 };

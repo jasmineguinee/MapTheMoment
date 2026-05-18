@@ -25,9 +25,7 @@ function remove() {
 </script>
 
  <form class="box" action="/dashboard/{{venue._id}}/addrating/{{venue._id}}" method="POST">
-    {{!-- <div class="card"> --}}
         <label>Add a star rating</label>
-        
         <br />
         <span onclick="getR(1)" class="star">★</span>
         <span onclick="getR(2)" class="star">★</span>
@@ -35,7 +33,7 @@ function remove() {
         <span onclick="getR(4)" class="star">★</span>
         <span onclick="getR(5)" class="star">★</span>
          <input hidden="hidden" id="number" name="number" value="">
-    {{!-- </div> --}}
+  
       <button class="button is-info">Add Rating</button>
   </form>
 

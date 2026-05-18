@@ -26,6 +26,19 @@ export const ratingJsonStore = {
     return foundRatings;
   },
 
+
+  async usersRatingForVenue(venueid, userid) {
+    await db.read();
+    let foundRatings = db.data.ratings.filter((rating) => rating.venueid === venueid && rating.userid === userid);
+    if (!foundRatings) {
+      foundRatings = null;
+    }
+    return foundRatings;
+    
+  },
+
+
+
   async getRatingById(id) {
     await db.read();
     let foundRating = db.data.ratings.find((rating) => rating._id === id);
@@ -78,6 +91,7 @@ export const ratingJsonStore = {
 
   async updateRating(venue, updatedRating) {
     rating.number = updatedRating.number;
+    rating.userid = updatedRating.userid;
     await db.write();
   },
 };

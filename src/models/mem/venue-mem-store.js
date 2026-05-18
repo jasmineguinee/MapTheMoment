@@ -78,13 +78,13 @@ export const venueMemStore = {
     return foundVenue;
   },
 
-  // async getAreaVenues(areaId) {
-  //   let foundVenues = venues.filter((venue) => venue.areaid === areaId);
-  //   if (!foundVenues) {
-  //     foundVenues = null;
-  //   }
-  //   return foundVenues;
-  // },
+  async getAreaVenues(areaId) {
+    let foundVenues = venues.filter((venue) => venue.areaid === areaId);
+    if (!foundVenues) {
+      foundVenues = null;
+    }
+    return foundVenues;
+  },
 
   async deleteVenue(id) {
     const index = venues.findIndex((venue) => venue._id === id);

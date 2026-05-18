@@ -21,13 +21,24 @@ export const ratingMongoStore = {
   },
 
 
-  //   async getVenueRatings(venueId) {
-  //   let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
-  //   if (!foundRatings) {
-  //     foundRatings = null;
-  //   }
-  //   return foundRatings;
-  // },
+  async usersRatingForVenue(venueid, userid) {
+   let ratings = await Rating.find({ ratingid: venueid, userid: userid}).lean();
+   if(!ratings) {
+    ratings = null;
+   }
+   return ratings;
+    
+  },
+
+
+
+    async getVenueRatings(venueId) {
+    let foundRatings = ratings.filter((rating) => rating.venueid === venueId);
+    if (!foundRatings) {
+      foundRatings = null;
+    }
+    return foundRatings;
+  },
 
 
   async getRatingById(id) {
@@ -37,6 +48,23 @@ export const ratingMongoStore = {
     }
     return null;
   },
+
+  
+
+  async getVenueRatingAvg(venueId){
+      const ratings = await Rating.find({ ratingid: venueId }).lean();
+   
+      const numberOfRatings = ratings.length;
+      
+     // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
+      const totalsum = ratings.reduce(
+        (accumulator, rating) => 
+       accumulator + rating.number,
+     0);
+     
+     return totalsum / numberOfRatings;
+    },
+  
 
   async deleteRating(id) {
     try {
@@ -53,6 +81,7 @@ export const ratingMongoStore = {
   async updateRating(rating, updatedRating) {
     const ratingDoc = await Rating.findOne({ _id: rating._id });
     ratingDoc.number = updatedRating.number;
+    ratingDoc.userid = updatedRating.userid;
   
     await ratingDoc.save();
   },

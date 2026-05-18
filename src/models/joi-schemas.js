@@ -38,6 +38,7 @@ export const ReviewSpec = Joi.object()
 export const RatingSpec = Joi.object()
   .keys({
   number: Joi.number().required().example(5),
+  userid: Joi.string().optional().example("userid goes here"),
   venueid: IdSpec,
   })
   .label("Rating");

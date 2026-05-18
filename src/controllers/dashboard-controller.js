@@ -67,6 +67,10 @@ export const dashboardController = {
       const venue = await db.venueStore.getVenueById(request.params.venueid);
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
       const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
+    
+      const myrating = await db.ratingStore.usersRatingForVenue(request.params.venueid, loggedInUser._id);
+      const avgrating = await db.ratingStore.getVenueRatingAvg(request.params.venueid);
+      const roundedAvg = avgrating.toFixed(2);
       const viewData = {
         title: "Public POI View",
         area: area,
@@ -74,6 +78,10 @@ export const dashboardController = {
         venuestring: JSON.stringify(venue),
         reviews: reviews,
         ratings: ratings,
+        avgrating:avgrating,
+        roundedAvg:roundedAvg,
+        myrating:myrating,
+        stringrating: JSON.stringify(myrating),
       };
       return h.view("dash-poi-view", viewData);
     },
@@ -119,6 +127,7 @@ export const dashboardController = {
         const postedBy = loggedInUser.firstName.concat(" ", loggedInUser.lastName);
         const newRating = {
           number: request.payload.number,
+          userid: loggedInUser._id,
         };
         await db.ratingStore.addRating(venue._id, newRating);
     

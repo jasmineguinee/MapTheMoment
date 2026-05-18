@@ -1,9 +1,57 @@
+
+
+body .button:hover{
+  background-color: rgb(154, 27, 218);
+}
+
+/* body .nav.a:hover{
+  background-color: rgb(154, 27, 218);
+} */
+
+body {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+nav.navbar{
+   background-color: #1a1a1a;
+  color: #f5f5f5;
+}
+
+body #maintitle{
+   color: #8827e9;
+   background-color: #0e0303;
+}
+
+body .div[hidden]{
+   background-color: #0e0303;
+}
+
+body .table{
+  background-color: white;
+  color:#413434;
+}
+
+body .div.table-container,
+body .subtitle, 
+body .label, 
+body .box, 
+body .nav, 
+body .title, 
+body strong {
+  color: #ffffff;
+   background-color: #413434;
+}
+
 .flex-container {
  display: flex;
  flex-direction: row;
  flex-wrap: nowrap;  
  overflow-x: auto; 
 }
+
+
+
 
 .flex-container div {
     padding:10px;
@@ -15,14 +63,37 @@
 }
 
 
-
-
-
 .star {
-  font-size: 10vh;
+  font-size: 24px;
   cursor: pointer;
 }
 
 .star.active {
   color: rgb(232, 187, 24);
+}
+
+
+
+
+
+.displaystar {
+  font-size: 24px;
+  color: rgba(0, 0, 0, 0.758);
+}
+
+.displaystar.active {
+  color: rgb(232, 187, 24);
+}
+
+
+.displaystar.half {
+  background: linear-gradient(
+    90deg,
+    rgb(232, 187, 24) 50%,
+    rgba(0, 0, 0, 0.758) 50%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  background-clip: text;
+
 }

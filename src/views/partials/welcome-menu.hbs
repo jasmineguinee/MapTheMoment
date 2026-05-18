@@ -1,13 +1,22 @@
 <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
     {{> project-brand}}
+
+     <a role="button" class="navbar-burger" id="burger" aria-label="menu" aria-expanded="false" data-target="nav-links">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
   </div>
-  <div id="navbarBasicExample" class="navbar-menu">
+
+
+  <div id="nav-links" class="navbar-menu">
     <div class="navbar-end">
       <div class="navbar-item">
         <div class="buttons">
-          <a class="button" id="login" href="/login"> Log in </a> <a class="button" id="signup" href="/signup"> Sign
-          up </a>
+          <a class="button" id="login" href="/login"> Log in </a>
+          <a class="button" id="signup" href="/signup"> Signup </a>
         </div>
       </div>
     </div>
@@ -15,5 +24,21 @@
 </nav>
 
 <script>
+
+document.addEventListener('DOMContentLoaded', () => {
+ 
+  const burger = document.querySelector('#burger');
+  const menu = document.querySelector('#nav-links');
+
+ 
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('is-active');
+      menu.classList.toggle('is-active');
+    });
+    });
+  
+
+
+ 
   document.getElementById("{{active}}").classList.add("is-info");
 </script>
