@@ -65,7 +65,6 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
-   
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
       const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
       const myrating = await db.ratingStore.usersRatingForVenue(request.params.venueid, loggedInUser._id);

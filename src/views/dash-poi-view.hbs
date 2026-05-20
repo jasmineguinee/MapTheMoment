@@ -8,14 +8,16 @@
      </figure>
     </div>
     {{/if}}
+    <h2 class="has-text-weight-medium is-size-4">{{venue.title}}</h2>
    </div>
-<h2 class="has-text-weight-medium is-size-4">{{venue.title}}</h2>
+
 
 {{#if ratings}}
 {{> venue-stars}}
 {{/if}}
-
+<br>
 {{> share-venue}}
+</br>
 {{> pubVenueDetails}}
 {{> review-thread}}
 {{> add-pubReview }}

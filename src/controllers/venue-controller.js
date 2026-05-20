@@ -17,7 +17,9 @@ export const venueController = {
       const proposalVenueStrings = JSON.stringify(proposalVenues);
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
       const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
-
+      const avgrating = await db.ratingStore.getVenueRatingAvg(request.params.venueid);  
+      const roundedAvg = avgrating.toFixed(2);
+      
       
 
       const viewData = {
@@ -29,6 +31,9 @@ export const venueController = {
         venuestring: JSON.stringify(venue),
         weddingVenuesStrings: weddingVenuesStrings,
         proposalVenueStrings: proposalVenueStrings,
+        avgrating:avgrating,
+        roundedAvg: roundedAvg,
+
       };
       return h.view("venue-view", viewData);
   },
@@ -77,12 +82,12 @@ uploadImage: {
           const url =  await imageStore.uploadImage(request.payload.imagefile);
          
         const updatedVenue = {
-          title: venue.title,
-          venuetype: venue.venuetype,
-          description: venue.description,
+          title: cleanString(venue.title),
+          venuetype: cleanString(venue.venuetype),
+          description: cleanString(venue.description),
           latitude: venue.latitude,
           longitude: venue.longitude,
-          visability: venue.visability,
+          visability: cleanString(venue.visability),
           poster: poster,
           img: url,
         };
