@@ -1,7 +1,24 @@
 
+ <form class="box" action="/dashboard/{{venue._id}}/addrating/{{venue._id}}" method="POST">
+        <label>Add a star rating</label>
+        <br/>
+        <span onclick="getR(1)" class="star">★</span>
+        <span onclick="getR(2)" class="star">★</span>
+        <span onclick="getR(3)" class="star">★</span>
+        <span onclick="getR(4)" class="star">★</span>
+        <span onclick="getR(5)" class="star">★</span>
+         <input hidden="hidden" id="number" name="number" value="">
+      <button class="button is-info">Add Rating</button>
+  </form>
+
+
+    
+
 <script>
+
   let stars = 
     document.getElementsByClassName("star");
+
 
 function getR(n) {
     remove();
@@ -13,25 +30,14 @@ function getR(n) {
    document.getElementById("number").value = n;
 }
 
+
+
 function remove() {
     for (let i = 0; i < stars.length; i++){
       stars[i].className = "star"
     }
+   
 }
+
+
 </script>
-
- <form class="box" action="/dashboard/{{venue._id}}/addrating/{{venue._id}}" method="POST">
-        <label>Add a star rating</label>
-        <br />
-        <span onclick="getR(1)" class="star">★</span>
-        <span onclick="getR(2)" class="star">★</span>
-        <span onclick="getR(3)" class="star">★</span>
-        <span onclick="getR(4)" class="star">★</span>
-        <span onclick="getR(5)" class="star">★</span>
-         <input hidden="hidden" id="number" name="number" value="">
-  
-      <button class="button is-info">Add Rating</button>
-  </form>
-
-
-    

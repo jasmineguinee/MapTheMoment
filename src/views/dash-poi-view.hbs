@@ -1,7 +1,5 @@
 {{> menu}}
 {{> singleVenuePubMap}}
-
- 
   <div class = "flex-container">
     {{#if venue.img}}
     <div>
@@ -12,9 +10,11 @@
     {{/if}}
    </div>
 <h2 class="has-text-weight-medium is-size-4">{{venue.title}}</h2>
+
 {{#if ratings}}
 {{> venue-stars}}
 {{/if}}
+
 {{> share-venue}}
 {{> pubVenueDetails}}
 {{> review-thread}}
@@ -24,6 +24,7 @@
 {{!-- // The below function stops an option to add another rating if the user has already rated --}}
 {{#unless myrating}}
  {{> add-star-rating}}
+ {{!-- //goes in and we input a number --}}
 {{/unless}}
 
 {{!-- myrating contains the users rating for the venue, as it is in a directory of ratings we reference each but they can only make one --}}

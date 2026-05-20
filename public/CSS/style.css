@@ -66,12 +66,11 @@ body strong {
   cursor: pointer;
 }
 
+
+
 .star.active {
   color: rgb(232, 187, 24);
 }
-
-
-
 
 
 .displaystar {

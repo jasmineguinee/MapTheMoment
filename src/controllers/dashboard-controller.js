@@ -65,12 +65,14 @@ export const dashboardController = {
       const loggedInUser = request.auth.credentials;
       const area = await db.areaStore.getAreaById(request.params.id);
       const venue = await db.venueStore.getVenueById(request.params.venueid);
+   
       const reviews = await db.reviewStore.getReviewsByVenueId(request.params.venueid);
       const ratings = await db.ratingStore.getRatingsByVenueId(request.params.venueid);
-    
       const myrating = await db.ratingStore.usersRatingForVenue(request.params.venueid, loggedInUser._id);
-      const avgrating = await db.ratingStore.getVenueRatingAvg(request.params.venueid);
+      const avgrating = await db.ratingStore.getVenueRatingAvg(request.params.venueid);  
       const roundedAvg = avgrating.toFixed(2);
+      
+      
       const viewData = {
         title: "Public POI View",
         area: area,
@@ -81,8 +83,8 @@ export const dashboardController = {
         avgrating:avgrating,
         roundedAvg:roundedAvg,
         myrating:myrating,
-        stringrating: JSON.stringify(myrating),
       };
+   
       return h.view("dash-poi-view", viewData);
     },
   },
@@ -107,7 +109,6 @@ export const dashboardController = {
           time:time,
         };
         await db.reviewStore.addReview(venue._id, newReview);
-    
         return h.redirect(`/dashboard/${request.params.venueid}/getvenuedetails/${request.params.venueid}`);
          
       },
@@ -130,9 +131,7 @@ export const dashboardController = {
           userid: loggedInUser._id,
         };
         await db.ratingStore.addRating(venue._id, newRating);
-    
-         
-           return h.redirect(`/dashboard/${request.params.venueid}/getvenuedetails/${request.params.venueid}`);
+         return h.redirect(`/dashboard/${request.params.venueid}/getvenuedetails/${request.params.venueid}`);
          
       },
     },

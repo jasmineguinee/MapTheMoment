@@ -19,6 +19,7 @@ export const ratingMemStore = {
     return ratings.filter((rating) => rating.venueid === id);
   },
 
+
   async getRatingById(id) {
     let foundRating = ratings.find((rating) => rating._id === id);
     if (!foundRating) {
@@ -63,6 +64,8 @@ export const ratingMemStore = {
      
      return totalsum / numberOfRatings;
     },
+
+
 
   async deleteRating(id) {
     const index = ratings.findIndex((rating) => rating._id === id);

@@ -34,8 +34,8 @@ export const webRoutes = [
   { method: "POST", path: "/venue/{id}/uploadimage/{venueid}", config: venueController.uploadImage },
   { method: "GET", path: "/{param*}", handler: { directory: { path: "./public" } }, options: { auth: false } },
   
-  { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
   { method: "GET", path: "/dashboard/{id}/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
+  { method: "GET", path: "/dashboard/getvenuedetails/{venueid}", config: dashboardController.getVenueDetails },
   { method: "POST", path: "/dashboard/{id}/addpublicreview/{venueid}", config: dashboardController.addPubReview},
   { method: "POST", path: "/dashboard/{id}/addrating/{venueid}", config: dashboardController.addRating},
   

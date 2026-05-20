@@ -1,28 +1,35 @@
+
+
  
+
+    <div class="card">
+        <h1>Star Rating</h1>
+        <br />
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+        <span class="displaystar">★</span>
+      
+        <p hidden= "hidden" id="avgrating">{{ avgrating }}</p>
+        <p id="roundedAvg-text">{{ roundedAvg }}/5</p>
+    </div>
+  
+   
  
  <script>
-      let displaystars = 
-    document.getElementsByClassName("displaystar");
-document.addEventListener("DOMContentLoaded", function() {
-   let avg = document.getElementById("avgrating").innerText;
- let avgRating = parseFloat(avg);
-  showR(avgRating);
+ document.addEventListener("DOMContentLoaded", function(){
+    const displaystars = document.getElementsByClassName("displaystar");
+   const avg = document.getElementById("avgrating").innerText;
+ const avgRating = parseFloat(avg);
+ if (isNaN(avgRating)){
+  avgRating = 0;
+ }
 
-});
+     for (let i = 0; i < displaystars.length; i++){
+      displaystars[i].className = "displaystar";
+    }
 
-
-
- let avg = document.getElementById("avgrating").innerText;
- let avgRating = parseFloat(avg);
-  showR(avgRating);
-
-
- 
-
-
-function showR(avgRating) {
-
-    remove();
     for (let i = 0; i < avgRating && i < displaystars.length; i++) {
        if(i < Math.floor(avgRating)){
         displaystars[i].className = "displaystar active";
@@ -37,30 +44,5 @@ function showR(avgRating) {
        }
     }
     
-}
-
-
-function remove() {
-    for (let i = 0; i < displaystars.length; i++){
-      displaystars[i].className = "displaystar"
-    }
-   
-}
+ });
  </script>
-
- 
-
-    <div class="card">
-        <h1>Star Rating</h1>
-        <br />
-        <span class="displaystar">★</span>
-        <span class="displaystar">★</span>
-        <span class="displaystar">★</span>
-        <span class="displaystar">★</span>
-        <span class="displaystar">★</span>
-      
-        <p hidden= "hidden" id="avgrating" name="avgrating">{{ avgrating }}</p>
-        <p id="avgrating" name="avgrating">{{ roundedAvg }}/5</p>
-    </div>
-  
-  

@@ -16,13 +16,13 @@ export const ratingMongoStore = {
   },
 
   async getRatingsByVenueId(id) {
-    const ratings = await Rating.find({ ratingid: id }).lean();
+    const ratings = await Rating.find({ venueid: id }).lean();
     return ratings;
   },
 
 
   async usersRatingForVenue(venueid, userid) {
-   let ratings = await Rating.find({ ratingid: venueid, userid: userid}).lean();
+   let ratings = await Rating.find({ venueid: venueid, userid: userid}).lean();
    if(!ratings) {
     ratings = null;
    }
@@ -52,7 +52,7 @@ export const ratingMongoStore = {
   
 
   async getVenueRatingAvg(venueId){
-      const ratings = await Rating.find({ ratingid: venueId }).lean();
+      const ratings = await Rating.find({ venueid: venueId }).lean();
    
       const numberOfRatings = ratings.length;
       

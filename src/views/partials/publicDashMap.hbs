@@ -53,6 +53,7 @@
    // make a marker for each type of venue
   function getPubWeddingVenues(){
    pubweddings.forEach(venue => {
+  
     const pathToDetails = `/dashboard/getvenuedetails/${venue._id}`
     L.popup()
       .setLatLng([venue.latitude, venue.longitude])

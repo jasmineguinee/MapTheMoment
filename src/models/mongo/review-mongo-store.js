@@ -17,7 +17,7 @@ export const reviewMongoStore = {
   },
 
   async getReviewsByVenueId(id) {
-    const reviews = await Review.find({ reviewid: id }).lean();
+    const reviews = await Review.find({ venueid: id }).lean();
     return reviews;
   },
 

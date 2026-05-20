@@ -27,11 +27,11 @@ export const ratingJsonStore = {
   },
 
 
-  async usersRatingForVenue(venueid, userid) {
+  async usersRatingForVenue(venueid, id) {
     await db.read();
-    let foundRatings = db.data.ratings.filter((rating) => rating.venueid === venueid && rating.userid === userid);
-    if (!foundRatings) {
-      foundRatings = null;
+    const foundRatings = db.data.ratings.filter((rating) => rating.venueid === venueid && rating.userid === id);
+    if (foundRatings.length === 0) {
+      return null;
     }
     return foundRatings;
     
@@ -72,8 +72,13 @@ export const ratingJsonStore = {
       (accumulator, rating) => 
      accumulator + rating.number,
    0);
-   
+
+   if (totalsum === 0) {
+    return 0;
+   }
+
    return totalsum / numberOfRatings;
+  
   },
 
 
