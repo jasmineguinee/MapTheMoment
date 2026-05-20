@@ -58,7 +58,7 @@
 
     L.popup()
       .setLatLng([venue.latitude, venue.longitude])
-     marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
+     const marker = L.marker([venue.latitude, venue.longitude], { icon: weddingicon }).addTo(map);
      marker.venueData = venue;
      const imgstr = venue.img;
 
@@ -81,7 +81,7 @@
 
     L.popup()
      .setLatLng([venue.latitude, venue.longitude])
-     marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
+     const marker = L.marker([venue.latitude, venue.longitude], { icon: proposalicon }).addTo(map);
      const imgstr = venue.img;
      marker.venueData = venue;
     if (imgstr){
