@@ -5,10 +5,10 @@
 MapTheMoment is a Placemark Hapi/Node Application which allows users to log wedding venues and proposal hotspots. 
 
 ## Description
-Users can create areas and add wedding or proposal venues. On the main dashboard when the user logs in, they can view all public postings for wedding venues or proposal venues, choosing which category they wish to see. Each venue shows the users' name who posted the venue along with it's pictures, details and reviews. There is an option to click on the venue to bring you to a page where you can leave a review. The user also has their personal venue map with all the venues they have created.
+Users can create areas on their dashboard. They can add wedding or proposal venues to each area. The dashboard also has a public map where they can view all public postings for wedding venues or proposal venues, choosing which category they wish to see. Users can click to get further details of each venue including images, descriptions, reviews and its community ratings. Users can also choose to keep their venues private while they are drafting them. The noticeboard gives users the opportunity to post and discuss venues.
 
 ## Use cases for application
-This app could be used for businesses to promote their venues and showcase what's on offer. It may also be helpful in building customer trust in their brand as there is a review system where customers can share their experiences. Users can also post venues and proposal hotspots that they have found and give their experience in the description. Something like this could be useful from a tourism perspective as people often travel to propose and get married. This would also be helpful for users wishing to access to all information in one spot, for example with venue descriptions and reviews there is opportunities for people to share service information close to the area such as where to buy flowers or finding a nearby photographer. 
+This app could be used for businesses to promote their venues. Users can also post venues that they have found and share details. This can be useful from a tourism perspective to help people who want to find good places to visit. There is also a commmunity aspect to this application as users can post on the noticeboard. There is potential of using the the app for planning local activities and community groups. It could be scoped out further with messaging as a type of social media application.
 
 ## Packages required  
 <u>Hapi is required for this project. Please install hapi, hapi vision for template rendering, hapi cookie to enable user sessions and hapi boom for http friendly errors with the commands below:</u>   
@@ -63,7 +63,6 @@ npm install @hapi/inert
 
 npm install hapi-auth-jwt2 jsonwebtoken  
 
-
 ## Installation instructions  
 <u>To install and start the project use the following commands:</u>
 
@@ -85,3 +84,4 @@ npm run start
 [Argon2 - a helpful guide for understanding hashing](https://argon2-cffi.readthedocs.io/en/stable/howto.html)  
 [dayjs](https://www.npmjs.com/package/dayjs)  
 [javascript star ratings](https://www.geeksforgeeks.org/javascript/star-rating-using-html-css-and-javascript/)  
+[Playwright docs](https://playwright.dev/docs/locators)  
