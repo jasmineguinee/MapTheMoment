@@ -16,7 +16,7 @@ await page.goto(savedAreaURL.url,  { waitUntil: "domcontentloaded" });
     await page.locator("#visibility").selectOption("public");
  await page.getByRole("button", { name: "Add Venue" }).click();
 
- // get the table so that the test data doesnt get connfused with the map data
+ // get the table so that the test data doesnt get confused with the map data
  const venueDetails = page.locator("#venuedetails");
 
   await expect(venueDetails.locator("text=testvenue123").last()).toBeVisible();
