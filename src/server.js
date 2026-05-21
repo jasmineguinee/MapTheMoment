@@ -88,8 +88,14 @@ async function init() {
     verifyOptions: { algorithms: ["HS256"] },
   });
   server.auth.default("session");
-
-  db.init("mongo");
+  
+  // if running playwright test use json to avoid issues 
+  if (process.env.CI) {
+    db.init("json")
+  } else {
+   db.init("mongo");
+  }
+ 
   server.route(webRoutes);
   server.route(apiRoutes);
   await server.start();

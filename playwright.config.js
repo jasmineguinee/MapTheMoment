@@ -25,7 +25,7 @@ export default defineConfig({
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: "on-first-retry",
   },
-
+// added time out of two minutes here to give it time to load to avoid crashes
    webServer: {
     command: "npm start",
     url: "http://localhost:3000",
