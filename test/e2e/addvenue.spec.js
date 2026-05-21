@@ -7,14 +7,14 @@ test("adding venue to area view", async ({ page }) => {
 const savedAreaURL = JSON.parse(fs.readFileSync("playwright/.auth/area-url.json", "utf8"));
 // go to the specific area page
 await page.goto(savedAreaURL.url,  { waitUntil: "domcontentloaded" });
-
- await page.locator("#title").fill("testvenue123");
-  await page.locator("#description").fill("great venue");
-   await page.locator("#venuetype").selectOption("proposal");
-    await page.locator("#latitude").fill("52.362183");
-     await page.locator("#longitude").fill("-9.145020");
-    await page.locator("#visibility").selectOption("public");
- await page.getByRole("button", { name: "Add Venue" }).click();
+const venueform = await page.locator("#venueform");
+ await venueform.locator("#title").fill("testvenue123");
+  await venueform.locator("#description").fill("great venue");
+   await venueform.locator("#venuetype").selectOption("proposal");
+    await venueform.locator("#latitude").fill("52.362183");
+     await venueform.locator("#longitude").fill("-9.145020");
+    await venueform.locator("#visibility").selectOption("public");
+ await venueform.getByRole("button", { name: "Add Venue" }).click();
 
  // get the table so that the test data doesnt get confused with the map data
  const venueDetails = page.locator("#venuedetails");
