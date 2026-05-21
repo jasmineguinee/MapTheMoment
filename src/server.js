@@ -90,11 +90,9 @@ async function init() {
   server.auth.default("session");
   
   // if running playwright test use json to avoid issues 
-  if (process.env.CI) {
-    db.init("json")
-  } else {
+
    db.init("mongo");
-  }
+  
  
   server.route(webRoutes);
   server.route(apiRoutes);
