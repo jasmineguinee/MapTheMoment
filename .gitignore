@@ -133,3 +133,5 @@ db/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+.env.test

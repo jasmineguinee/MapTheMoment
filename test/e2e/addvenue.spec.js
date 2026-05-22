@@ -6,7 +6,8 @@ import fs from "fs";
 test("adding venue to area view", async ({ page }) => {
 const savedAreaURL = JSON.parse(fs.readFileSync("playwright/.auth/area-url.json", "utf8"));
 // go to the specific area page
-await page.goto(savedAreaURL.url,  { waitUntil: "domcontentloaded" });
+await page.goto(savedAreaURL.url,  { waitUntil: "load" });
+
 const venueform = await page.locator("#venueform");
  await venueform.locator("#title").fill("testvenue123");
   await venueform.locator("#description").fill("great venue");
@@ -16,15 +17,19 @@ const venueform = await page.locator("#venueform");
     await venueform.locator("#visibility").selectOption("public");
  await venueform.getByRole("button", { name: "Add Venue" }).click();
 
+
+
+   await page.waitForURL(savedAreaURL.url, {waitUntil: "load"});
+
  // get the table so that the test data doesnt get confused with the map data
  const venueDetails = page.locator("#venuedetails");
-
-  await expect(venueDetails.locator("text=testvenue123").last()).toBeVisible();
+ await expect(venueDetails.locator("text=testvenue123").last()).toBeVisible();
 
   // the open area button (on the last area added)
   const openbutton = page.locator("#editvenue").last();
   await openbutton.click();
-  await page.waitForLoadState("domcontentloaded");
+
+  await page.waitForLoadState("load");
   const venueViewUrl = page.url();
   fs.writeFileSync("playwright/.auth/venue-url.json", JSON.stringify({ url: venueViewUrl}))
 

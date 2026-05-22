@@ -1,0 +1,129 @@
+{
+  "users": [
+    {
+      "firstName": "Homer",
+      "lastName": "Simpson",
+      "email": "homer@simpson.com",
+      "password": "$argon2id$v=19$m=65536,t=3,p=4$+fWWx4nsyzOMQbY9wqsiAw$eAHHlDib8Ue4rN1LOOZQLFhy8raGOzcH9ZpD6H9NzFw",
+      "_id": "dcd95943-ee72-4acf-8759-86cadf74e769"
+    },
+    {
+      "firstName": "Marge",
+      "lastName": "Simpson",
+      "email": "marge@simpson.com",
+      "password": "$argon2id$v=19$m=65536,t=3,p=4$y9VPFCSs5SJjArjxhnUKIw$XcGjX70GuoViloW3O+LMLKVAPmKBp+Km93zi8GqeWxo",
+      "_id": "d9d0fffc-1388-4dbd-a452-9c1c5b7998f1"
+    },
+    {
+      "firstName": "Bart",
+      "lastName": "Simpson",
+      "email": "bart@simpson.com",
+      "password": "$argon2id$v=19$m=65536,t=3,p=4$/TPXqoYweLOIVYwK+pHMRA$WCKR3P3oNjSyCcCoJLhnlySFFA+QNGLFj+Hryti5lZY",
+      "_id": "bcce0c0e-2a6d-48f4-b740-a4ee65e450f9"
+    }
+  ],
+  "areas": [
+    {
+      "title": "Springfort hall",
+      "_id": "98871fe2-bb64-4c76-a6cb-874577475ece"
+    }
+  ],
+  "venues": [
+    {
+      "title": "Fota Island Resort",
+      "venuetype": "wedding",
+      "description": "This is a luxury Irish wedding venue that can cater to very large weddings",
+      "latitude": 5,
+      "longitude": 6,
+      "visability": "private",
+      "poster": "Gerard Barry",
+      "_id": "893421a3-ca0c-4c43-b260-7c60c30cd75a",
+      "areaid": "98871fe2-bb64-4c76-a6cb-874577475ece"
+    },
+    {
+      "title": "Inish Beg Estate",
+      "venuetype": "wedding",
+      "description": "Outdoor ceremonies on Inish Beg can take place by a pond in the woodland, in a walled garden or at the water's edge",
+      "latitude": 5,
+      "longitude": 6,
+      "visability": "public",
+      "poster": "David Cleary",
+      "_id": "b80c8a91-17bc-447f-a536-0bdb015d4aba",
+      "areaid": "98871fe2-bb64-4c76-a6cb-874577475ece"
+    },
+    {
+      "title": "Garnish Island",
+      "venuetype": "proposal",
+      "description": "This is a hidden-gem proposal spot, featuring Italianate gardens, exotic plants, and breathtaking sea views. Top locations here include the iconic Grecian Temple overlooking Bantry Bay, the romantic clock tower, the intimate walled garden, and the scenic ferry ride passing the local seal colony",
+      "latitude": 5,
+      "longitude": 6,
+      "visability": "private",
+      "poster": "Margaret Burke",
+      "_id": "5dc5b038-5572-431b-a193-2453007a6e1b",
+      "areaid": "98871fe2-bb64-4c76-a6cb-874577475ece"
+    }
+  ],
+  "ratings": [
+    {
+      "number": 1,
+      "userid": "the users id",
+      "_id": "bfb90666-9aa5-4d48-9b46-bfe38ccbd7ac",
+      "venueid": "e2c285db-0838-499c-881d-10374c3eda42"
+    },
+    {
+      "number": 4,
+      "userid": "the users id",
+      "_id": "a716c01d-8f51-49d9-bfa3-635f2b887d0d",
+      "venueid": "e2c285db-0838-499c-881d-10374c3eda42"
+    },
+    {
+      "number": 5,
+      "userid": "the users id",
+      "_id": "2052d399-35a1-450c-9f05-bbef3378ef51",
+      "venueid": "e2c285db-0838-499c-881d-10374c3eda42"
+    }
+  ],
+  "reviews": [
+    {
+      "content": "I think its too busy for a proposal venue",
+      "postedBy": "Mary Egan",
+      "_id": "48a5a978-072f-4a81-b444-0ebc8b6f35a8",
+      "venueid": "d90ecb41-75bf-48a5-a791-1c48e18a6281"
+    },
+    {
+      "content": "wow, thats a showstopping place!",
+      "postedBy": "John Barry",
+      "_id": "2a7bc8ad-9ce0-4329-b562-6f14e04ebe8e",
+      "venueid": "d90ecb41-75bf-48a5-a791-1c48e18a6281"
+    },
+    {
+      "content": "I wasn't happy. Their prices are a bit hefty",
+      "postedBy": "Elise O' Keefe",
+      "_id": "a5226cbf-601a-4791-b509-1d02dc68f95e",
+      "venueid": "d90ecb41-75bf-48a5-a791-1c48e18a6281"
+    }
+  ],
+  "posts": [
+    {
+      "body": "Here is my wonderful venue. Take a look! We make sure to do the best for our customers",
+      "poster": "Mary O' Keefe",
+      "time": "time string",
+      "userid": "d91dc8f1-804f-4031-9d0d-692eeeb5b63c",
+      "_id": "0c8d6945-38cd-48ca-bd55-1d74d392203a"
+    },
+    {
+      "body": "I took a long time to choose this venue for my wedding but they didn't even cater for special diets, the customer service could do with a bit of work",
+      "poster": "John Brown",
+      "time": "time string",
+      "userid": "d91dc8f1-804f-4031-9d0d-692eeeb5b63c",
+      "_id": "a510825c-2731-4343-8805-c864070e3e1f"
+    },
+    {
+      "body": "Today we got engaged here. It was so romantic and I was impressed with his choice of venue",
+      "poster": "Lucy Maloney",
+      "time": "time string",
+      "userid": "d91dc8f1-804f-4031-9d0d-692eeeb5b63c",
+      "_id": "923eb8ec-c231-4651-b7df-a4175662bbd0"
+    }
+  ]
+}

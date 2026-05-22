@@ -6,15 +6,16 @@
   "author": "Jasmine",
   "type": "module",
   "main": "src/server.js",
+
   "scripts": {
     "start": "node src/server.js",
     "lint": "eslint . --ext .js",
-    "test": "mocha --ui tdd test/**/*.js --exit",
+    "test": "mocha --require ./src/server.js --ui tdd test/**/*.js --exit",
     "test:e2e": "playwright test",
-    "coverage": "c8 mocha --ui tdd test/**/*.js --exit ",
+    "coverage": "c8 mocha --require ./src/server.js ./src/server.js --ui tdd test/{models,api}/**/*.js --exit ",
     "dev": "nodemon  src/server.js --ignore src/models/json/*.json",
-    "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js",
-    "testapi": "./node_modules/mocha/bin/mocha --ui tdd test/api/**/*.js"
+    "testmodels": "./node_modules/mocha/bin/mocha --require ./src/server.js --ui tdd test/models/**/*.js",
+    "testapi": "./node_modules/mocha/bin/mocha --require ./src/server.js --ui tdd test/api/**/*.js"
   },
   "dependencies": {
     "@hapi/bell": "^13.1.0",
