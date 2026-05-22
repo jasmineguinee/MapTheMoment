@@ -12,11 +12,10 @@
     "test": "mocha --ui tdd test/**/*.js --exit",
     "test:e2e": "playwright test",
     "coverage": "c8 mocha --ui tdd test/**/*.js --exit ",
-    "dev": "nodemon  src/server.js --ignore 'src/models/json/*.json'",
+    "dev": "nodemon  src/server.js --ignore src/models/json/*.json",
     "testmodels": "./node_modules/mocha/bin/mocha --ui tdd test/models/**/*.js",
     "testapi": "./node_modules/mocha/bin/mocha --ui tdd test/api/**/*.js"
   },
-  
   "dependencies": {
     "@hapi/bell": "^13.1.0",
     "@hapi/boom": "^10.0.1",
@@ -38,7 +37,7 @@
     "mongoose": "^9.3.0",
     "sanitize-html": "^2.17.3",
     "uuid": "^13.0.0",
-    "uuidv4": "^6.2.13"
+    "uuidv4": "^1.0.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.60.0",
@@ -48,6 +47,7 @@
     "axios": "^1.13.6",
     "c8": "^11.0.0",
     "chai": "^6.2.2",
+    "cross-env": "^10.1.0",
     "eslint": "^8.57.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-prettier": "^10.1.8",
@@ -75,8 +75,8 @@
       "src"
     ]
   },
-  "mocha":{
-    "ignore":[
+  "mocha": {
+    "ignore": [
       "test/e2e/**/*"
     ]
   }

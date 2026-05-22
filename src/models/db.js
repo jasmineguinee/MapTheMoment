@@ -41,13 +41,13 @@ export const db = {
         this.postStore = postJsonStore;
         break;
       case "mongo":
+        connectMongo();
         this.userStore = userMongoStore;
         this.areaStore = areaMongoStore;
         this.venueStore = venueMongoStore;
         this.reviewStore = reviewMongoStore;
         this.ratingStore = ratingMongoStore;
         this.postStore = postMongoStore;
-        connectMongo();
         break;
       default:
         this.userStore = userMemStore;

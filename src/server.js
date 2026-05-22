@@ -1,15 +1,15 @@
+import dotenv from "dotenv";
 import Inert from "@hapi/inert";
 import Vision from "@hapi/vision";
 import Hapi from "@hapi/hapi";
 import Cookie from "@hapi/cookie";
-import dotenv from "dotenv";
 import path from "path";
 import Joi from "joi";
 import jwt from "hapi-auth-jwt2";
-
 import HapiSwagger from "hapi-swagger";
 import { fileURLToPath } from "url";
 import Handlebars from "handlebars";
+
 import { webRoutes } from "./web-routes.js";
 import { db } from "./models/db.js";
 import { accountsController } from "./controllers/accounts-controller.js";
@@ -22,9 +22,9 @@ const __dirname = path.dirname(__filename);
 
 const result = dotenv.config();
 if (result.error) {
-  console.log(result.error.message);
+  console.log(result.error.message)
+};
 
-}
 
 const swaggerOptions = {
   info: {
@@ -89,7 +89,7 @@ async function init() {
   });
   server.auth.default("session");
   
-  // if running playwright test use json to avoid issues 
+
 
    db.init("mongo");
   
