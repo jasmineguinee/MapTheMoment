@@ -11,7 +11,7 @@
     "start": "node src/server.js",
     "lint": "eslint . --ext .js",
     "test": "mocha --require ./src/server.js --ui tdd test/**/*.js --exit",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test ./test/e2e -- test",
     "coverage": "c8 mocha --require ./src/server.js ./src/server.js --ui tdd test/{models,api}/**/*.js --exit ",
     "dev": "nodemon  src/server.js --ignore src/models/json/*.json",
     "testmodels": "./node_modules/mocha/bin/mocha --require ./src/server.js --ui tdd test/models/**/*.js",

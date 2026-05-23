@@ -48,15 +48,14 @@ body strong {
 }
 
 
-
-
 .flex-container div {
     padding:10px;
 }
 
 .dash-img {
     height: auto;
-    width: auto;
+    width: 100%;
+    max-width:200px;
 }
 
 

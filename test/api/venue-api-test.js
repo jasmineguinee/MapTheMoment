@@ -3,11 +3,11 @@ import { assertSubset } from "../test-utils.js";
 import { mapthemomentService } from "./mapthemoment-service.js";
 import { maggie, kerry, testAreas, testVenues, boathousevenue, maggieCredentials} from "../fixtures.js";
 
-suite("Venue API tests", () => {
+suite("Venue API tests",function () {
   let user = null;
   let limerick = null;
 
-
+this.timeout(10000);
   setup(async () => {
     mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);

@@ -27,12 +27,13 @@ export default defineConfig({
   },
 // added time out of two minutes here to give it time to load to avoid crashes
    webServer: {
-    command: "npm start",
+    command: "npm start -- test",
     url: "http://localhost:3000",
     reuseExistingServer: false,
-    timeout: 120 * 1000,
+    timeout: 80000,
   },
 
+  // I am adding login as a dependancy for the browsers before they run (so that it knows its a logged in used)
   projects: [
 
     {

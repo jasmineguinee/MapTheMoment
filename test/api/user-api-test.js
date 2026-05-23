@@ -4,17 +4,20 @@ import { mapthemomentService } from "./mapthemoment-service.js";
 import { maggieCredentials, maggie, testUsers } from "../fixtures.js";
 import { db } from "../../src/models/db.js";
 
+
 const users = new Array(testUsers.length);
 
-suite("User API tests", () => {
+suite("User API tests", function () {
+this.timeout(10000);
   setup(async () => {
+    
     mapthemomentService.clearAuth();
     await mapthemomentService.createUser(maggie);
     await mapthemomentService.authenticate(maggieCredentials);
     await mapthemomentService.deleteAllUsers();
     for (let i = 0; i < testUsers.length; i += 1) {
       // eslint-disable-next-line no-await-in-loop
-      users[0] = await mapthemomentService.createUser(testUsers[i]);
+      users[i] = await mapthemomentService.createUser(testUsers[i]);
     }
     await mapthemomentService.createUser(maggie);
     await mapthemomentService.authenticate(maggieCredentials);

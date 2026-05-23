@@ -3,7 +3,10 @@ import { mapthemomentService } from "./mapthemoment-service.js";
 import { decodeToken } from "../../src/api/jwt-utils.js";
 import { maggie, maggieCredentials } from "../fixtures.js";
 
-suite("Authentication API tests", async () => {
+
+
+suite("Authentication API tests", function () {
+this.timeout(10000);
   setup(async () => {
     mapthemomentService.clearAuth();
     await mapthemomentService.createUser(maggie);

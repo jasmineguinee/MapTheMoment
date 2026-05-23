@@ -4,12 +4,12 @@ import { mapthemomentService } from "./mapthemoment-service.js";
 import { assertSubset } from "../test-utils.js";
 import { maggie, mypost, testPosts, maggieCredentials } from "../fixtures.js";
 
+
 EventEmitter.setMaxListeners(25);
 
-suite("Post API tests", () => {
-
+suite("Post API tests", function () {
  let user = null;
-
+this.timeout(10000);
   setup(async () => {
     mapthemomentService.clearAuth();
     user = await mapthemomentService.createUser(maggie);

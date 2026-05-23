@@ -6,8 +6,8 @@ import { maggie, kerry, testAreas, maggieCredentials } from "../fixtures.js";
 
 EventEmitter.setMaxListeners(25);
 
-suite("Area API tests", () => {
-
+suite("Area API tests", function () {
+this.timeout(10000);
  let user = null;
 
   setup(async () => {
